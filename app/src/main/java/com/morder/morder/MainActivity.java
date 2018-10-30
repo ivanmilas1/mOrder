@@ -20,21 +20,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        button = (Button) findViewById(btnPopisStolova);
-        button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                PrikaziPopisStolova();
-            }
-        });
-        /*
-        button.setX(260);
-        button.setY(500);
-        */
     }
 
-    public void PrikaziPopisStolova(){
-        Intent intent = new Intent(this, PrikazStolova.class);
-        startActivity(intent);
-    }
 }
