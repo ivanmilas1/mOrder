@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_below="@id/btnPopisStolova"
     tools:context=".MainActivity"
     tools:layout_editor_absoluteY="81dp">
 
@@ -18,20 +17,8 @@
         android:text="Početna stranica"
         android:textColor="#000000"
         android:textSize="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnPopisStolova"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnPopisStolova"
-        android:layout_width="197dp"
-        android:layout_height="0dp"
-        android:layout_alignBottom="@+id/textView"
-        android:layout_marginBottom="397dp"
-        android:text="Popis stolova"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </android.support.constraint.ConstraintLayout>
