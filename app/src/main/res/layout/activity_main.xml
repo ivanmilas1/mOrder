@@ -20,5 +20,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/narucivanje"
+        android:layout_width="160dp"
+        android:layout_height="0dp"
+        android:text="@string/narucivanje"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="284dp"
+        tools:layout_editor_absoluteY="344dp" />
+
 
 </android.support.constraint.ConstraintLayout>

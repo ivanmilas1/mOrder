@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">mOrder</string>
+    <string name="narucivanje">Narucivanje</string>
+    <string name="pocetna">Pocetna</string>
+    <string name="jelovnik">Jelovnik</string>
+    <string name="narudzba">Narudzba</string>
+    <string name="kontakt">Kontakt</string>
 </resources>

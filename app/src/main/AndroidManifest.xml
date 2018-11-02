@@ -17,6 +17,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".PrikazStolova"></activity>
+        <activity android:name=".Narucivanje">
+
+
+        </activity>
+
     </application>
 
 </manifest>
