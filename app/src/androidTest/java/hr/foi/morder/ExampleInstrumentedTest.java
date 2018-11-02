@@ -1,4 +1,4 @@
-package com.morder.morder;
+package hr.foi.morder;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
