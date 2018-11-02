@@ -14,12 +14,19 @@ import static com.morder.morder.R.id.textView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button button;
+    //private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
+        Button button = (Button) findViewById(R.id.btnPopisStolova);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), PrikazStolova.class);
+                startActivity(i);
+            }
+        });
+    }
 }

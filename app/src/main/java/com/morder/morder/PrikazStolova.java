@@ -10,4 +10,6 @@ public class PrikazStolova extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prikaz_stolova);
     }
+
+
 }

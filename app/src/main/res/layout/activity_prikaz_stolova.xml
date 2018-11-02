@@ -15,12 +15,14 @@
         app:layout_constraintGuide_begin="20dp" />
 
     <LinearLayout
+        android:id="@+id/layout1"
         android:layout_width="397dp"
         android:layout_height="101dp"
         android:orientation="horizontal"
         android:gravity="center"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        tools:layout_editor_absoluteY="8dp"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/textView"
@@ -34,12 +36,15 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/layout2"
         android:layout_width="395dp"
         android:layout_height="109dp"
         android:orientation="horizontal"
         android:gravity="center"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="117dp">
+        tools:layout_editor_absoluteY="117dp"
+        android:layout_below="@id/layout1"
+        tools:ignore="MissingConstraints">
 
         <Button
             android:id="@+id/stol1"
@@ -59,12 +64,15 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/layout3"
         android:layout_width="395dp"
         android:layout_height="106dp"
         android:orientation="horizontal"
         android:gravity="center"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="238dp">
+        tools:layout_editor_absoluteY="238dp"
+        android:layout_below="@id/layout2"
+        tools:ignore="MissingConstraints">
 
         <Button
             android:id="@+id/stol3"
@@ -84,12 +92,15 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/layout4"
         android:layout_width="395dp"
         android:layout_height="100dp"
         android:orientation="horizontal"
         android:gravity="center"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="352dp">
+        tools:layout_editor_absoluteY="352dp"
+        android:layout_below="@id/layout3"
+        tools:ignore="MissingConstraints">
 
         <Button
             android:id="@+id/stol5"
@@ -109,12 +120,15 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/layout5"
         android:layout_width="395dp"
         android:layout_height="91dp"
         android:gravity="center"
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="460dp">
+        tools:layout_editor_absoluteY="460dp"
+        android:layout_below="@id/layout4"
+        tools:ignore="MissingConstraints">
 
         <Button
             android:id="@+id/stol7"
