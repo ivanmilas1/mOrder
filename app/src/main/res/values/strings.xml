@@ -10,4 +10,6 @@
     <string name="btn7">7</string>
     <string name="btn8">8</string>
     <string name="btn9">9</string>
+    <string name="pocetna_stranica">Početna stranica</string>
+    <string name="zapocnite_s_narudzbom">Zapocnite s narudzbom</string>
 </resources>

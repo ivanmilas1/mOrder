@@ -13,12 +13,25 @@
         android:layout_height="0dp"
         android:layout_marginStart="124dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="100dp"
-        android:text="Početna stranica"
+        android:layout_marginBottom="119dp"
+        android:text="@string/pocetna_stranica"
         android:textColor="#000000"
-        android:textSize="18dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonEnterLogin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonEnterLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="303dp"
+        android:onClick="enterLogin"
+        android:text="@string/zapocnite_s_narudzbom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 
 </android.support.constraint.ConstraintLayout>
