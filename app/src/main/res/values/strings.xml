@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">mOrder</string>
+    <string name="app_name" translatable="false">mOrder</string>
     <string name="btnPrijavaName">Prijavi se</string>
     <string name="btn1">1</string>
     <string name="btn2">2</string>
