@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">mOrder</string>
+    <string name="title_activity_detalji_narudzbe">DetaljiNarudzbe</string>
 </resources>
