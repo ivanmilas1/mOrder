@@ -4,130 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PrijavaActivity">
+    android:background="@drawable/food_wallpaper_backgroud"
+    tools:context=".PrijavaDjelatnikActivity"
+    tools:layout_editor_absoluteY="89dp">
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:id="@+id/buttonSignIn"
+        android:layout_width="287dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="152dp"
-        android:layout_marginBottom="92dp"
+        android:layout_marginEnd="151dp"
+        android:layout_marginBottom="312dp"
+        android:background="@color/colorAccent"
         android:text="@string/btnPrijavaName"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="47dp"
-        android:layout_marginEnd="39dp"
-        android:layout_marginBottom="34dp"
-        android:text="@string/btn1"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
-        app:layout_constraintEnd_toStartOf="@+id/button4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="47dp"
-        android:layout_marginEnd="39dp"
-        android:layout_marginBottom="34dp"
-        android:text="@string/btn2"
-        app:layout_constraintBottom_toTopOf="@+id/button7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button4"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
 
-    <Button
-        android:id="@+id/button4"
+    <EditText
+        android:id="@+id/editTextPassword"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="47dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="34dp"
-        android:text="@string/btn3"
-        app:layout_constraintBottom_toTopOf="@+id/button8"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
-        app:layout_constraintStart_toEndOf="@+id/button2"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:ems="4"
+        android:hint="@string/pin_hint"
+        android:inputType="numberPassword"
+        android:maxLength="4"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSignIn"
+        app:layout_constraintEnd_toEndOf="@+id/textClock"
+        app:layout_constraintStart_toStartOf="@+id/textClock"
+        app:layout_constraintTop_toBottomOf="@+id/textClock" />
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="0dp"
+    <TextClock
+        android:id="@+id/textClock"
+        android:layout_width="114dp"
         android:layout_height="0dp"
-        android:layout_marginStart="57dp"
-        android:layout_marginEnd="39dp"
-        android:layout_marginBottom="46dp"
-        android:text="@string/btn4"
-        app:layout_constraintBottom_toTopOf="@+id/button6"
-        app:layout_constraintEnd_toStartOf="@+id/button8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
-
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="57dp"
-        android:layout_marginEnd="39dp"
-        android:layout_marginBottom="192dp"
-        android:text="@string/btn5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button10"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5" />
-
-    <Button
-        android:id="@+id/button9"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="39dp"
-        android:layout_marginBottom="192dp"
-        android:text="@string/btn6"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="258dp"
+        android:layout_marginEnd="228dp"
+        android:layout_marginBottom="119dp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button10"
-        app:layout_constraintTop_toBottomOf="@+id/button7" />
-
-    <Button
-        android:id="@+id/button10"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="192dp"
-        android:text="@string/btn7"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button9"
-        app:layout_constraintStart_toEndOf="@+id/button6"
-        app:layout_constraintTop_toBottomOf="@+id/button8" />
-
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="39dp"
-        android:layout_marginBottom="46dp"
-        android:text="@string/btn8"
-        app:layout_constraintBottom_toTopOf="@+id/button9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button8"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
-
-    <Button
-        android:id="@+id/button8"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="46dp"
-        android:text="@string/btn9"
-        app:layout_constraintBottom_toTopOf="@+id/button10"
-        app:layout_constraintEnd_toStartOf="@+id/button7"
-        app:layout_constraintStart_toEndOf="@+id/button5"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

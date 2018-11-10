@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".PrikazStolova" />
-        <activity android:name=".PrijavaActivity"></activity>
+        <activity android:name=".PrijavaDjelatnikActivity"></activity>
     </application>
 
 </manifest>

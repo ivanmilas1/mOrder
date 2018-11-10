@@ -14,11 +14,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void enterLoginGuest(View view) {
-        Intent intent = new Intent(this, PrijavaActivity.class);
-        startActivity(intent);
+
     }
 
     public void enterLoginEmployee(View view) {
-
+        Intent intent = new Intent(this, PrijavaDjelatnikActivity.class);
+        startActivity(intent);
     }
 }

@@ -14,4 +14,5 @@
     <string name="zapocnite_s_narudzbom">Zapocnite s narudzbom</string>
     <string name="dobrodosli">Dobrodošli</string>
     <string name="prijava_kao_djelatnik">Prijava kao djelatnik</string>
+    <string name="pin_hint">****</string>
 </resources>

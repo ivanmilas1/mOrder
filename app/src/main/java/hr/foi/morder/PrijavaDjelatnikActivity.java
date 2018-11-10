@@ -1,9 +1,9 @@
 package hr.foi.morder;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-public class PrijavaActivity extends AppCompatActivity {
+public class PrijavaDjelatnikActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
