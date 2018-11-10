@@ -5,4 +5,12 @@
     <string name="jelovnik">Jelovnik</string>
     <string name="narudzba">Narudzba</string>
     <string name="kontakt">Kontakt</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="pica">Pica</string>
+    <string name="jela">Jela</string>
+    <string name="menu">Menu</string>
+    <string name="naruci">Naruči</string>
+    <string name="select">Odaberi</string>
+
 </resources>
