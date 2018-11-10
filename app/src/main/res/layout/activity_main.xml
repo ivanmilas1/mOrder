@@ -6,35 +6,48 @@
     android:layout_height="match_parent"
     android:background="@drawable/food_wallpaper_backgroud"
     tools:context="hr.foi.morder.MainActivity"
-    tools:layout_editor_absoluteY="81dp">
+    tools:layout_editor_absoluteY="89dp">
 
     <Button
-        android:id="@+id/buttonEnterLogin"
-        android:layout_width="205dp"
+        android:id="@+id/buttonEnterLoginGuest"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="61dp"
-        android:layout_marginBottom="172dp"
+        android:layout_marginBottom="30dp"
         android:background="@color/colorAccent"
-        android:onClick="enterLogin"
+        android:onClick="enterLoginGuest"
         android:text="@string/zapocnite_s_narudzbom"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonEnterLoginEmployee"
+        app:layout_constraintEnd_toEndOf="@+id/buttonEnterLoginEmployee"
+        app:layout_constraintStart_toStartOf="@+id/buttonEnterLoginEmployee"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWelcome" />
+
+    <Button
+        android:id="@+id/buttonEnterLoginEmployee"
+        android:layout_width="352dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="126dp"
+        android:layout_marginBottom="231dp"
+        android:background="@color/colorAccent"
+        android:onClick="enterLoginEmployee"
+        android:text="@string/prijava_kao_djelatnik"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewWelcome" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonEnterLoginGuest" />
 
     <TextView
         android:id="@+id/textViewWelcome"
-        android:layout_width="127dp"
+        android:layout_width="347dp"
         android:layout_height="0dp"
-        android:layout_marginTop="212dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginBottom="44dp"
-        android:text="Dobrodošli"
+        android:layout_marginTop="302dp"
+        android:layout_marginBottom="72dp"
+        android:text="@string/dobrodosli"
         android:textColor="@color/common_google_signin_btn_text_dark_pressed"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonEnterLogin"
-        app:layout_constraintEnd_toEndOf="@+id/buttonEnterLogin"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread_inside" />
+        android:textSize="70sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonEnterLoginGuest"
+        app:layout_constraintEnd_toEndOf="@+id/buttonEnterLoginGuest"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
