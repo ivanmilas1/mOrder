@@ -15,14 +15,14 @@
         android:layout_marginEnd="151dp"
         android:layout_marginBottom="312dp"
         android:background="@color/colorAccent"
+        android:onClick="onClickSignIn"
         android:text="@string/btnPrijavaName"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/editTextPassword"
-        android:layout_width="0dp"
+        android:layout_width="114dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
         android:ems="4"
@@ -34,17 +34,19 @@
         android:textSize="26sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonSignIn"
         app:layout_constraintEnd_toEndOf="@+id/textClock"
-        app:layout_constraintStart_toStartOf="@+id/textClock"
-        app:layout_constraintTop_toBottomOf="@+id/textClock" />
+        app:layout_constraintStart_toStartOf="@+id/textClock" />
 
     <TextClock
         android:id="@+id/textClock"
-        android:layout_width="114dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="258dp"
-        android:layout_marginEnd="228dp"
-        android:layout_marginBottom="119dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
+        android:layout_width="505dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="193dp"
+        android:layout_marginEnd="32dp"
+        android:format24Hour="HH:mm:ss "
+        android:gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:textSize="44sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
