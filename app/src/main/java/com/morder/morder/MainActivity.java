@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), NavigationViewActivity.class);
+                Intent i = new Intent(v.getContext(), ArticleActivity.class);
                 startActivity(i);
             }
         });
