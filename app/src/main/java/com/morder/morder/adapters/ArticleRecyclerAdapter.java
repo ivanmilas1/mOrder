@@ -41,7 +41,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         final Article article = articleList.get(position);
         viewHolder.setName(article.getNaziv());
         viewHolder.setPrice(article.getJedinicna_cijena());
-
+        viewHolder.setImage(ctx, article.getSlika());
     }
 
     @Override

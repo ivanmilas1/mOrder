@@ -3,6 +3,7 @@ package com.morder.morder;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -56,36 +57,11 @@ public class ArticleActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.article_recycler);
         database = FirebaseFirestore.getInstance();
 
-        loadArticleList();
-
-        firestoreListener = database.collection("Artikl")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
-                        if (e != null) {
-                            Log.e("Error", "Listen failed!", e);
-                            return;
-                        }
-
-                        List<Article> articlesList = new ArrayList<>();
-
-                        for(DocumentSnapshot doc: documentSnapshots){
-                            Article article = doc.toObject(Article.class);
-                            article.getNaziv();
-
-
-                            articlesList.add(article);
-                        }
-
-                        adapter = new ArticleRecyclerAdapter(articlesList, getApplicationContext(), database);
-                        recyclerView.setAdapter(adapter);
-
-                    }
-                });
     }
 
-    private void loadArticleList() {
+    private void loadArticleListDrinks() {
         database.collection("Artikl")
+                .whereEqualTo("kategorija_id", 1)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -95,8 +71,36 @@ public class ArticleActivity extends AppCompatActivity {
                             for(DocumentSnapshot documentSnapshot: task.getResult()){
                                 Article article = documentSnapshot.toObject(Article.class);
                                 article.getNaziv();
+                                article.getJedinicna_cijena();
+                                article.getSlika();
+                                articlesList.add(article);
+                            }
+                            adapter = new ArticleRecyclerAdapter(articlesList, getApplicationContext(), database);
+                            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                            recyclerView.setLayoutManager(layoutManager);
+                            recyclerView.setAdapter(adapter);
+                        }
+                        else{
+                            Log.d("Error", "Error getting data");
+                        }
+                    }
+                });
+    }
 
-
+    private void loadArticleListFood() {
+        database.collection("Artikl")
+                .whereEqualTo("kategorija_id", 2)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            List<Article> articlesList = new ArrayList<>();
+                            for(DocumentSnapshot documentSnapshot: task.getResult()){
+                                Article article = documentSnapshot.toObject(Article.class);
+                                article.getNaziv();
+                                article.getJedinicna_cijena();
+                                article.getSlika();
                                 articlesList.add(article);
                             }
                             adapter = new ArticleRecyclerAdapter(articlesList, getApplicationContext(), database);
@@ -123,7 +127,14 @@ public class ArticleActivity extends AppCompatActivity {
 
     private void selectDrawerView(MenuItem item){
         switch (item.getItemId()){
-            case R.id.kontakt:
+            case R.id.pica:
+                loadArticleListDrinks();
+                drawer.closeDrawer(GravityCompat.START);
+                break;
+
+            case R.id.jela:
+                loadArticleListFood();
+                drawer.closeDrawer(GravityCompat.START);
                 break;
         }
     }

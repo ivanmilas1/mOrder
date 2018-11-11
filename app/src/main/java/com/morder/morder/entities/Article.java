@@ -3,11 +3,11 @@ package com.morder.morder.entities;
 public class Article {
     private String naziv;
     private String jedinicna_mjera;
-    private Number jedinicna_cijena;
-    private Number kategorija_id;
+    private Integer jedinicna_cijena;
+    private Integer kategorija_id;
     private String slika;
 
-    public Article(String naziv, String jedinicna_mjera, Number jedinicna_cijena, Number kategorija_id, String slika) {
+    public Article(String naziv, String jedinicna_mjera, Integer jedinicna_cijena, Integer kategorija_id, String slika) {
         this.naziv = naziv;
         this.jedinicna_mjera = jedinicna_mjera;
         this.jedinicna_cijena = jedinicna_cijena;
@@ -35,19 +35,19 @@ public class Article {
         this.jedinicna_mjera = jedinicna_mjera;
     }
 
-    public Number getJedinicna_cijena() {
+    public Integer getJedinicna_cijena() {
         return jedinicna_cijena;
     }
 
-    public void setJedinicna_cijena(Number jedinicna_cijena) {
+    public void setJedinicna_cijena(Integer jedinicna_cijena) {
         this.jedinicna_cijena = jedinicna_cijena;
     }
 
-    public Number getKategorija_id() {
+    public Integer getKategorija_id() {
         return kategorija_id;
     }
 
-    public void setKategorija_id(Number kategorija_id) {
+    public void setKategorija_id(Integer kategorija_id) {
         this.kategorija_id = kategorija_id;
     }
 
