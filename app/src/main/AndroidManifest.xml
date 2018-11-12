@@ -17,10 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".PrikazStolova" />
-        <activity
-            android:name=".DetaljiNarudzbe"
-            android:label="@string/title_activity_detalji_narudzbe"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".DetaljiNarudzbe2" />
     </application>
 
 </manifest>

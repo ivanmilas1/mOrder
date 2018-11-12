@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void PrikaziDetaljeNarudzbe(){
 
-        Intent intent = new Intent(this, DetaljiNarudzbe.class);
+        Intent intent = new Intent(this, DetaljiNarudzbe2.class);
         startActivity(intent);
 
     }
