@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-import static com.morder.morder.Stol.stanjeNarudzbe.slobodan;
+import hr.foi.morder.Entities.Stol;
 
 public class PrikazStolova extends AppCompatActivity {
 
@@ -84,7 +86,7 @@ public class PrikazStolova extends AppCompatActivity {
             }
 
             @Override
-            public boolean remove(@androidx.annotation.Nullable Object o) {
+            public boolean remove(@Nullable Object o) {
                 return false;
             }
 

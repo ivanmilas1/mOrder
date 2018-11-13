@@ -14,6 +14,8 @@ public class IzbornikDjelatnikActivity extends AppCompatActivity {
     }
 
     public void OnClickViewOrders(View view) {
+        Intent i = new Intent(getApplicationContext(), PrikazStolova.class);
+        startActivity(i);
     }
 
     public void OnClickSignOut(View view) {
