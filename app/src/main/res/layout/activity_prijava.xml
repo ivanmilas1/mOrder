@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/food_wallpaper_backgroud"
+    tools:context=".PrijavaDjelatnikActivity"
+    tools:layout_editor_absoluteY="89dp">
+
+    <Button
+        android:id="@+id/buttonSignIn"
+        android:layout_width="287dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="151dp"
+        android:layout_marginBottom="312dp"
+        android:background="@color/colorAccent"
+        android:onClick="onClickSignIn"
+        android:text="@string/btnPrijavaName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="114dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:ems="4"
+        android:hint="@string/pin_hint"
+        android:inputType="numberPassword"
+        android:maxLength="4"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSignIn"
+        app:layout_constraintEnd_toEndOf="@+id/textClock"
+        app:layout_constraintStart_toStartOf="@+id/textClock" />
+
+    <TextClock
+        android:id="@+id/textClock"
+        android:layout_width="505dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="193dp"
+        android:layout_marginEnd="32dp"
+        android:format24Hour="HH:mm:ss "
+        android:timeZone="GMT+0200"
+        android:gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:textSize="44sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

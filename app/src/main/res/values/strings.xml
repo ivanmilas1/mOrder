@@ -1,3 +1,20 @@
 <resources>
-    <string name="app_name">mOrder</string>
+    <string name="app_name" translatable="false">mOrder</string>
+    <string name="btnPrijavaName">Prijavi se</string>
+    <string name="btn1">1</string>
+    <string name="btn2">2</string>
+    <string name="btn3">3</string>
+    <string name="btn4">4</string>
+    <string name="btn5">5</string>
+    <string name="btn6">6</string>
+    <string name="btn7">7</string>
+    <string name="btn8">8</string>
+    <string name="btn9">9</string>
+    <string name="pocetna_stranica">Početna stranica</string>
+    <string name="zapocnite_s_narudzbom">Zapocnite s narudzbom</string>
+    <string name="dobrodosli">Dobrodošli</string>
+    <string name="prijava_kao_djelatnik">Prijava kao djelatnik</string>
+    <string name="pin_hint">****</string>
+    <string name="odjava">ODJAVA</string>
+    <string name="pregled_narudzbi">PREGLED NARUDŽBI</string>
 </resources>
