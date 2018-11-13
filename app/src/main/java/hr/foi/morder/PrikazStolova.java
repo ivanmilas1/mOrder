@@ -3,12 +3,13 @@ package hr.foi.morder;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -40,135 +41,16 @@ public class PrikazStolova extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prikaz_stolova);
 
-        Stol stol1 = new Stol();
-        Stol stol2 = new Stol();
-        Stol stol3 = new Stol();
-        Stol stol4 = new Stol();
-        Stol stol5 = new Stol();
-        Stol stol6 = new Stol();
-        Stol stol7 = new Stol();
+        Stol stol1 = new Stol(1);
+        Stol stol2 = new Stol(2);
+        Stol stol3 = new Stol(3);
+        Stol stol4 = new Stol(4);
+        Stol stol5 = new Stol(5);
+        Stol stol6 = new Stol(6);
+        Stol stol7 = new Stol(7);
 
-        List<Stol> listaStolova = new List<Stol>() {
-            @Override
-            public int size() {
-                return 0;
-            }
+        List<Stol> listaStolova = new ArrayList<>() ;
 
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-
-            @Override
-            public boolean contains(@Nullable Object o) {
-                return false;
-            }
-
-            @NonNull
-            @Override
-            public Iterator<Stol> iterator() {
-                return null;
-            }
-
-            @Nullable
-            @Override
-            public Object[] toArray() {
-                return new Object[0];
-            }
-
-            @Override
-            public <T> T[] toArray(@Nullable T[] a) {
-                return null;
-            }
-
-            @Override
-            public boolean add(Stol stol) {
-                return false;
-            }
-
-            @Override
-            public boolean remove(@Nullable Object o) {
-                return false;
-            }
-
-            @Override
-            public boolean containsAll(@NonNull Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(@NonNull Collection<? extends Stol> c) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(int index, @NonNull Collection<? extends Stol> c) {
-                return false;
-            }
-
-            @Override
-            public boolean removeAll(@NonNull Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public boolean retainAll(@NonNull Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public void clear() {
-
-            }
-
-            @Override
-            public Stol get(int index) {
-                return null;
-            }
-
-            @Override
-            public Stol set(int index, Stol element) {
-                return null;
-            }
-
-            @Override
-            public void add(int index, Stol element) {
-
-            }
-
-            @Override
-            public Stol remove(int index) {
-                return null;
-            }
-
-            @Override
-            public int indexOf(@Nullable Object o) {
-                return 0;
-            }
-
-            @Override
-            public int lastIndexOf(@Nullable Object o) {
-                return 0;
-            }
-
-            @NonNull
-            @Override
-            public ListIterator<Stol> listIterator() {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            public ListIterator<Stol> listIterator(int index) {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            public List<Stol> subList(int fromIndex, int toIndex) {
-                return null;
-            }
-        };
         listaStolova.add(stol1);
         listaStolova.add(stol2);
         listaStolova.add(stol3);
@@ -188,11 +70,10 @@ public class PrikazStolova extends AppCompatActivity {
         btnStol1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), StanjeNarudzbePoStolu.class);
-                startActivity(i);
+//                Intent i = new Intent(v.getContext(), StanjeNarudzbePoStolu.class);
+//                startActivity(i);
             }
         });
-
         Button btnStol2 = (Button) findViewById(R.id.btnStol2);
         btnStol2.setBackgroundColor(zuta);
     }

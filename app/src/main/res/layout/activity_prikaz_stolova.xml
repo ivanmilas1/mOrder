@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="hr.foi.morder.PrikazStolova"
+    tools:context=".PrikazStolova"
     tools:layout_editor_absoluteY="81dp">
 
     <android.support.constraint.Guideline
@@ -15,11 +15,11 @@
         app:layout_constraintGuide_begin="20dp" />
 
     <RelativeLayout
-        android:layout_width="755dp"
-        android:layout_height="869dp"
+        android:layout_width="691dp"
+        android:layout_height="879dp"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="2dp">
+        tools:layout_editor_absoluteX="64dp"
+        tools:layout_editor_absoluteY="-8dp">
 
         <Button
             android:id="@+id/btnStol7"

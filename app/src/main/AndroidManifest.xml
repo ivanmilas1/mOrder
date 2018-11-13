@@ -16,9 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PrikazStolova" />
         <activity android:name=".PrijavaDjelatnikActivity" />
-        <activity android:name=".IzbornikDjelatnikActivity"></activity>
+        <activity android:name=".IzbornikDjelatnikActivity" />
+        <activity android:name=".PrikazStolova"></activity>
     </application>
 
 </manifest>
