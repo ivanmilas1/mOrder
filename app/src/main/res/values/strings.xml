@@ -15,4 +15,6 @@
     <string name="dobrodosli">Dobrodošli</string>
     <string name="prijava_kao_djelatnik">Prijava kao djelatnik</string>
     <string name="pin_hint">****</string>
+    <string name="odjava">ODJAVA</string>
+    <string name="pregled_narudzbi">PREGLED NARUDŽBI</string>
 </resources>

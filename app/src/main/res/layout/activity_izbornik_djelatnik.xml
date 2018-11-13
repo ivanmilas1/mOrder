@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/food_wallpaper_backgroud"
+    tools:context=".IzbornikDjelatnikActivity">
+
+    <Button
+        android:id="@+id/buttonOrdersView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="333dp"
+        android:layout_marginBottom="63dp"
+        android:background="@color/colorAccent"
+        android:onClick="OnClickViewOrders"
+        android:text="@string/pregled_narudzbi"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSignOut"
+        app:layout_constraintEnd_toEndOf="@+id/buttonSignOut"
+        app:layout_constraintStart_toStartOf="@+id/buttonSignOut"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonSignOut"
+        android:layout_width="201dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="209dp"
+        android:layout_marginBottom="327dp"
+        android:background="@color/colorAccent"
+        android:onClick="OnClickSignOut"
+        android:text="@string/odjava"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonOrdersView" />
+
+</android.support.constraint.ConstraintLayout>
