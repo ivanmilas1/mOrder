@@ -1,13 +1,12 @@
 package hr.foi.morder;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
@@ -17,16 +16,18 @@ import java.util.ListIterator;
 
 import hr.foi.morder.Entities.Stol;
 
+import static hr.foi.morder.Entities.Stol.stanjeNarudzbe.slobodan;
+
 public class PrikazStolova extends AppCompatActivity {
 
     //ako nema narudžbe
-    int crvena=Color.rgb(179,5,5);
+    int crvena = Color.rgb(179, 5, 5);
 
     //ako je narudžba u izradi
-    int zuta=Color.rgb(225,206,132);
+    int zuta = Color.rgb(225, 206, 132);
 
     //ako je narudžba poslužena
-    int zelena=Color.rgb(78,255,167);
+    int zelena = Color.rgb(78, 255, 167);
 
     /*
     if(stol_n.statusNarudzbe==...){
@@ -47,7 +48,7 @@ public class PrikazStolova extends AppCompatActivity {
         Stol stol6 = new Stol();
         Stol stol7 = new Stol();
 
-        List<Stol> listaStolova=new List<Stol>() {
+        List<Stol> listaStolova = new List<Stol>() {
             @Override
             public int size() {
                 return 0;
@@ -59,24 +60,24 @@ public class PrikazStolova extends AppCompatActivity {
             }
 
             @Override
-            public boolean contains(@androidx.annotation.Nullable Object o) {
+            public boolean contains(@Nullable Object o) {
                 return false;
             }
 
-            @androidx.annotation.NonNull
+            @NonNull
             @Override
             public Iterator<Stol> iterator() {
                 return null;
             }
 
-            @androidx.annotation.Nullable
+            @Nullable
             @Override
             public Object[] toArray() {
                 return new Object[0];
             }
 
             @Override
-            public <T> T[] toArray(@androidx.annotation.Nullable T[] a) {
+            public <T> T[] toArray(@Nullable T[] a) {
                 return null;
             }
 
@@ -91,27 +92,27 @@ public class PrikazStolova extends AppCompatActivity {
             }
 
             @Override
-            public boolean containsAll(@androidx.annotation.NonNull Collection<?> c) {
+            public boolean containsAll(@NonNull Collection<?> c) {
                 return false;
             }
 
             @Override
-            public boolean addAll(@androidx.annotation.NonNull Collection<? extends Stol> c) {
+            public boolean addAll(@NonNull Collection<? extends Stol> c) {
                 return false;
             }
 
             @Override
-            public boolean addAll(int index, @androidx.annotation.NonNull Collection<? extends Stol> c) {
+            public boolean addAll(int index, @NonNull Collection<? extends Stol> c) {
                 return false;
             }
 
             @Override
-            public boolean removeAll(@androidx.annotation.NonNull Collection<?> c) {
+            public boolean removeAll(@NonNull Collection<?> c) {
                 return false;
             }
 
             @Override
-            public boolean retainAll(@androidx.annotation.NonNull Collection<?> c) {
+            public boolean retainAll(@NonNull Collection<?> c) {
                 return false;
             }
 
@@ -141,28 +142,28 @@ public class PrikazStolova extends AppCompatActivity {
             }
 
             @Override
-            public int indexOf(@androidx.annotation.Nullable Object o) {
+            public int indexOf(@Nullable Object o) {
                 return 0;
             }
 
             @Override
-            public int lastIndexOf(@androidx.annotation.Nullable Object o) {
+            public int lastIndexOf(@Nullable Object o) {
                 return 0;
             }
 
-            @androidx.annotation.NonNull
+            @NonNull
             @Override
             public ListIterator<Stol> listIterator() {
                 return null;
             }
 
-            @androidx.annotation.NonNull
+            @NonNull
             @Override
             public ListIterator<Stol> listIterator(int index) {
                 return null;
             }
 
-            @androidx.annotation.NonNull
+            @NonNull
             @Override
             public List<Stol> subList(int fromIndex, int toIndex) {
                 return null;
@@ -177,23 +178,22 @@ public class PrikazStolova extends AppCompatActivity {
         listaStolova.add(stol7);
 
         //u defaultu se svaki stol postavlja na slobodan, stanje se mijenja naknadno
-        for (Stol item:listaStolova) {
-             item.stanjeNarudzbe=slobodan;
+        for (Stol item : listaStolova) {
+            item.stanjeNarudzbe = slobodan;
         }
 
         //boja stavljena samo za primjer
-        Button btnStol1=(Button)findViewById(R.id.btnStol1);
+        Button btnStol1 = (Button) findViewById(R.id.btnStol1);
         btnStol1.setBackgroundColor(crvena);
         btnStol1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(v.getContext(),StanjeNarudzbePoStolu.class);
+                Intent i = new Intent(v.getContext(), StanjeNarudzbePoStolu.class);
                 startActivity(i);
             }
         });
 
-        Button btnStol2=(Button)findViewById(R.id.btnStol2);
+        Button btnStol2 = (Button) findViewById(R.id.btnStol2);
         btnStol2.setBackgroundColor(zuta);
-
     }
 }

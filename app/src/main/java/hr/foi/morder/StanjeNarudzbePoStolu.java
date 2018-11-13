@@ -1,4 +1,4 @@
-package com.morder.morder;
+package hr.foi.morder;
 
 public class StanjeNarudzbePoStolu {
 }
