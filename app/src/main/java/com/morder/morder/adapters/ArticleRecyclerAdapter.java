@@ -10,22 +10,27 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.morder.morder.ArticleActivity;
 import com.morder.morder.R;
 import com.morder.morder.entities.Article;
+import com.morder.morder.entities.OrderItems;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
 import java.util.List;
+import java.util.Map;
 
 public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecyclerAdapter.ViewHolder>  {
 
     private List<Article> articleList;
     private Context ctx;
     private FirebaseFirestore database;
-
+    private ArticleActivity activity;
 
     public ArticleRecyclerAdapter(List<Article> articleList, Context ctx, FirebaseFirestore database) {
         this.articleList = articleList;
@@ -83,8 +88,28 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
 
             }
         });
+
+        viewHolder.order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Integer quantity = Integer.parseInt(String.valueOf(viewHolder.quantity.getText()));
+                Integer price = Integer.parseInt(String.valueOf(viewHolder.price.getText()));
+                addOrder(1,1,quantity,price);
+            }
+        });
     }
 
+    public void addOrder(Integer racun, Integer artikl, Integer kolicina, Integer cijena){
+        Map<String, Object> stavkaNarudzbe = new OrderItems(racun, artikl, kolicina, cijena).toMap();
+        database.collection("Stavka narudzbe")
+                .add(stavkaNarudzbe)
+                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+
+                    }
+                });
+    }
 
     @Override
     public int getItemCount() {
@@ -132,6 +157,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
             TextView articlePriceCurrency = itemView.findViewById(R.id.article_price_currency);
             articlePriceCurrency.setText(quantity.toString());
         }
+
 
 
     }

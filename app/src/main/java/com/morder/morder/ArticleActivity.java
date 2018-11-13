@@ -20,17 +20,21 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firestore.v1beta1.StructuredQuery;
 import com.morder.morder.adapters.ArticleRecyclerAdapter;
 import com.morder.morder.entities.Article;
+import com.morder.morder.entities.OrderItems;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public class ArticleActivity extends AppCompatActivity {
@@ -118,6 +122,8 @@ public class ArticleActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
 
     private void setupDrawerContent(NavigationView nv){
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
