@@ -1,18 +1,23 @@
 package hr.foi.morder;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import com.google.api.core.ApiFuture;
-import com.google.firebase.firestore.CollectionReference;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.concurrent.ExecutionException;
+
+import javax.xml.datatype.Duration;
+
+import hr.foi.morder.Entities.Korisnik;
 
 public class PrijavaDjelatnikActivity extends AppCompatActivity {
 
@@ -25,20 +30,31 @@ public class PrijavaDjelatnikActivity extends AppCompatActivity {
     public void onClickSignIn(View view) throws ExecutionException, InterruptedException {
         EditText editTextPassword = findViewById(R.id.editTextPassword);
 
+        String pin = editTextPassword.getText().toString();
+
         // Access a Cloud Firestore instance from your Activity
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        // Reference to a Collection
-        CollectionReference korisnik = db.collection("Korisnik");
-        String pin = editTextPassword.getText().toString();
-        Query query = korisnik.whereEqualTo(pin, true);
-        // retrieve  query results asynchronously using query.get()
-        ApiFuture<QuerySnapshot> querySnapshot = (ApiFuture<QuerySnapshot>) query.get();
-        // block on response
-        //DocumentSnapshot document = future.get();
-
-        for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
-            System.out.println(document.getId());
-        }
+        db.collection("Korisnik")
+                .whereEqualTo("lozinka", pin)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot documentSnapshotKorisnik = null;
+                            Korisnik korisnik = null;
+                            for (DocumentSnapshot document : task.getResult()) {
+                                korisnik = document.toObject(Korisnik.class);
+                            }
+                            if (korisnik != null){
+                                Toast.makeText(getApplicationContext(), "Dobrodošli" + korisnik.getImePrezime(), Toast.LENGTH_LONG).show();
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(), "Neuspješna prijava", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    }
+                });
     }
 }

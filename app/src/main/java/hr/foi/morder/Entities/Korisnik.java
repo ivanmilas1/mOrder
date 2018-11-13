@@ -1,10 +1,12 @@
 package hr.foi.morder.Entities;
 
+import java.util.Date;
+
 public class Korisnik {
     public Integer id;
     public String imePrezime;
     public String lozinka;
-    public String datumRodjenja;
+    public Date datumRodjenja;
     public String adresaPrebivalista;
     public TipKorisnika tipKorisnika;
 
@@ -32,11 +34,11 @@ public class Korisnik {
         this.lozinka = lozinka;
     }
 
-    public String getDatumRodjenja() {
+    public Date getDatumRodjenja() {
         return datumRodjenja;
     }
 
-    public void setDatumRodjenja(String datumRodjenja) {
+    public void setDatumRodjenja(Date datumRodjenja) {
         this.datumRodjenja = datumRodjenja;
     }
 

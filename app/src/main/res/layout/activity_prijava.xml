@@ -43,6 +43,7 @@
         android:layout_marginTop="193dp"
         android:layout_marginEnd="32dp"
         android:format24Hour="HH:mm:ss "
+        android:timeZone="GMT+0200"
         android:gravity="center_horizontal"
         android:textColor="@color/white"
         android:textSize="44sp"
