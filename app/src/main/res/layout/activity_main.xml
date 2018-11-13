@@ -10,22 +10,22 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="160dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="124dp"
+        android:layout_width="265dp"
+        android:layout_height="83dp"
+        android:layout_marginStart="252dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="100dp"
         android:text="Početna stranica"
         android:textColor="#000000"
-        android:textSize="18dp"
+        android:textSize="29dp"
         app:layout_constraintBottom_toTopOf="@+id/btnPopisStolova"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnPopisStolova"
-        android:layout_width="197dp"
-        android:layout_height="0dp"
+        android:layout_width="234dp"
+        android:layout_height="90dp"
         android:layout_alignBottom="@+id/textView"
         android:layout_marginBottom="397dp"
         android:text="Popis stolova"

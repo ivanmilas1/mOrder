@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StanjeNarudzbePoStolu">
+
+    <RelativeLayout
+        android:layout_width="752dp"
+        android:layout_height="871dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="38dp"
+            android:text="Stol N/A"
+            android:textColor="#000000"
+            android:textSize="29dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView2"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="106dp"
+            android:text="Popis narudžbe:"
+            android:textColor="#000000"
+            android:textSize="24dp" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView2"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="162dp"
+            android:text="artikl1
+artikl2
+artikl3
+..."
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="256dp"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/textView4"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="-209dp"
+            android:layout_marginBottom="119dp"
+            android:text="Status narudžbe:"
+            android:textColor="#000000"
+            android:textSize="24dp" />
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

@@ -15,11 +15,11 @@
         app:layout_constraintGuide_begin="20dp" />
 
     <RelativeLayout
-        android:layout_width="395dp"
-        android:layout_height="587dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"
-        tools:ignore="MissingConstraints" >
+        android:layout_width="755dp"
+        android:layout_height="869dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="2dp">
 
         <Button
             android:id="@+id/btnStol7"
@@ -27,9 +27,9 @@
             android:layout_height="64dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="152dp"
-            android:layout_marginTop="436dp"
-            android:text="Button" />
+            android:layout_marginStart="337dp"
+            android:layout_marginTop="676dp"
+            android:text="7" />
 
         <Button
             android:id="@+id/btnStol6"
@@ -37,9 +37,9 @@
             android:layout_height="64dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="262dp"
-            android:layout_marginTop="335dp"
-            android:text="Button" />
+            android:layout_marginStart="573dp"
+            android:layout_marginTop="542dp"
+            android:text="6" />
 
         <Button
             android:id="@+id/btnStol5"
@@ -47,9 +47,9 @@
             android:layout_height="64dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="42dp"
-            android:layout_marginTop="337dp"
-            android:text="Button" />
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="540dp"
+            android:text="5" />
 
         <Button
             android:id="@+id/btnStol4"
@@ -57,9 +57,9 @@
             android:layout_height="64dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="264dp"
-            android:layout_marginTop="234dp"
-            android:text="Button" />
+            android:layout_marginStart="577dp"
+            android:layout_marginTop="372dp"
+            android:text="4" />
 
         <Button
             android:id="@+id/btnStol3"
@@ -67,9 +67,9 @@
             android:layout_height="64dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="232dp"
-            android:text="Button" />
+            android:layout_marginStart="139dp"
+            android:layout_marginTop="370dp"
+            android:text="3" />
 
         <TextView
             android:id="@+id/textNaslov"
@@ -77,10 +77,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="29dp"
-            android:textSize="29dp"
+            android:layout_marginTop="85dp"
+            android:text="Popis stolova"
             android:textColor="#ff0000"
-            android:text="Popis stolova" />
+            android:textSize="29dp" />
 
         <Button
             android:id="@+id/btnStol1"
@@ -88,9 +88,9 @@
             android:layout_height="64dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="126dp"
-            android:text="Button" />
+            android:layout_marginStart="141dp"
+            android:layout_marginTop="191dp"
+            android:text="1" />
 
         <Button
             android:id="@+id/btnStol2"
@@ -98,9 +98,9 @@
             android:layout_height="64dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="264dp"
-            android:layout_marginTop="126dp"
-            android:text="Button" />
+            android:layout_marginStart="578dp"
+            android:layout_marginTop="191dp"
+            android:text="2" />
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
