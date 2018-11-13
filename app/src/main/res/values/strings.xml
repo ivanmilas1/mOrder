@@ -12,5 +12,6 @@
     <string name="menu">Menu</string>
     <string name="naruci">Naruči</string>
     <string name="select">Odaberi</string>
+    <string name="quantity_value">1</string>
 
 </resources>
