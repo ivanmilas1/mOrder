@@ -5,13 +5,13 @@ import java.util.Map;
 
 public class StavkaNarudzbe {
     Integer Artikl_id;
-    Integer Racun_id;
+    Integer narudzbaId;
     Integer cijena;
     Integer kolicina;
 
-    public StavkaNarudzbe(Integer artikl_id, Integer racun_id, Integer cijena, Integer kolicina) {
-        Artikl_id = artikl_id;
-        Racun_id = racun_id;
+    public StavkaNarudzbe(Integer artikl_id, Integer narudzbaId, Integer cijena, Integer kolicina) {
+        this.Artikl_id = artikl_id;
+        this.narudzbaId = narudzbaId;
         this.cijena = cijena;
         this.kolicina = kolicina;
     }
@@ -28,12 +28,12 @@ public class StavkaNarudzbe {
         Artikl_id = artikl_id;
     }
 
-    public Integer getRacun_id() {
-        return Racun_id;
+    public Integer getNarudzbaId() {
+        return narudzbaId;
     }
 
-    public void setRacun_id(Integer racun_id) {
-        Racun_id = racun_id;
+    public void setNarudzbaId(Integer narudzbaId) {
+        this.narudzbaId = narudzbaId;
     }
 
     public Integer getCijena() {
@@ -52,13 +52,12 @@ public class StavkaNarudzbe {
         this.kolicina = kolicina;
     }
 
-    public Map<String, Object> toMap(){
+    public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("Artikl_id", this.Artikl_id);
-        result.put("Racun_id", this.Racun_id);
+        result.put("Racun_id", this.narudzbaId);
         result.put("cijena", this.cijena);
         result.put("kolicina", this.kolicina);
-
         return result;
     }
 }
