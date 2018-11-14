@@ -55,7 +55,7 @@ public class StavkaNarudzbe {
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("Artikl_id", this.Artikl_id);
-        result.put("Racun_id", this.narudzbaId);
+        result.put("Narudzba_id", this.narudzbaId);
         result.put("cijena", this.cijena);
         result.put("kolicina", this.kolicina);
         return result;

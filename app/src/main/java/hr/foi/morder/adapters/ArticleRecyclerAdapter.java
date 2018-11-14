@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -88,7 +89,10 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
             public void onClick(View v) {
                 Integer quantity = Integer.parseInt(String.valueOf(viewHolder.quantity.getText()));
                 Integer price = Integer.parseInt(String.valueOf(viewHolder.price.getText()));
-                addOrder(1, 1, quantity, price);
+                addOrder(1, 1, price, quantity);
+                viewHolder.setPrice(Artikl.getJedinicna_cijena());
+                viewHolder.setQuantity(1);
+                Toast.makeText(ctx, "Narudžba je zaprimljena" , Toast.LENGTH_LONG).show();
             }
         });
     }
