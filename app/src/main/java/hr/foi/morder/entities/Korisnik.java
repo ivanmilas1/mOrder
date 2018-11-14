@@ -1,4 +1,4 @@
-package hr.foi.morder.Entities;
+package hr.foi.morder.entities;
 
 import java.util.Date;
 

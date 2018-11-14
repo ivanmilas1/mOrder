@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="230dp"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="0dp"
+    android:layout_marginTop="5dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/article_image"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:contentDescription="@string/pica"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/article_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:textAppearance="@style/TextAppearance.Compat.Notification.Info"
+            android:textIsSelectable="false"
+            tools:text="Article name" />
+
+        <TextView
+            android:id="@+id/article_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="110dp"
+            android:layout_marginTop="-17dp"
+            android:textAppearance="@style/TextAppearance.Compat.Notification.Info"
+            tools:text="12" />
+
+        <TextView
+            android:id="@+id/article_price_currency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="-16dp"
+            android:textAppearance="@style/TextAppearance.Compat.Notification.Info"
+            tools:text="kn" />
+
+        <TextView
+            android:id="@+id/article_quantity_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:text="Količina"
+            android:textAppearance="@style/TextAppearance.Compat.Notification.Info"
+            android:textIsSelectable="false"
+            tools:text="Article quantity" />
+
+        <TextView
+            android:id="@+id/article_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="110dp"
+            android:layout_marginTop="-17dp"
+            android:text="@string/quantity_value"
+            android:textAppearance="@style/TextAppearance.Compat.Notification.Info"
+            tools:text="1" />
+
+        <Button
+            android:id="@+id/button_add"
+            android:layout_width="15dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="-16dp"
+            android:background="@color/colorNavigation"
+            android:text="+"
+            android:textColor="@color/colorText" />
+
+        <Button
+            android:id="@+id/button_remove"
+            android:layout_width="15dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="165dp"
+            android:layout_marginTop="-18dp"
+            android:background="@color/colorNavigation"
+            android:text="-"
+            android:textColor="@color/colorText" />
+
+        <Button
+            android:id="@+id/button_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="25dp"
+            android:background="@color/colorNavigation"
+            android:text="@string/select"
+            android:textColor="@color/colorText" />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
