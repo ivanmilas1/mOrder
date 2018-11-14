@@ -19,6 +19,7 @@
         <activity android:name=".PrijavaDjelatnikActivity" />
         <activity android:name=".IzbornikDjelatnikActivity" />
         <activity android:name=".PrikazStolova"></activity>
+        <activity android:name=".NarucivanjeActivity"></activity>
     </application>
 
 </manifest>

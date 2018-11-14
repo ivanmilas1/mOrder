@@ -9,9 +9,9 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
 
-import hr.foi.morder.Entities.Stol;
+import hr.foi.morder.entities.Stol;
 
-import static hr.foi.morder.Entities.Stol.stanjeNarudzbe.slobodan;
+import static hr.foi.morder.entities.Stol.stanjeNarudzbe.slobodan;
 
 public class PrikazStolova extends AppCompatActivity {
 
@@ -64,6 +64,7 @@ public class PrikazStolova extends AppCompatActivity {
         btnStol1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // TODO
 //                Intent i = new Intent(v.getContext(), StanjeNarudzbePoStolu.class);
 //                startActivity(i);
             }

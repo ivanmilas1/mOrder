@@ -17,4 +17,18 @@
     <string name="pin_hint">****</string>
     <string name="odjava">ODJAVA</string>
     <string name="pregled_narudzbi">PREGLED NARUDŽBI</string>
+    <string name="narucivanje">Narucivanje</string>
+    <string name="pocetna">Pocetna</string>
+    <string name="jelovnik">Jelovnik</string>
+    <string name="narudzba">Narudzba</string>
+    <string name="kontakt">Kontakt</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="pica">Pica</string>
+    <string name="jela">Jela</string>
+    <string name="menu">Menu</string>
+    <string name="naruci">Naruči</string>
+    <string name="select">Odaberi</string>
+    <string name="quantity_value">1</string>
+
 </resources>

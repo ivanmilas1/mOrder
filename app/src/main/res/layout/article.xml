@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ArticleActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/article_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/colorNavigation"
+        app:itemTextColor="@color/colorText"
+        app:menu="@menu/drawer_menu"
+        android:layout_gravity="start">
+
+    </android.support.design.widget.NavigationView>
+
+
+    </android.support.v4.widget.DrawerLayout>
