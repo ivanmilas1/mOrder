@@ -1,5 +1,6 @@
 package hr.foi.morder;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,7 @@ import hr.foi.morder.entities.Stol;
 
 import static hr.foi.morder.entities.Stol.stanjeNarudzbe.slobodan;
 
-public class PrikazStolova extends AppCompatActivity {
+public class PrikazStolovaActivity extends AppCompatActivity {
 
     //ako nema narudžbe
     int crvena = Color.rgb(179, 5, 5);
@@ -64,9 +65,8 @@ public class PrikazStolova extends AppCompatActivity {
         btnStol1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO
-//                Intent i = new Intent(v.getContext(), StanjeNarudzbePoStolu.class);
-//                startActivity(i);
+                Intent i = new Intent(v.getContext(), DetaljiNarudzbeActitity.class);
+                startActivity(i);
             }
         });
         Button btnStol2 = (Button) findViewById(R.id.btnStol2);

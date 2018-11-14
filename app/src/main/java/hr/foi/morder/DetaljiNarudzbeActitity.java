@@ -1,4 +1,4 @@
-package hr.foi.morder.djelatnik;
+package hr.foi.morder;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,10 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
-import hr.foi.morder.R;
-import hr.foi.morder.entities.Artikl2;
-
 import java.util.ArrayList;
+
+import hr.foi.morder.djelatnik.ListAdapter;
+import hr.foi.morder.entities.Artikl2;
 
 public class DetaljiNarudzbeActitity extends AppCompatActivity
 {

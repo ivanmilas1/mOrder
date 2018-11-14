@@ -1,18 +1,17 @@
-package com.morder.morder;
+package hr.foi.morder.entities;
 
-public class Artikl {
+public class Artikl2 {
 
-    String Naziv;
-    Double Cijena;
-    int Slika;
-    int KolicinaKosarica;
+   public String Naziv;
+   public Double Cijena;
+   public int Slika;
+   public int KolicinaKosarica;
 
-    public Artikl(String naziv,Double cijena, int slika)
+    public Artikl2(String naziv, Double cijena, int slika)
     {
         Naziv = naziv;
         Cijena = cijena;
         Slika = slika;
     }
-
 }
 

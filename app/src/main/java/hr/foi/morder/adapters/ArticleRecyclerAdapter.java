@@ -23,7 +23,7 @@ import hr.foi.morder.R;
 import hr.foi.morder.entities.Artikl;
 import hr.foi.morder.entities.StavkaNarudzbe;
 
-public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecyclerAdapter.ViewHolder>  {
+public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecyclerAdapter.ViewHolder> {
 
     private List<Artikl> articleList;
     private Context ctx;
@@ -51,8 +51,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         viewHolder.setImage(ctx, Artikl.getSlika());
         viewHolder.setQuantity(1);
         viewHolder.setPriceCurrency("kn");
-        viewHolder.quantityAdd.setOnClickListener(new View.OnClickListener()
-        {
+        viewHolder.quantityAdd.setOnClickListener(new View.OnClickListener() {
             int priceArticle1 = Integer.parseInt(String.valueOf(viewHolder.price.getText()));
 
             @Override
@@ -62,7 +61,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
                 viewHolder.quantity.setText(String.valueOf(countQuantity));
 
                 int priceArticle = Integer.parseInt(String.valueOf(viewHolder.price.getText()));
-                priceArticle =  priceArticle1 + priceArticle;
+                priceArticle = priceArticle1 + priceArticle;
                 viewHolder.price.setText(String.valueOf(priceArticle));
             }
         });
@@ -73,16 +72,14 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
             @Override
             public void onClick(View v) {
                 int countQuantity = Integer.parseInt(String.valueOf(viewHolder.quantity.getText()));
-                if(countQuantity>=2 && countQuantity <=999){
+                if (countQuantity >= 2 && countQuantity <= 999) {
                     countQuantity--;
                     viewHolder.quantity.setText(String.valueOf(countQuantity));
 
                     int priceArticle = Integer.parseInt(String.valueOf(viewHolder.price.getText()));
-                    priceArticle =  priceArticle - priceArticle1;
+                    priceArticle = priceArticle - priceArticle1;
                     viewHolder.price.setText(String.valueOf(priceArticle));
-
                 }
-
             }
         });
 
@@ -91,13 +88,13 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
             public void onClick(View v) {
                 Integer quantity = Integer.parseInt(String.valueOf(viewHolder.quantity.getText()));
                 Integer price = Integer.parseInt(String.valueOf(viewHolder.price.getText()));
-                addOrder(1,1,quantity,price);
+                addOrder(1, 1, quantity, price);
             }
         });
     }
 
-    public void addOrder(Integer racun, Integer artikl, Integer kolicina, Integer cijena){
-        Map<String, Object> stavkaNarudzbe = new StavkaNarudzbe(racun, artikl, kolicina, cijena).toMap();
+    public void addOrder(Integer artikl, Integer narudzba, Integer cijena, Integer kolicina) {
+        Map<String, Object> stavkaNarudzbe = new StavkaNarudzbe(artikl, narudzba, cijena, kolicina).toMap();
         database.collection("Stavka narudzbe")
                 .add(stavkaNarudzbe)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -132,17 +129,19 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
             price = mView.findViewById(R.id.article_price);
             quantity = mView.findViewById(R.id.article_quantity);
         }
-        public void setName(String name){
+
+        public void setName(String name) {
             TextView article_name = mView.findViewById(R.id.article_name);
             article_name.setText(name);
         }
-        public void setPrice(Number price){
+
+        public void setPrice(Number price) {
             TextView article_price = mView.findViewById(R.id.article_price);
             article_price.setText(price.toString());
         }
 
-        public void setImage(Context ctx, String image){
-            ImageView article_image = (ImageView)mView.findViewById(R.id.article_image);
+        public void setImage(Context ctx, String image) {
+            ImageView article_image = (ImageView) mView.findViewById(R.id.article_image);
             Picasso.with(ctx).load(image).into(article_image);
         }
 
@@ -150,6 +149,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
             TextView articleQuantity = itemView.findViewById(R.id.article_quantity);
             articleQuantity.setText(quantity.toString());
         }
+
         public void setPriceCurrency(String quantity) {
             TextView articlePriceCurrency = itemView.findViewById(R.id.article_price_currency);
             articlePriceCurrency.setText(quantity.toString());
