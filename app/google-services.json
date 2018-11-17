@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "676632106686",
+    "firebase_url": "https://morder-5a057.firebaseio.com",
+    "project_id": "morder-5a057",
+    "storage_bucket": "morder-5a057.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:676632106686:android:ea2bb30e7a08cef7",
+        "android_client_info": {
+          "package_name": "hr.foi.morder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "676632106686-sbln6kntistd816mm02l7gkqd86qbu6t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hr.foi.morder",
+            "certificate_hash": "7c6b9e9083a9b8a958b0dc940541ebe5f6d2490b"
+          }
+        },
+        {
+          "client_id": "676632106686-q6pmj4rnu1rd60bbbjlka9i0umtnv87i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4pSlpEAgngZuuZImdnDbzAj_kiVvRBvU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "676632106686-q6pmj4rnu1rd60bbbjlka9i0umtnv87i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
