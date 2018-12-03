@@ -44,7 +44,7 @@ public class PrikazStolovaActivity extends AppCompatActivity {
         Stol stol6 = new Stol(6);
         Stol stol7 = new Stol(7);
 
-        List<Stol> listaStolova = new ArrayList<>() ;
+        List<Stol> listaStolova = new ArrayList<>();
 
         listaStolova.add(stol1);
         listaStolova.add(stol2);
@@ -58,6 +58,19 @@ public class PrikazStolovaActivity extends AppCompatActivity {
         for (Stol item : listaStolova) {
             item.stanjeNarudzbe = slobodan;
         }
+
+        for (Stol item : listaStolova) {
+            int stolId = item.StolID;
+            Button btnStol = (Button) findViewById(stolId);
+            if (item.stanjeNarudzbe == "slobodan") {
+                btnStol.setBackgroundColor(crvena);
+            } else if (item.stanjeNarudzbe == "narudzbaUIzradi") {
+                btnStol.setBackgroundColor(zuta);
+            } else {
+                btnStol.setBackgroundColor(zelena);
+            }
+        }
+
 
         //boja stavljena samo za primjer
         Button btnStol1 = (Button) findViewById(R.id.btnStol1);
