@@ -4,7 +4,9 @@ public class Stol {
 
     public int StolID;
 
-    public Object stanjeNarudzbe;
+    public String stanjeNarudzbe;
+
+    public int kategorijaId;
 
     public enum stanjeNarudzbe{
         slobodan, narudzbaUIzradi, narudzbaPosluzena
@@ -15,18 +17,25 @@ public class Stol {
     }
 
     public int getStolID() {
-        return StolID;
-    }
+        return StolID;    }
 
     public void setStolID(int stolID) {
         StolID = stolID;
     }
 
-    public Object getStanjeNarudzbe() {
+    public String getStanjeNarudzbe() {
         return stanjeNarudzbe;
     }
 
-    public void setStanjeNarudzbe(Object stanjeNarudzbe) {
+    public void setStanjeNarudzbe(String stanjeNarudzbe) {
         this.stanjeNarudzbe = stanjeNarudzbe;
+    }
+
+    public int getKategorijaId() {
+        return kategorijaId;
+    }
+
+    public void setKategorijaId(int kategorijaId) {
+        this.kategorijaId = kategorijaId;
     }
 }
