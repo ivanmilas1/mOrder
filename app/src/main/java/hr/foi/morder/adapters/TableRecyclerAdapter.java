@@ -12,7 +12,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.List;
 
 import hr.foi.morder.R;
-import hr.foi.morder.entities.Artikl;
 import hr.foi.morder.entities.Stol;
 
 public class TableRecyclerAdapter extends RecyclerView.Adapter<TableRecyclerAdapter.ViewHolder> {
@@ -32,11 +31,21 @@ public class TableRecyclerAdapter extends RecyclerView.Adapter<TableRecyclerAdap
         return new TableRecyclerAdapter.ViewHolder(view);
     }
 
-    public void onBindViewHolder
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return 0;
+    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ViewHolder(View view) {
-            super();
+            super(view);
+
         }
     }
 }
