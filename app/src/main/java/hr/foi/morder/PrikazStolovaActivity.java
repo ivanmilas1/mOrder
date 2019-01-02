@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hr.foi.morder.adapters.TableRecyclerAdapter;
-import hr.foi.morder.entities.Stol;
+import hr.foi.morder.model.Stol;
 
 import static android.support.v4.view.GravityCompat.START;
 
@@ -83,7 +83,6 @@ public class PrikazStolovaActivity extends AppCompatActivity {
         //učitaj s određenim id-jem
         upit.addListenerForSingleValueEvent(valueEventListener);
         */
-
 
         Stol stol1 = new Stol(1);
         Stol stol2 = new Stol(2);

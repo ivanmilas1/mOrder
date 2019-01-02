@@ -1,4 +1,4 @@
-package hr.foi.morder.entities;
+package hr.foi.morder.model;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -10,7 +10,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import hr.foi.morder.djelatnik.ListAdapter;
-import hr.foi.morder.entities.Artikl2;
+import hr.foi.morder.model.Artikl2;
 
 public class DetaljiNarudzbeActitity extends AppCompatActivity
 {

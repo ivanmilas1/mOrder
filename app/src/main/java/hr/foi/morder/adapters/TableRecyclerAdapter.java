@@ -12,7 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.List;
 
 import hr.foi.morder.R;
-import hr.foi.morder.entities.Stol;
+import hr.foi.morder.model.Stol;
 
 public class TableRecyclerAdapter extends RecyclerView.Adapter<TableRecyclerAdapter.ViewHolder> {
 

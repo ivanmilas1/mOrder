@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hr.foi.morder.adapters.ArticleRecyclerAdapter;
-import hr.foi.morder.entities.Artikl;
+import hr.foi.morder.model.Artikl;
 
 
 public class NarucivanjeActivity extends AppCompatActivity {
@@ -112,8 +112,6 @@ public class NarucivanjeActivity extends AppCompatActivity {
                     }
                 });
     }
-
-
 
     private void setupDrawerContent(NavigationView nv){
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
