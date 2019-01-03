@@ -44,30 +44,18 @@ public class PrikazStolovaActivity extends AppCompatActivity {
 
     //ako nema narudžbe
     int crvena = Color.rgb(179, 5, 5);
-
     //ako je narudžba u izradi
     int zuta = Color.rgb(225, 206, 132);
-
     //ako je narudžba poslužena
     int zelena = Color.rgb(78, 255, 167);
 
-    /*
-    if(stol_n.statusNarudzbe==...){
-        stol_n.backcolor=...
-    }
-
-    ValueEventListener valueEventListener=new ValueEventListener() {
-        @Override
-        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-        }
-
-        @Override
-        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-        }
-    };
-    */
+    Button btnStol1=(Button)findViewById(R.id.btnStol1);
+    Button btnStol2=(Button)findViewById(R.id.btnStol2);
+    Button btnStol3=(Button)findViewById(R.id.btnStol3);
+    Button btnStol4=(Button)findViewById(R.id.btnStol4);
+    Button btnStol5=(Button)findViewById(R.id.btnStol5);
+    Button btnStol6=(Button)findViewById(R.id.btnStol6);
+    Button btnStol7=(Button)findViewById(R.id.btnStol7);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +126,22 @@ public class PrikazStolovaActivity extends AppCompatActivity {
                     for (DocumentSnapshot snapshot: task.getResult()){
                         Stol stol=snapshot.toObject(Stol.class);
                         stol.getStolID();
+                        switch (stol.getStolID()){
+                            case 1: ucitajBojuStola(btnStol1,stol.stanjeNarudzbe);
+                                    break;
+                            case 2: ucitajBojuStola(btnStol2,stol.stanjeNarudzbe);
+                                    break;
+                            case 3: ucitajBojuStola(btnStol3,stol.stanjeNarudzbe);
+                                break;
+                            case 4: ucitajBojuStola(btnStol4,stol.stanjeNarudzbe);
+                                break;
+                            case 5: ucitajBojuStola(btnStol5,stol.stanjeNarudzbe);
+                                break;
+                            case 6: ucitajBojuStola(btnStol6,stol.stanjeNarudzbe);
+                                break;
+                            case 7: ucitajBojuStola(btnStol7,stol.stanjeNarudzbe);
+                                break;
+                        }
                         stol.getStanjeNarudzbe();
                         stol.getKategorijaId();
                         stolList.add(stol);
@@ -152,7 +156,7 @@ public class PrikazStolovaActivity extends AppCompatActivity {
                 }
             }
         });
-    };
+    }
 
     private void setupDrawerContent(NavigationView nv){
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -172,6 +176,19 @@ public class PrikazStolovaActivity extends AppCompatActivity {
         loadDesks();
         drawer.closeDrawer(START);
     }
+
+    public void ucitajBojuStola(Button stol, String status){
+        if(status=="slobodan"){
+            stol.setBackgroundColor(crvena);
+        }
+        else if(status=="narudzbaUIzradi"){
+            stol.setBackgroundColor(zuta);
+        }
+        else{
+            stol.setBackgroundColor(zelena);
+        }
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

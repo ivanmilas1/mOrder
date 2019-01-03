@@ -1,5 +1,8 @@
 package hr.foi.morder.entities;
 
+import android.graphics.Color;
+import android.widget.Button;
+
 public class Stol {
 
     public int StolID;
@@ -38,4 +41,5 @@ public class Stol {
     public void setKategorijaId(int kategorijaId) {
         this.kategorijaId = kategorijaId;
     }
+
 }
