@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Map;
 
 import hr.foi.morder.R;
-import hr.foi.morder.entities.Artikl;
-import hr.foi.morder.entities.StavkaNarudzbe;
+import hr.foi.morder.model.Artikl;
+import hr.foi.morder.model.StavkaNarudzbe;
 
 public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecyclerAdapter.ViewHolder> {
 

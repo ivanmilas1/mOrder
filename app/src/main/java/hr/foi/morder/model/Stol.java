@@ -1,4 +1,4 @@
-package hr.foi.morder.entities;
+package hr.foi.morder.model;
 
 public class Stol {
 

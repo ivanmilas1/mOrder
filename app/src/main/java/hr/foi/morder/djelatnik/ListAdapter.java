@@ -10,7 +10,7 @@ import android.widget.EditText;
 import java.util.ArrayList;
 
 import hr.foi.morder.R;
-import hr.foi.morder.entities.Artikl2;
+import hr.foi.morder.model.Artikl2;
 
 public class ListAdapter extends BaseAdapter
 {
