@@ -12,13 +12,13 @@ import java.util.ArrayList;
 import hr.foi.morder.djelatnik.ListAdapter;
 import hr.foi.morder.model.Artikl2;
 
-public class DetaljiNarudzbeActitity extends AppCompatActivity
+public class DetaljiNarudzbeActivity extends AppCompatActivity
 {
-    private ListView listView;
-    private ListAdapter listAdapter;
     ArrayList<Artikl2> artikl2s = new ArrayList<>();
     Button btnPlaceOrder;
     ArrayList<Artikl2> artiklsNarudzba = new ArrayList<>();
+    private ListView listView;
+    private ListAdapter listAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

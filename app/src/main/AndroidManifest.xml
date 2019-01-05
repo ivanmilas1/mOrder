@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name="PrikazStolovaActivity" />
-        <activity android:name="DetaljiNarudzbeActitity" />
+        <activity android:name=".DetaljiNarudzbeActivity" />
         <activity android:name="PrijavaDjelatnikActivity" />
         <activity android:name="IzbornikDjelatnikActivity" />
         <activity android:name="NarucivanjeActivity"></activity>
