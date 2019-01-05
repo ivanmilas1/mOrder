@@ -1,45 +1,38 @@
 package hr.foi.morder.entities;
 
-import android.graphics.Color;
-import android.widget.Button;
-
 public class Stol {
 
-    public int StolID;
+    public int id;
 
-    public String stanjeNarudzbe;
+    public String stanje;
 
-    public int kategorijaId;
+    public int narudzba_id;
 
     public enum stanjeNarudzbe{
         slobodan, narudzbaUIzradi, narudzbaPosluzena
     }
 
-    public Stol(int stolID) {
-        StolID = stolID;
+    public int getId() {
+        return id;
     }
 
-    public int getStolID() {
-        return StolID;    }
-
-    public void setStolID(int stolID) {
-        StolID = stolID;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getStanjeNarudzbe() {
-        return stanjeNarudzbe;
+    public String getStanje() {
+        return stanje;
     }
 
-    public void setStanjeNarudzbe(String stanjeNarudzbe) {
-        this.stanjeNarudzbe = stanjeNarudzbe;
+    public void setStanje(String stanje) {
+        this.stanje = stanje;
     }
 
-    public int getKategorijaId() {
-        return kategorijaId;
+    public int getNarudzba_id() {
+        return narudzba_id;
     }
 
-    public void setKategorijaId(int kategorijaId) {
-        this.kategorijaId = kategorijaId;
+    public void setNarudzba_id(int narudzba_id) {
+        this.narudzba_id = narudzba_id;
     }
-
 }
