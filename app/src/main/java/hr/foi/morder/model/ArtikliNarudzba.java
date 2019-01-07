@@ -1,22 +1,21 @@
 package hr.foi.morder.model;
 
-public class Artikl {
-    public String naziv;
-    public String jedinicna_mjera;
-    public Integer jedinicna_cijena;
-    public Integer kategorija_id;
-    public String slika;
+public class ArtikliNarudzba {
 
-    public Artikl(String naziv, String jedinicna_mjera, Integer jedinicna_cijena, Integer kategorija_id, String slika) {
+    private String naziv;
+    private String jedinicna_mjera;
+    private Integer jedinicna_cijena;
+    private Integer kategorija_id;
+    private String slika;
+    private Integer kolicina;
+
+    public ArtikliNarudzba(String naziv, String jedinicna_mjera, Integer jedinicna_cijena, Integer kategorija_id, String slika, Integer kolicina) {
         this.naziv = naziv;
         this.jedinicna_mjera = jedinicna_mjera;
         this.jedinicna_cijena = jedinicna_cijena;
         this.kategorija_id = kategorija_id;
         this.slika = slika;
-    }
-
-    public Artikl(){
-
+        this.kolicina = kolicina;
     }
 
     public String getNaziv() {
@@ -57,5 +56,12 @@ public class Artikl {
 
     public void setSlika(String slika) {
         this.slika = slika;
+    }
+    public Integer getKolicina() {
+        return kolicina;
+    }
+
+    public void setKolicina(Integer kolicina) {
+        this.kolicina = kolicina;
     }
 }

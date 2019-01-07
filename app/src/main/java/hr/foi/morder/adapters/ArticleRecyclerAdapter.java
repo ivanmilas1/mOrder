@@ -45,10 +45,9 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int position) {
-        final int itemPosition = position;
         final Artikl Artikl = articleList.get(position);
+
         viewHolder.setName(Artikl.getNaziv());
-        viewHolder.setPrice(Artikl.getJedinicna_cijena());
         viewHolder.setImage(ctx, Artikl.getSlika());
         viewHolder.setQuantity(1);
         viewHolder.setPriceCurrency("kn");
@@ -92,7 +91,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
                 addOrder(1, 1, price, quantity);
                 viewHolder.setPrice(Artikl.getJedinicna_cijena());
                 viewHolder.setQuantity(1);
-                Toast.makeText(ctx, "Narudžba je zaprimljena" , Toast.LENGTH_LONG).show();
+                Toast.makeText(ctx, "Narudžba je zaprimljena", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -116,13 +115,11 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         View mView;
-        private Context ctx;
         public Button quantityAdd;
         public Button quantityRemove;
         public Button order;
         public TextView price;
         public TextView quantity;
-
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -145,7 +142,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         }
 
         public void setImage(Context ctx, String image) {
-            ImageView article_image = (ImageView) mView.findViewById(R.id.article_image);
+            ImageView article_image = mView.findViewById(R.id.article_image);
             Picasso.with(ctx).load(image).into(article_image);
         }
 
@@ -156,7 +153,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
 
         public void setPriceCurrency(String quantity) {
             TextView articlePriceCurrency = itemView.findViewById(R.id.article_price_currency);
-            articlePriceCurrency.setText(quantity.toString());
+            articlePriceCurrency.setText(quantity);
         }
     }
 }

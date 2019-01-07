@@ -1,4 +1,4 @@
-package hr.foi.morder.djelatnik;
+package hr.foi.morder.adapters;
 
 import android.widget.EditText;
 import android.widget.ImageButton;

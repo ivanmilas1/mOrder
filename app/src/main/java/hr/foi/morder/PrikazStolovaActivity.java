@@ -18,7 +18,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-import hr.foi.morder.entities.Stol;
+import hr.foi.morder.model.Stol;
 
 public class PrikazStolovaActivity extends AppCompatActivity {
 
@@ -33,7 +33,10 @@ public class PrikazStolovaActivity extends AppCompatActivity {
         initColors();
         final List<Button> listOfButtons = getButtonsInList();
         final List<Stol> listaStolova = new ArrayList<>();
+        getTables(listOfButtons, listaStolova);
+    }
 
+    private void getTables(final List<Button> listOfButtons, final List<Stol> listaStolova) {
         database = FirebaseFirestore.getInstance();
         database.collection("Stol")
                 .get()
@@ -44,7 +47,6 @@ public class PrikazStolovaActivity extends AppCompatActivity {
                             for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                 Stol stol = documentSnapshot.toObject(Stol.class);
                                 listaStolova.add(stol);
-
                             }
                         } else {
                             Log.d("Error", "Error getting data");
@@ -72,12 +74,13 @@ public class PrikazStolovaActivity extends AppCompatActivity {
     }
 
     private void setOnClickListenerForAllButtons(List<Button> listOfButtons) {
-        for (Button itemButton : listOfButtons) {
+        for (final Button itemButton : listOfButtons) {
             // seting for all buttons onClickListener to start DetaljiNaruzdbeActivity
             itemButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(v.getContext(), DetaljiNarudzbeActivity.class);
+                    i.putExtra("stolID", itemButton.getText());
                     startActivity(i);
                 }
             });
