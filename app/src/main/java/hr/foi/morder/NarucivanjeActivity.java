@@ -96,9 +96,9 @@ public class NarucivanjeActivity extends AppCompatActivity {
                             List<Artikl> articlesList = new ArrayList<>();
                             for(DocumentSnapshot documentSnapshot: task.getResult()){
                                 Artikl artikl = documentSnapshot.toObject(Artikl.class);
-                                artikl.getNaziv();
-                                artikl.getJedinicna_cijena();
-                                artikl.getSlika();
+//                                artikl.getNaziv();
+//                                artikl.getJedinicna_cijena();
+//                                artikl.getSlika();
                                 articlesList.add(artikl);
                             }
                             adapter = new ArticleRecyclerAdapter(articlesList, getApplicationContext(), database);

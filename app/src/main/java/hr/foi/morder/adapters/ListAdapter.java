@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import hr.foi.morder.R;
@@ -58,7 +60,7 @@ public class ListAdapter extends BaseAdapter {
 
         listViewHolder.tvNaziv.setText(artikl.naziv);
         listViewHolder.tvCijena.setText(artikl.jedinicna_cijena + "Kn");
-        listViewHolder.ivSlika.setImageResource(Integer.parseInt(artikl.slika));
+        Picasso.with(context).load(artikl.slika).into(listViewHolder.ivSlika);
       //  listViewHolder.etKolicina.setText(artikl2.KolicinaKosarica + "");
         listViewHolder.btnDodaj.setOnClickListener(new View.OnClickListener() {
             @Override

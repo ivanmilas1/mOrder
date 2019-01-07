@@ -39,9 +39,6 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity
         Intent intent = getIntent();
         String stolID = intent.getStringExtra("stolID");
         getArticles();
-        listView = findViewById(R.id.customListView);
-        listAdapter = new ListAdapter(this, listaArtikala);
-        listView.setAdapter(listAdapter);
 
         btnPlaceOrder = findViewById(R.id.btnPlaceOrder);
         btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
@@ -66,9 +63,10 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity
                         } else {
                             Log.d("Error", "Error getting data");
                         }
+                        listView = findViewById(R.id.customListView);
+                        listAdapter = new ListAdapter(getApplicationContext(), listaArtikala);
+                        listView.setAdapter(listAdapter);
                     }
                 });
-//        artikl2s.add(new Artikl2("Coca-Cola",15.00,R.mipmap.ic_launcher));
-//        artikl2s.add(new Artikl2("Pivo",12.00,R.mipmap.untitled));
     }
 }
