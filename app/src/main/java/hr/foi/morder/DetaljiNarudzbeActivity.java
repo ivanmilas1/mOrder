@@ -20,15 +20,12 @@ import java.util.ArrayList;
 
 import hr.foi.morder.adapters.ListAdapter;
 import hr.foi.morder.model.Artikl;
-import hr.foi.morder.model.Artikl2;
 
 public class DetaljiNarudzbeActivity extends AppCompatActivity
 {
     ArrayList<Artikl> listaArtikala = new ArrayList<>();
     private FirebaseFirestore database;
-    ArrayList<Artikl2> artikl2s = new ArrayList<>();
     Button btnPlaceOrder;
-    ArrayList<Artikl2> artiklsNarudzba = new ArrayList<>();
     private ListView listView;
     private ListAdapter listAdapter;
 
