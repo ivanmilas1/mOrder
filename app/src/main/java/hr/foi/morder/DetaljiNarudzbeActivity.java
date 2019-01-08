@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import hr.foi.morder.adapters.ListAdapter;
 import hr.foi.morder.model.Artikl;
+import hr.foi.morder.model.Racun;
 
 public class DetaljiNarudzbeActivity extends AppCompatActivity
 {
@@ -28,13 +29,14 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity
     Button btnPlaceOrder;
     private ListView listView;
     private ListAdapter listAdapter;
+    int stolID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalji_narudzbe2);
         Intent intent = getIntent();
-        String stolID = intent.getStringExtra("stolID");
+        stolID = Integer.parseInt(intent.getStringExtra("stolID"));
         getArticles();
 
         btnPlaceOrder = findViewById(R.id.btnPlaceOrder);
@@ -47,15 +49,17 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity
     }
     public void getArticles(){
         database = FirebaseFirestore.getInstance();
-        database.collection("Artikl")
+        database.collection("Racun")
+                .whereEqualTo("stol_id", stolID)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (DocumentSnapshot documentSnapshot : task.getResult()) {
-                                Artikl artikl = documentSnapshot.toObject(Artikl.class);
-                                listaArtikala.add(artikl);
+                                Racun racun = documentSnapshot.toObject(Racun.class);
+                              //  Artikl artikl = racun.getStol().getNarudzba().getArtikl();
+                               // listaArtikala.add(artikl);
                             }
                         } else {
                             Log.d("Error", "Error getting data");

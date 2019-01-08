@@ -65,6 +65,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
                 viewHolder.price.setText(String.valueOf(priceArticle));
             }
         });
+
         viewHolder.quantityRemove.setOnClickListener(new View.OnClickListener() {
 
             int priceArticle1 = Integer.parseInt(String.valueOf(viewHolder.price.getText()));
