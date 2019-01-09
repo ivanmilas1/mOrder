@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ArticleActivity">
+    tools:context="hr.foi.morder.NarucivanjeActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/article_recycler"
@@ -22,6 +22,14 @@
         app:itemTextColor="@color/colorText"
         app:menu="@menu/drawer_menu"
         android:layout_gravity="start">
+
+        <ExpandableListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="160dp"
+            android:choiceMode="singleChoice"
+            android:id="@+id/navigationmenu">
+        </ExpandableListView>
 
     </android.support.design.widget.NavigationView>
 

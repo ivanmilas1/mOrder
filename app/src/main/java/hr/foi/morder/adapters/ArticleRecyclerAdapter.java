@@ -46,14 +46,14 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int position) {
         final int itemPosition = position;
-        final Artikl Artikl = articleList.get(position);
+        final Artikl Artikl = articleList.get(itemPosition);
         viewHolder.setName(Artikl.getNaziv());
         viewHolder.setPrice(Artikl.getJedinicna_cijena());
         viewHolder.setImage(ctx, Artikl.getSlika());
         viewHolder.setQuantity(1);
         viewHolder.setPriceCurrency("kn");
         viewHolder.quantityAdd.setOnClickListener(new View.OnClickListener() {
-            int priceArticle1 = Integer.parseInt(String.valueOf(viewHolder.price.getText()));
+            Double priceArticle1 = Double.parseDouble(String.valueOf(viewHolder.price.getText()));
 
             @Override
             public void onClick(View v) {
@@ -61,14 +61,14 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
                 countQuantity++;
                 viewHolder.quantity.setText(String.valueOf(countQuantity));
 
-                int priceArticle = Integer.parseInt(String.valueOf(viewHolder.price.getText()));
+                Double priceArticle = Double.parseDouble(String.valueOf(viewHolder.price.getText()));
                 priceArticle = priceArticle1 + priceArticle;
                 viewHolder.price.setText(String.valueOf(priceArticle));
             }
         });
         viewHolder.quantityRemove.setOnClickListener(new View.OnClickListener() {
 
-            int priceArticle1 = Integer.parseInt(String.valueOf(viewHolder.price.getText()));
+            Double priceArticle1 = Double.parseDouble(String.valueOf(viewHolder.price.getText()));
 
             @Override
             public void onClick(View v) {
@@ -77,7 +77,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
                     countQuantity--;
                     viewHolder.quantity.setText(String.valueOf(countQuantity));
 
-                    int priceArticle = Integer.parseInt(String.valueOf(viewHolder.price.getText()));
+                    Double priceArticle = Double.parseDouble(String.valueOf(viewHolder.price.getText()));
                     priceArticle = priceArticle - priceArticle1;
                     viewHolder.price.setText(String.valueOf(priceArticle));
                 }
@@ -88,7 +88,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
             @Override
             public void onClick(View v) {
                 Integer quantity = Integer.parseInt(String.valueOf(viewHolder.quantity.getText()));
-                Integer price = Integer.parseInt(String.valueOf(viewHolder.price.getText()));
+                Double price = Double.parseDouble(String.valueOf(viewHolder.price.getText()));
                 addOrder(1, 1, price, quantity);
                 viewHolder.setPrice(Artikl.getJedinicna_cijena());
                 viewHolder.setQuantity(1);
@@ -97,7 +97,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         });
     }
 
-    public void addOrder(Integer artikl, Integer narudzba, Integer cijena, Integer kolicina) {
+    public void addOrder(Integer artikl, Integer narudzba, Double cijena, Integer kolicina) {
         Map<String, Object> stavkaNarudzbe = new StavkaNarudzbe(artikl, narudzba, cijena, kolicina).toMap();
         database.collection("Stavka narudzbe")
                 .add(stavkaNarudzbe)
@@ -139,7 +139,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
             article_name.setText(name);
         }
 
-        public void setPrice(Number price) {
+        public void setPrice(Double price) {
             TextView article_price = mView.findViewById(R.id.article_price);
             article_price.setText(price.toString());
         }
@@ -149,7 +149,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
             Picasso.with(ctx).load(image).into(article_image);
         }
 
-        public void setQuantity(Number quantity) {
+        public void setQuantity(Integer quantity) {
             TextView articleQuantity = itemView.findViewById(R.id.article_quantity);
             articleQuantity.setText(quantity.toString());
         }

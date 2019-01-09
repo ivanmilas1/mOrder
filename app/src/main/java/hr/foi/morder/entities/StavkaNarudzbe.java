@@ -6,10 +6,10 @@ import java.util.Map;
 public class StavkaNarudzbe {
     Integer Artikl_id;
     Integer narudzbaId;
-    Integer cijena;
+    Double cijena;
     Integer kolicina;
 
-    public StavkaNarudzbe(Integer artikl_id, Integer narudzbaId, Integer cijena, Integer kolicina) {
+    public StavkaNarudzbe(Integer artikl_id, Integer narudzbaId, Double cijena, Integer kolicina) {
         this.Artikl_id = artikl_id;
         this.narudzbaId = narudzbaId;
         this.cijena = cijena;
@@ -36,11 +36,11 @@ public class StavkaNarudzbe {
         this.narudzbaId = narudzbaId;
     }
 
-    public Integer getCijena() {
+    public Double getCijena() {
         return cijena;
     }
 
-    public void setCijena(Integer cijena) {
+    public void setCijena(Double cijena) {
         this.cijena = cijena;
     }
 

@@ -1,7 +1,10 @@
 package hr.foi.morder;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -11,9 +14,19 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -21,14 +34,20 @@ import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import javax.crypto.KeyAgreement;
+
 import hr.foi.morder.adapters.ArticleRecyclerAdapter;
+import hr.foi.morder.adapters.ExpendableListAdapter;
 import hr.foi.morder.entities.Artikl;
+import hr.foi.morder.entities.Kategorija;
 
 
 public class NarucivanjeActivity extends AppCompatActivity {
 
+    private View view;
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
     private NavigationView navigation;
@@ -37,24 +56,105 @@ public class NarucivanjeActivity extends AppCompatActivity {
     private CollectionReference collection;
     private ListenerRegistration firestoreListener;
     private ArticleRecyclerAdapter adapter;
+    private ExpandableListView expandableListView;
+    private ExpandableListAdapter expandableListAdapter;
+    private List<String> listHeader;
+    private HashMap<String, List<Kategorija>> listChild;
+    private HashMap<String, List<Kategorija>> listChildEx;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.article);
-
         drawer = findViewById(R.id.drawer);
         toggle = new ActionBarDrawerToggle(this, drawer, R.string.open, R.string.close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        expandableListView = findViewById(R.id.navigationmenu);
         navigation = findViewById(R.id.nv);
         setupDrawerContent(navigation);
 
         recyclerView = findViewById(R.id.article_recycler);
         database = FirebaseFirestore.getInstance();
+        dohvatiKategorije();
+        /*listChild = dohvatiKategorije();
+        Log.d("TAG", "listChildSize"+listChild.size());
+        listHeader = new ArrayList<String>(listChild.keySet());
+        Log.d("TAG", "listHeader"+listHeader.size());
+        expandableListAdapter = new ExpendableListAdapter(this, listHeader, listChild);
+        expandableListView.setAdapter(expandableListAdapter);
+        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                v.setSelected(true);
+                drawer.closeDrawers();
+                return false;
+            }
+        });
+        expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                return false;
+            }
+        });*/
+    }
 
+    private HashMap<String, List<String>> prepareListData() {
+        HashMap<String, List<String>> listChildEx = new HashMap<String, List<String>>();
+
+        List<String> jelovnik = new ArrayList<String>();
+        jelovnik.add("Pica");
+        jelovnik.add("Hladno jelo");
+
+        listChildEx.put("Jelovnik", jelovnik);
+        Log.d("Tag", "child"+listChildEx.keySet());
+        Log.d("Tag", "childsize"+listChildEx.size());
+        return listChildEx;
+    }
+
+    private void dohvatiKategorije(){
+        listChildEx = new HashMap<String, List<Kategorija>>();
+        database.collection("Kategorija")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            List<Kategorija> kategorijaList = new ArrayList<>();
+                            for(DocumentSnapshot documentSnapshot: task.getResult()){
+                                Kategorija kategorija = documentSnapshot.toObject(Kategorija.class);
+                                kategorija.getNaziv();
+                                kategorijaList.add(kategorija);
+
+                            }
+                            listChildEx.put("Jelovnik", kategorijaList);
+                            listChild = listChildEx;
+                            listHeader = new ArrayList<String>(listChild.keySet());
+                            expandableListAdapter = new ExpendableListAdapter(getApplicationContext(), listHeader, listChild);
+                            expandableListView.setAdapter(expandableListAdapter);
+                            expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+                                @Override
+                                public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                                    v.setSelected(true);
+                                    loadArticleListDrinks();
+                                    drawer.closeDrawers();
+                                    return false;
+                                }
+                            });
+                            expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+                                @Override
+                                public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                                    return false;
+                                }
+                            });
+                        }
+                        else{
+                            Log.d("Error", "Error getting data");
+                        }
+                    }
+                });
     }
 
     private void loadArticleListDrinks() {
@@ -127,7 +227,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
 
     private void selectDrawerView(MenuItem item){
         switch (item.getItemId()){
-            case R.id.pica:
+            /*case R.id.pica:
                 loadArticleListDrinks();
                 drawer.closeDrawer(GravityCompat.START);
                 break;
@@ -135,7 +235,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
             case R.id.jela:
                 loadArticleListFood();
                 drawer.closeDrawer(GravityCompat.START);
-                break;
+                break;*/
         }
     }
 
