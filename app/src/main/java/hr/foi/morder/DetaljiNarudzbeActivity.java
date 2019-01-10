@@ -17,9 +17,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import hr.foi.morder.adapters.ListAdapter;
+import hr.foi.morder.adapters.DjelatnikPregledRacunaListAdapter;
 import hr.foi.morder.model.Artikl;
 import hr.foi.morder.model.Narudzba;
 import hr.foi.morder.model.Racun;
@@ -27,10 +26,11 @@ import hr.foi.morder.model.StavkaNarudzbe;
 
 public class DetaljiNarudzbeActivity extends AppCompatActivity {
     ArrayList<Artikl> listaArtikala = new ArrayList<>();
+    ArrayList<StavkaNarudzbe> listaStavkiNarudžbi = new ArrayList<>();
     private FirebaseFirestore database;
     Button btnPlaceOrder;
     private ListView listView;
-    private ListAdapter listAdapter;
+    private DjelatnikPregledRacunaListAdapter djelatnikPregledRacunaStolaListAdapter;
     int stolID;
 
     @Override
@@ -59,7 +59,6 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
-                            List<Artikl> articlesList = new ArrayList<>();
                             for(DocumentSnapshot documentSnapshot: task.getResult()){
                                 Racun racun = documentSnapshot.toObject(Racun.class);
                                 getOrders(racun.getId());
@@ -101,6 +100,7 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             for(DocumentSnapshot documentSnapshot: task.getResult()){
                                 StavkaNarudzbe stavkaNarudzbe = documentSnapshot.toObject(StavkaNarudzbe.class);
+                                listaStavkiNarudžbi.add(stavkaNarudzbe);
                                 getOrderArticles(stavkaNarudzbe.getArtikl_id());
                             }
                         }
@@ -124,8 +124,9 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
                                 listaArtikala.add(artikl);
                             }
                             listView = findViewById(R.id.customListView);
-                            listAdapter = new ListAdapter(getApplicationContext(), listaArtikala);
-                            listView.setAdapter(listAdapter);
+                            djelatnikPregledRacunaStolaListAdapter = new DjelatnikPregledRacunaListAdapter
+                                    (getApplicationContext(), listaArtikala, listaStavkiNarudžbi);
+                            listView.setAdapter(djelatnikPregledRacunaStolaListAdapter);
                         }
                         else{
                             Log.d("Error", "Error getting data");
