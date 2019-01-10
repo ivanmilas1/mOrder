@@ -1,20 +1,32 @@
 package hr.foi.morder.model;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Korisnik {
-    public Integer id;
+    public String id;
     public String imePrezime;
     public String lozinka;
     public Date datumRodjenja;
     public String adresaPrebivalista;
     public TipKorisnika tipKorisnika;
 
-    public Integer getId() {
+   public Korisnik(String id,String imePrezime,String lozinka,String adresaPrebivalista){
+
+        this.id = id;
+        this.imePrezime = imePrezime;
+        this.lozinka = lozinka;
+        this.adresaPrebivalista = adresaPrebivalista;
+    }
+
+    public Korisnik(){}
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -57,4 +69,7 @@ public class Korisnik {
     public void setTipKorisnika(TipKorisnika tipKorisnika) {
         this.tipKorisnika = tipKorisnika;
     }
+
+
 }
+

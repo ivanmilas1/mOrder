@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:676632106686:android:ea2bb30e7a08cef7",
         "android_client_info": {
-          "package_name": "hr.foi.morder"
+          "package_name": "com.morder.morder"
         }
       },
       "oauth_client": [
@@ -18,8 +18,84 @@
           "client_id": "676632106686-sbln6kntistd816mm02l7gkqd86qbu6t.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "hr.foi.morder",
+            "package_name": "com.morder.morder",
             "certificate_hash": "7c6b9e9083a9b8a958b0dc940541ebe5f6d2490b"
+          }
+        },
+        {
+          "client_id": "676632106686-tulm7j1c8pp1hp0kacto4n9u7pn49rrr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.morder.morder",
+            "certificate_hash": "be880e0aba97386adf435f50ceca98867fe92be0"
+          }
+        },
+        {
+          "client_id": "676632106686-s38hr0ppufr1120b2lkjsqh3ivuhq8b0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.morder.morder",
+            "certificate_hash": "59fbad2605ccb10962ef338967da33eaeb16906c"
+          }
+        },
+        {
+          "client_id": "676632106686-q6pmj4rnu1rd60bbbjlka9i0umtnv87i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4pSlpEAgngZuuZImdnDbzAj_kiVvRBvU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "676632106686-q6pmj4rnu1rd60bbbjlka9i0umtnv87i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:676632106686:android:d419cb8129415f42",
+        "android_client_info": {
+          "package_name": "hr.foi.morder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "676632106686-gvqua4ledensfduh2r8ifd9t05n92bbt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hr.foi.morder",
+            "certificate_hash": "9f9022219e8e370110e1735dfaa4d46047d6c78c"
+          }
+        },
+        {
+          "client_id": "676632106686-3tv9k8lp31kegagc5mr1coo1v5depi34.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hr.foi.morder",
+            "certificate_hash": "fcdac2f7c87a145a4ab5929a16b3e57215635ba1"
+          }
+        },
+        {
+          "client_id": "676632106686-jhrid4m7gjqe4c9325g07sam664i78cj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hr.foi.morder",
+            "certificate_hash": "be880e0aba97386adf435f50ceca98867fe92be0"
           }
         },
         {

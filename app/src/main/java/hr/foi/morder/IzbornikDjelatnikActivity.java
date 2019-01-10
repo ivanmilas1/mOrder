@@ -22,4 +22,8 @@ public class IzbornikDjelatnikActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+    public void OnClickViewDjelatnik(View view){
+        Intent intent = new Intent(this, DodavanjeRadnikaActivity.class);
+        startActivity(intent);
+    }
 }
