@@ -49,6 +49,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
 
         viewHolder.setName(Artikl.getNaziv());
         viewHolder.setImage(ctx, Artikl.getSlika());
+        viewHolder.setPrice(Artikl.getJedinicna_cijena());
         viewHolder.setQuantity(1);
         viewHolder.setPriceCurrency("kn");
         viewHolder.quantityAdd.setOnClickListener(new View.OnClickListener() {

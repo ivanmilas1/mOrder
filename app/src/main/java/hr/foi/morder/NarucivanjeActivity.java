@@ -14,10 +14,8 @@ import android.view.MenuItem;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -34,8 +32,6 @@ public class NarucivanjeActivity extends AppCompatActivity {
     private NavigationView navigation;
     private RecyclerView recyclerView;
     private FirebaseFirestore database;
-    private CollectionReference collection;
-    private ListenerRegistration firestoreListener;
     private ArticleRecyclerAdapter adapter;
 
     @Override
@@ -68,9 +64,6 @@ public class NarucivanjeActivity extends AppCompatActivity {
                             List<Artikl> articlesList = new ArrayList<>();
                             for(DocumentSnapshot documentSnapshot: task.getResult()){
                                 Artikl artikl = documentSnapshot.toObject(Artikl.class);
-//                                artikl.getNaziv();
-//                                artikl.getJedinicna_cijena();
-//                                artikl.getSlika();
                                 articlesList.add(artikl);
                             }
                             adapter = new ArticleRecyclerAdapter(articlesList, getApplicationContext(), database);
@@ -96,9 +89,6 @@ public class NarucivanjeActivity extends AppCompatActivity {
                             List<Artikl> articlesList = new ArrayList<>();
                             for(DocumentSnapshot documentSnapshot: task.getResult()){
                                 Artikl artikl = documentSnapshot.toObject(Artikl.class);
-//                                artikl.getNaziv();
-//                                artikl.getJedinicna_cijena();
-//                                artikl.getSlika();
                                 articlesList.add(artikl);
                             }
                             adapter = new ArticleRecyclerAdapter(articlesList, getApplicationContext(), database);

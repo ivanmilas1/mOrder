@@ -5,6 +5,7 @@ import java.util.Date;
 public class Narudzba {
     public int id;
     public Date vrijeme_narudzbe;
+    public double iznos_narudzbe;
     public Korisnik korisnik;
 
     public int getId() {
@@ -21,6 +22,14 @@ public class Narudzba {
 
     public void setVrijeme_narudzbe(Date vrijeme_narudzbe) {
         this.vrijeme_narudzbe = vrijeme_narudzbe;
+    }
+
+    public double getIznos_narudzbe() {
+        return iznos_narudzbe;
+    }
+
+    public void setIznos_narudzbe(double iznos_narudzbe) {
+        this.iznos_narudzbe = iznos_narudzbe;
     }
 
     public Korisnik getKorisnik() {
