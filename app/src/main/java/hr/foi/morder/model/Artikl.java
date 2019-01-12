@@ -1,11 +1,11 @@
-package hr.foi.morder.entities;
+package hr.foi.morder.model;
 
 public class Artikl {
-    private String naziv;
-    private String jedinicna_mjera;
-    private Double jedinicna_cijena;
-    private Integer kategorija_id;
-    private String slika;
+    public String naziv;
+    public String jedinicna_mjera;
+    public Double jedinicna_cijena;
+    public Integer kategorija_id;
+    public String slika;
 
     public Artikl(String naziv, String jedinicna_mjera, Double jedinicna_cijena, Integer kategorija_id, String slika) {
         this.naziv = naziv;

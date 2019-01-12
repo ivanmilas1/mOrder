@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import hr.foi.morder.R;
-import hr.foi.morder.entities.Kategorija;
 
 public class ExpendableListAdapter extends BaseExpandableListAdapter {
     private Context ctx;

@@ -26,8 +26,8 @@ import java.util.List;
 
 import hr.foi.morder.adapters.ArticleRecyclerAdapter;
 import hr.foi.morder.adapters.ExpendableListAdapter;
-import hr.foi.morder.entities.Artikl;
-import hr.foi.morder.entities.Kategorija;
+import hr.foi.morder.model.Artikl;
+import hr.foi.morder.model.Kategorija;
 
 
 public class NarucivanjeActivity extends AppCompatActivity {
@@ -117,11 +117,9 @@ public class NarucivanjeActivity extends AppCompatActivity {
                             List<Artikl> articlesList = new ArrayList<>();
                             for(DocumentSnapshot documentSnapshot: task.getResult()){
                                 Artikl artikl = documentSnapshot.toObject(Artikl.class);
-                                artikl.getNaziv();
-                                artikl.getJedinicna_cijena();
-                                artikl.getSlika();
                                 articlesList.add(artikl);
                             }
+
                             adapter = new ArticleRecyclerAdapter(articlesList, getApplicationContext(), database);
                             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                             recyclerView.setLayoutManager(layoutManager);
