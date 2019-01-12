@@ -1,12 +1,8 @@
 package hr.foi.morder;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,24 +16,13 @@ import android.widget.ExpandableListView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import javax.crypto.KeyAgreement;
 
 import hr.foi.morder.adapters.ArticleRecyclerAdapter;
 import hr.foi.morder.adapters.ExpendableListAdapter;
@@ -47,14 +32,11 @@ import hr.foi.morder.entities.Kategorija;
 
 public class NarucivanjeActivity extends AppCompatActivity {
 
-    private View view;
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
     private NavigationView navigation;
     private RecyclerView recyclerView;
     private FirebaseFirestore database;
-    private CollectionReference collection;
-    private ListenerRegistration firestoreListener;
     private ArticleRecyclerAdapter adapter;
     private ExpandableListView expandableListView;
     private ExpandableListAdapter expandableListAdapter;
@@ -83,7 +65,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
 
 
     private void dohvatiKategorije(){
-        listChildEx = new HashMap<String, List<String>>();
+        listChildEx = new HashMap<>();
         database.collection("Kategorija")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
