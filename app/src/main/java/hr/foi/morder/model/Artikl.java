@@ -3,11 +3,11 @@ package hr.foi.morder.model;
 public class Artikl {
     public String naziv;
     public String jedinicna_mjera;
-    public Integer jedinicna_cijena;
+    public Double jedinicna_cijena;
     public Integer kategorija_id;
     public String slika;
 
-    public Artikl(String naziv, String jedinicna_mjera, Integer jedinicna_cijena, Integer kategorija_id, String slika) {
+    public Artikl(String naziv, String jedinicna_mjera, Double jedinicna_cijena, Integer kategorija_id, String slika) {
         this.naziv = naziv;
         this.jedinicna_mjera = jedinicna_mjera;
         this.jedinicna_cijena = jedinicna_cijena;
@@ -35,11 +35,11 @@ public class Artikl {
         this.jedinicna_mjera = jedinicna_mjera;
     }
 
-    public Integer getJedinicna_cijena() {
+    public Double getJedinicna_cijena() {
         return jedinicna_cijena;
     }
 
-    public void setJedinicna_cijena(Integer jedinicna_cijena) {
+    public void setJedinicna_cijena(Double jedinicna_cijena) {
         this.jedinicna_cijena = jedinicna_cijena;
     }
 
