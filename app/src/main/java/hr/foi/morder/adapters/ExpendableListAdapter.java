@@ -16,9 +16,9 @@ import hr.foi.morder.entities.Kategorija;
 public class ExpendableListAdapter extends BaseExpandableListAdapter {
     private Context ctx;
     private List<String> headerList;
-    private HashMap<String, List<Kategorija>> dataChildList;
+    private HashMap<String, List<String>> dataChildList;
 
-    public ExpendableListAdapter(Context context, List<String> listHeader, HashMap<String, List<Kategorija>> data) {
+    public ExpendableListAdapter(Context context, List<String> listHeader, HashMap<String, List<String>> data) {
         this.ctx = context;
         this.headerList = listHeader;
         this.dataChildList = data;
@@ -41,7 +41,7 @@ public class ExpendableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public Object getChild(int groupPosition, int childPosition) {
+    public String getChild(int groupPosition, int childPosition) {
         return this.dataChildList.get(this.headerList.get(groupPosition)).get(childPosition);
     }
 
@@ -74,13 +74,13 @@ public class ExpendableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        final Object child =  getChild(groupPosition, childPosition);
+        final String child =  getChild(groupPosition, childPosition);
         if(convertView == null){
             LayoutInflater layoutInflater = (LayoutInflater) this.ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.submenu, null);
         }
         TextView textChild= convertView.findViewById(R.id.submenu);
-        textChild.setText(child.toString());
+        textChild.setText(child);
         return convertView;
     }
 

@@ -59,9 +59,9 @@ public class NarucivanjeActivity extends AppCompatActivity {
     private ExpandableListView expandableListView;
     private ExpandableListAdapter expandableListAdapter;
     private List<String> listHeader;
-    private HashMap<String, List<Kategorija>> listChild;
-    private HashMap<String, List<Kategorija>> listChildEx;
-
+    private HashMap<String, List<String>> listChild;
+    private HashMap<String, List<String>> listChildEx;
+    private Long childId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,55 +79,21 @@ public class NarucivanjeActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.article_recycler);
         database = FirebaseFirestore.getInstance();
         dohvatiKategorije();
-        /*listChild = dohvatiKategorije();
-        Log.d("TAG", "listChildSize"+listChild.size());
-        listHeader = new ArrayList<String>(listChild.keySet());
-        Log.d("TAG", "listHeader"+listHeader.size());
-        expandableListAdapter = new ExpendableListAdapter(this, listHeader, listChild);
-        expandableListView.setAdapter(expandableListAdapter);
-        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                v.setSelected(true);
-                drawer.closeDrawers();
-                return false;
-            }
-        });
-        expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                return false;
-            }
-        });*/
     }
 
-    private HashMap<String, List<String>> prepareListData() {
-        HashMap<String, List<String>> listChildEx = new HashMap<String, List<String>>();
-
-        List<String> jelovnik = new ArrayList<String>();
-        jelovnik.add("Pica");
-        jelovnik.add("Hladno jelo");
-
-        listChildEx.put("Jelovnik", jelovnik);
-        Log.d("Tag", "child"+listChildEx.keySet());
-        Log.d("Tag", "childsize"+listChildEx.size());
-        return listChildEx;
-    }
 
     private void dohvatiKategorije(){
-        listChildEx = new HashMap<String, List<Kategorija>>();
+        listChildEx = new HashMap<String, List<String>>();
         database.collection("Kategorija")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
-                            List<Kategorija> kategorijaList = new ArrayList<>();
+                            List<String> kategorijaList = new ArrayList<>();
                             for(DocumentSnapshot documentSnapshot: task.getResult()){
                                 Kategorija kategorija = documentSnapshot.toObject(Kategorija.class);
-                                kategorija.getNaziv();
-                                kategorijaList.add(kategorija);
-
+                                kategorijaList.add(kategorija.getNaziv());
                             }
                             listChildEx.put("Jelovnik", kategorijaList);
                             listChild = listChildEx;
@@ -137,8 +103,9 @@ public class NarucivanjeActivity extends AppCompatActivity {
                             expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
                                 @Override
                                 public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                                    childId = parent.getExpandableListAdapter().getChildId(groupPosition, childPosition)+1;
                                     v.setSelected(true);
-                                    loadArticleListDrinks();
+                                    loadArticleList(childId);
                                     drawer.closeDrawers();
                                     return false;
                                 }
@@ -157,9 +124,9 @@ public class NarucivanjeActivity extends AppCompatActivity {
                 });
     }
 
-    private void loadArticleListDrinks() {
+    private void loadArticleList(long idKategorije) {
         database.collection("Artikl")
-                .whereEqualTo("kategorija_id", 1)
+                .whereEqualTo("kategorija_id", idKategorije)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -184,36 +151,6 @@ public class NarucivanjeActivity extends AppCompatActivity {
                     }
                 });
     }
-
-    private void loadArticleListFood() {
-        database.collection("Artikl")
-                .whereEqualTo("kategorija_id", 2)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            List<Artikl> articlesList = new ArrayList<>();
-                            for(DocumentSnapshot documentSnapshot: task.getResult()){
-                                Artikl artikl = documentSnapshot.toObject(Artikl.class);
-                                artikl.getNaziv();
-                                artikl.getJedinicna_cijena();
-                                artikl.getSlika();
-                                articlesList.add(artikl);
-                            }
-                            adapter = new ArticleRecyclerAdapter(articlesList, getApplicationContext(), database);
-                            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-                            recyclerView.setLayoutManager(layoutManager);
-                            recyclerView.setAdapter(adapter);
-                        }
-                        else{
-                            Log.d("Error", "Error getting data");
-                        }
-                    }
-                });
-    }
-
-
 
     private void setupDrawerContent(NavigationView nv){
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -226,17 +163,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
     }
 
     private void selectDrawerView(MenuItem item){
-        switch (item.getItemId()){
-            /*case R.id.pica:
-                loadArticleListDrinks();
-                drawer.closeDrawer(GravityCompat.START);
-                break;
 
-            case R.id.jela:
-                loadArticleListFood();
-                drawer.closeDrawer(GravityCompat.START);
-                break;*/
-        }
     }
 
     @Override
