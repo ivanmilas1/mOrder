@@ -16,7 +16,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.concurrent.ExecutionException;
 
-import hr.foi.morder.entities.Korisnik;
+import hr.foi.morder.model.Korisnik;
 
 public class PrijavaDjelatnikActivity extends AppCompatActivity {
 
