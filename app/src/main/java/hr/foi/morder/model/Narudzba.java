@@ -21,11 +21,11 @@ public class Narudzba {
         this.iznos_narudzbe = iznos_narudzbe;
     }
 
-    public Korisnik getKorisnik() {
-        return korisnik;
+    public int getKorisnik_id() {
+        return korisnik_id;
     }
 
-    public void setKorisnik(Korisnik korisnik) {
-        this.korisnik = korisnik;
+    public void setKorisnik_id(int korisnik_id) {
+        this.korisnik_id = korisnik_id;
     }
 }
