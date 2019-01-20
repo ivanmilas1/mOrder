@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/ivProduct"
         android:layout_width="90dp"
         android:layout_height="90dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:scaleType="centerInside"
@@ -22,9 +21,9 @@
         android:id="@+id/tvProductName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:gravity="center_vertical"
         android:padding="2dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -35,9 +34,8 @@
 
     <TextView
         android:id="@+id/tvPrice"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="8dp"
+        android:layout_width="115dp"
+        android:layout_height="46dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center_vertical"
@@ -66,18 +64,16 @@
         android:id="@+id/editTextQuantity"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="0"
+        android:layout_marginEnd="8dp"
         android:inputType="number"
+        android:text="0"
         app:layout_constraintEnd_toStartOf="@+id/ib_remove"
-        app:layout_constraintStart_toEndOf="@+id/ib_addnew"
-        app:layout_constraintTop_toBottomOf="@+id/tvProductName"
         app:layout_constraintLeft_toRightOf="@+id/ib_addnew"
-        android:layout_marginLeft="8dp"
         app:layout_constraintRight_toLeftOf="@+id/ib_remove"
-        android:layout_marginRight="8dp" />
+        app:layout_constraintStart_toEndOf="@+id/ib_addnew"
+        app:layout_constraintTop_toBottomOf="@+id/tvProductName" />
 
 
     <ImageButton
@@ -86,13 +82,13 @@
         android:layout_height="50dp"
         android:layout_gravity="bottom"
         android:layout_marginTop="8dp"
-        android:scaleType="centerInside"
+        android:layout_marginRight="8dp"
         android:background="#00ffffff"
+        android:scaleType="centerInside"
         android:src="@mipmap/untitled2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvProductName"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvProductName" />
 
 
 </android.support.constraint.ConstraintLayout>

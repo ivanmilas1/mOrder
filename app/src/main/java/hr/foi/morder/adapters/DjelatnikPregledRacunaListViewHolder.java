@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class ListViewHolder
+public class DjelatnikPregledRacunaListViewHolder
 {
     TextView tvNaziv;
     ImageView ivSlika;
