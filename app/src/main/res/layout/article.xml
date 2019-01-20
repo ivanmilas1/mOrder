@@ -24,11 +24,11 @@
         android:layout_gravity="start">
 
         <ExpandableListView
+            android:id="@+id/navigationmenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="160dp"
-            android:choiceMode="singleChoice"
-            android:id="@+id/navigationmenu">
+            android:choiceMode="singleChoice">
         </ExpandableListView>
 
     </android.support.design.widget.NavigationView>

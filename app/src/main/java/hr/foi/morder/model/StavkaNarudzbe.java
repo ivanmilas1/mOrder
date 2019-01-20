@@ -11,22 +11,15 @@ public class StavkaNarudzbe {
     public Integer kolicina;
     public Date vrijeme_narucivanja;
 
-    public StavkaNarudzbe(Integer artikl_id, Integer narudzbaId, Integer cijena, Integer kolicina) {
-        this.artikl_id = artikl_id;
-        this.narudzba_id = narudzbaId;
-        this.cijena = cijena;
-        this.kolicina = kolicina;
-    }
 
     public StavkaNarudzbe() {
     }
 
-    public StavkaNarudzbe(Integer artikl_id, Integer narudzbaId, double cijena, Integer kolicina, Date vrijeme_narudzbe) {
+    public StavkaNarudzbe(Integer artikl_id, Integer narudzbaId, double cijena, Integer kolicina) {
         this.artikl_id = artikl_id;
         this.narudzba_id = narudzbaId;
         this.cijena = cijena;
         this.kolicina = kolicina;
-        this.vrijeme_narucivanja = vrijeme_narudzbe;
     }
 
     public Integer getArtikl_id() {
