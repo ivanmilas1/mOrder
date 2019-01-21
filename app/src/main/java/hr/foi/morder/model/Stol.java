@@ -3,10 +3,8 @@ package hr.foi.morder.model;
 public class Stol {
 
     public int id;
-
     public String stanje;
-
-    public int narudzba_id;
+    public Racun racun;
 
     public enum stanjeNarudzbe{
         slobodan, narudzbaUIzradi, narudzbaPosluzena
@@ -28,11 +26,11 @@ public class Stol {
         this.stanje = stanje;
     }
 
-    public int getNarudzba_id() {
-        return narudzba_id;
+    public Racun getRacun() {
+        return racun;
     }
 
-    public void setNarudzba_id(int narudzba_id) {
-        this.narudzba_id = narudzba_id;
+    public void setRacun(Racun racun) {
+        this.racun = racun;
     }
 }

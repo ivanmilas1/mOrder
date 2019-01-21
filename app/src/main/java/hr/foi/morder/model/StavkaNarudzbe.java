@@ -1,46 +1,48 @@
 package hr.foi.morder.model;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class StavkaNarudzbe {
-    Integer Artikl_id;
-    Integer narudzbaId;
-    Integer cijena;
-    Integer kolicina;
+    public Integer artikl_id;
+    public Integer narudzba_id;
+    public double cijena;
+    public Integer kolicina;
+    public Date vrijeme_narucivanja;
 
-    public StavkaNarudzbe(Integer artikl_id, Integer narudzbaId, Integer cijena, Integer kolicina) {
-        this.Artikl_id = artikl_id;
-        this.narudzbaId = narudzbaId;
+
+    public StavkaNarudzbe() {
+    }
+
+    public StavkaNarudzbe(Integer artikl_id, Integer narudzbaId, double cijena, Integer kolicina) {
+        this.artikl_id = artikl_id;
+        this.narudzba_id = narudzbaId;
         this.cijena = cijena;
         this.kolicina = kolicina;
     }
 
-    public StavkaNarudzbe() {
-
-    }
-
     public Integer getArtikl_id() {
-        return Artikl_id;
+        return artikl_id;
     }
 
     public void setArtikl_id(Integer artikl_id) {
-        Artikl_id = artikl_id;
+        this.artikl_id = artikl_id;
     }
 
-    public Integer getNarudzbaId() {
-        return narudzbaId;
+    public Integer getNarudzba_id() {
+        return narudzba_id;
     }
 
-    public void setNarudzbaId(Integer narudzbaId) {
-        this.narudzbaId = narudzbaId;
+    public void setNarudzba_id(Integer narudzba_id) {
+        this.narudzba_id = narudzba_id;
     }
 
-    public Integer getCijena() {
+    public double getCijena() {
         return cijena;
     }
 
-    public void setCijena(Integer cijena) {
+    public void setCijena(double cijena) {
         this.cijena = cijena;
     }
 
@@ -52,10 +54,18 @@ public class StavkaNarudzbe {
         this.kolicina = kolicina;
     }
 
+    public Date getVrijeme_narucivanja() {
+        return vrijeme_narucivanja;
+    }
+
+    public void setVrijeme_narucivanja(Date vrijeme_narucivanja) {
+        this.vrijeme_narucivanja = vrijeme_narucivanja;
+    }
+
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("Artikl_id", this.Artikl_id);
-        result.put("Narudzba_id", this.narudzbaId);
+        result.put("artikl_id", this.artikl_id);
+        result.put("narudzba_id", this.narudzba_id);
         result.put("cijena", this.cijena);
         result.put("kolicina", this.kolicina);
         return result;

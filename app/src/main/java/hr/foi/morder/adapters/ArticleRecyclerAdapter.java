@@ -49,6 +49,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
 
         viewHolder.setName(Artikl.getNaziv());
         viewHolder.setImage(ctx, Artikl.getSlika());
+        viewHolder.setPrice(Artikl.getJedinicna_cijena());
         viewHolder.setQuantity(1);
         viewHolder.setPriceCurrency("kn");
         viewHolder.quantityAdd.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +66,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
                 viewHolder.price.setText(String.valueOf(priceArticle));
             }
         });
+
         viewHolder.quantityRemove.setOnClickListener(new View.OnClickListener() {
 
             int priceArticle1 = Integer.parseInt(String.valueOf(viewHolder.price.getText()));
