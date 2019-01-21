@@ -7,10 +7,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="hr.foi.morder.NarucivanjeActivity">
 
+
+    <LinearLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="3dp">
+
+        <TextView
+            android:id="@+id/novo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="50dp"
+            android:text="Novo u ponudi !"
+            android:textAppearance="@style/TextAppearance.Compat.Notification.Info"
+            android:textColor="@color/colorNavigation"
+            android:textSize="29dp" />
+
+    </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/article_recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp">
 
     </android.support.v7.widget.RecyclerView>
 

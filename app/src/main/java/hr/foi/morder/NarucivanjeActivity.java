@@ -50,6 +50,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
     private Long childId;
     private Integer idNarudzba;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,9 +66,13 @@ public class NarucivanjeActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.article_recycler);
         database = FirebaseFirestore.getInstance();
+        loadLastArticles();
         dohvatiKategorije();
         dohvatiIdNarudzbe();
+
     }
+
+
 
     private void dohvatiIdNarudzbe() {
         database.collection("Narudzba").orderBy("id", Query.Direction.DESCENDING).limit(1)
@@ -87,7 +92,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
                             for (Narudzba n: narudzbaList){
                                 idNarudzba = n.getId();
                             }
-                            addIdNarudzba(idNarudzba+1);
+                            addIdNarudzba(idNarudzba+1, "U pripremi");
                         }
                         else{
                             Log.d("Error", "Error getting data");
@@ -97,8 +102,8 @@ public class NarucivanjeActivity extends AppCompatActivity {
     }
 
 
-    public void addIdNarudzba(Integer id) {
-        Map<String, Object> idNarudzbe = new Narudzba(id).toMap();
+    public void addIdNarudzba(Integer id, String status) {
+        Map<String, Object> idNarudzbe = new Narudzba(id, status).toMap();
         database.collection("Narudzba")
                 .add(idNarudzbe)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -154,6 +159,31 @@ public class NarucivanjeActivity extends AppCompatActivity {
     private void loadArticleList(long idKategorije) {
         database.collection("Artikl")
                 .whereEqualTo("kategorija_id", idKategorije)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            List<Artikl> articlesList = new ArrayList<>();
+                            for(DocumentSnapshot documentSnapshot: task.getResult()){
+                                Artikl artikl = documentSnapshot.toObject(Artikl.class);
+                                articlesList.add(artikl);
+                            }
+
+                            adapter = new ArticleRecyclerAdapter(articlesList, getApplicationContext(), database);
+                            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                            recyclerView.setLayoutManager(layoutManager);
+                            recyclerView.setAdapter(adapter);
+                        }
+                        else{
+                            Log.d("Error", "Error getting data");
+                        }
+                    }
+                });
+    }
+
+    private void loadLastArticles() {
+        database.collection("Artikl").orderBy("id",Query.Direction.DESCENDING).limit(7)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

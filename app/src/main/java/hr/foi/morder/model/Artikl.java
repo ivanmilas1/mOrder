@@ -68,4 +68,8 @@ public class Artikl {
     public void setSlika(String slika) {
         this.slika = slika;
     }
+
+    public void load(){
+
+    }
 }
