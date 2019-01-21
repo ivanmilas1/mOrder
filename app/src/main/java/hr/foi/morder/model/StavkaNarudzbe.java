@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StavkaNarudzbe {
-    Integer Artikl_id;
+    Integer artikl_id;
     Integer narudzbaId;
     Double cijena;
     Integer kolicina;
 
     public StavkaNarudzbe(Integer artikl_id, Integer narudzbaId, Double cijena, Integer kolicina) {
-        this.Artikl_id = artikl_id;
+        this.artikl_id = artikl_id;
         this.narudzbaId = narudzbaId;
         this.cijena = cijena;
         this.kolicina = kolicina;
@@ -21,11 +21,11 @@ public class StavkaNarudzbe {
     }
 
     public Integer getArtikl_id() {
-        return Artikl_id;
+        return artikl_id;
     }
 
     public void setArtikl_id(Integer artikl_id) {
-        Artikl_id = artikl_id;
+        artikl_id = artikl_id;
     }
 
     public Integer getNarudzbaId() {
@@ -54,8 +54,8 @@ public class StavkaNarudzbe {
 
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("Artikl_id", this.Artikl_id);
-        result.put("Narudzba_id", this.narudzbaId);
+        result.put("artikl_id", this.artikl_id);
+        result.put("narudzba_id", this.narudzbaId);
         result.put("cijena", this.cijena);
         result.put("kolicina", this.kolicina);
         return result;

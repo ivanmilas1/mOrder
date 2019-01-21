@@ -16,18 +16,22 @@ import android.widget.ExpandableListView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import hr.foi.morder.adapters.ArticleRecyclerAdapter;
 import hr.foi.morder.adapters.ExpendableListAdapter;
 import hr.foi.morder.model.Artikl;
 import hr.foi.morder.model.Kategorija;
+import hr.foi.morder.model.Narudzba;
 
 
 public class NarucivanjeActivity extends AppCompatActivity {
@@ -44,6 +48,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
     private HashMap<String, List<String>> listChild;
     private HashMap<String, List<String>> listChildEx;
     private Long childId;
+    private Integer idNarudzba;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +66,48 @@ public class NarucivanjeActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.article_recycler);
         database = FirebaseFirestore.getInstance();
         dohvatiKategorije();
+        dohvatiIdNarudzbe();
     }
 
+    private void dohvatiIdNarudzbe() {
+        database.collection("Narudzba").orderBy("id", Query.Direction.DESCENDING).limit(1)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            List<Narudzba> narudzbaList = new ArrayList<>();
+
+                            for(DocumentSnapshot documentSnapshot: task.getResult()){
+                                Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
+                                narudzba.getId();
+                                narudzbaList.add(narudzba);
+                            }
+
+                            for (Narudzba n: narudzbaList){
+                                idNarudzba = n.getId();
+                            }
+                            addIdNarudzba(idNarudzba+1);
+                        }
+                        else{
+                            Log.d("Error", "Error getting data");
+                        }
+                    }
+                });
+    }
+
+
+    public void addIdNarudzba(Integer id) {
+        Map<String, Object> idNarudzbe = new Narudzba(id).toMap();
+        database.collection("Narudzba")
+                .add(idNarudzbe)
+                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+
+                    }
+                });
+    }
 
     private void dohvatiKategorije(){
         listChildEx = new HashMap<>();

@@ -3,6 +3,7 @@ package hr.foi.morder.adapters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,14 +15,19 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import hr.foi.morder.R;
 import hr.foi.morder.model.Artikl;
+import hr.foi.morder.model.Narudzba;
 import hr.foi.morder.model.StavkaNarudzbe;
 
 public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecyclerAdapter.ViewHolder> {
@@ -29,6 +35,10 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
     private List<Artikl> articleList;
     private Context ctx;
     private FirebaseFirestore database;
+    private Integer idNarudzba;
+    private Integer quantity;
+    private Double price;
+    private Integer id;
 
     public ArticleRecyclerAdapter(List<Artikl> articleList, Context ctx, FirebaseFirestore database) {
         this.articleList = articleList;
@@ -43,10 +53,12 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         return new ArticleRecyclerAdapter.ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int position) {
         final int itemPosition = position;
         final Artikl Artikl = articleList.get(itemPosition);
+        viewHolder.setId(Artikl.getId());
         viewHolder.setName(Artikl.getNaziv());
         viewHolder.setPrice(Artikl.getJedinicna_cijena());
         viewHolder.setImage(ctx, Artikl.getSlika());
@@ -87,12 +99,38 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         viewHolder.order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Integer quantity = Integer.parseInt(String.valueOf(viewHolder.quantity.getText()));
-                Double price = Double.parseDouble(String.valueOf(viewHolder.price.getText()));
-                addOrder(1, 1, price, quantity);
+                quantity = Integer.parseInt(String.valueOf(viewHolder.quantity.getText()));
+                price = Double.parseDouble(String.valueOf(viewHolder.price.getText()));
+                id = Integer.parseInt(String.valueOf(viewHolder.id.getText()));
+
                 viewHolder.setPrice(Artikl.getJedinicna_cijena());
                 viewHolder.setQuantity(1);
                 Toast.makeText(ctx, "Narudžba je zaprimljena" , Toast.LENGTH_LONG).show();
+
+                database.collection("Narudzba").orderBy("id", Query.Direction.DESCENDING).limit(1)
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()){
+                                    List<Narudzba> narudzbaList = new ArrayList<>();
+
+                                    for(DocumentSnapshot documentSnapshot: task.getResult()){
+                                        Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
+                                        narudzba.getId();
+                                        narudzbaList.add(narudzba);
+                                    }
+
+                                    for (Narudzba n: narudzbaList){
+                                        idNarudzba = n.getId();
+                                    }
+                                    addOrder(id,idNarudzba, price, quantity);
+                                }
+                                else{
+                                    Log.d("Error", "Error getting data");
+                                }
+                            }
+                        });
             }
         });
     }
@@ -122,7 +160,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         public Button order;
         public TextView price;
         public TextView quantity;
-
+        public TextView id;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -132,6 +170,12 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
             order = mView.findViewById(R.id.button_order);
             price = mView.findViewById(R.id.article_price);
             quantity = mView.findViewById(R.id.article_quantity);
+            id = mView.findViewById(R.id.article_id);
+        }
+
+        public void setId(Integer id) {
+            TextView articleId = itemView.findViewById(R.id.article_id);
+            articleId.setText(id.toString());
         }
 
         public void setName(String name) {
