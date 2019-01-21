@@ -31,4 +31,9 @@
     <string name="select">Odaberi</string>
     <string name="quantity_value">1</string>
     <string name="title_activity_detalji_narudzbe">DetaljiNarudzbe</string>
+    <array name="tip_korisnika">
+        <item>Konobar</item>
+        <item>Administrator</item>
+        <item>Voditelj</item>
+    </array>
 </resources>

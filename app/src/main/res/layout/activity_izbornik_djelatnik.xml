@@ -19,13 +19,14 @@
         app:layout_constraintBottom_toTopOf="@+id/buttonSignOut"
         app:layout_constraintEnd_toEndOf="@+id/buttonSignOut"
         app:layout_constraintStart_toStartOf="@+id/buttonSignOut"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
 
     <Button
         android:id="@+id/buttonSignOut"
         android:layout_width="201dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="209dp"
+        android:layout_marginEnd="280dp"
         android:layout_marginBottom="327dp"
         android:background="@color/colorAccent"
         android:onClick="OnClickSignOut"
@@ -33,5 +34,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonOrdersView" />
+
+    <Button
+        android:id="@+id/ButtonPregledKorisnika"
+        android:layout_width="250dp"
+        android:layout_height="66dp"
+        android:layout_marginEnd="256dp"
+        android:layout_marginBottom="172dp"
+        android:background="@color/colorAccent"
+        android:text="Pregled Korisnika"
+        android:onClick="OnClickViewDjelatnik"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSignOut"
+        app:layout_constraintVertical_bias="0.707" />
 
 </android.support.constraint.ConstraintLayout>

@@ -22,7 +22,10 @@
         <activity android:name=".DetaljiNarudzbeActivity" />
         <activity android:name="PrijavaDjelatnikActivity" />
         <activity android:name="IzbornikDjelatnikActivity" />
-        <activity android:name="NarucivanjeActivity"></activity>
+        <activity android:name="NarucivanjeActivity"/>
+        <activity android:name=".DodavanjeRadnikaActivity">
+
+        </activity>
     </application>
 
 </manifest>
