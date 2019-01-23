@@ -26,4 +26,8 @@ public class IzbornikDjelatnikActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DodavanjeRadnikaActivity.class);
         startActivity(intent);
     }
+
+    public void OnClickStartScanner(View view){
+
+    }
 }
