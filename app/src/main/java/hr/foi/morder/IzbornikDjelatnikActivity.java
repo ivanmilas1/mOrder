@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import hr.foi.morder.scannerlib.ScannerStart;
+
 public class IzbornikDjelatnikActivity extends AppCompatActivity {
 
     @Override
@@ -20,6 +22,11 @@ public class IzbornikDjelatnikActivity extends AppCompatActivity {
 
     public void OnClickSignOut(View view) {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void OnClickStartQR(View view){
+        Intent intent=new Intent(this, ScannerStart.class);
         startActivity(intent);
     }
 }
