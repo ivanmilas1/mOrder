@@ -17,6 +17,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -91,7 +92,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
             public void onClick(View v) {
                 Integer quantity = Integer.parseInt(String.valueOf(viewHolder.quantity.getText()));
                 Double price = Double.parseDouble(String.valueOf(viewHolder.price.getText()));
-                addOrder(1, 1, price, quantity);
+                addOrder(Artikl.getId(), 1, price, quantity,Artikl.getJedinicna_cijena());
                 viewHolder.setPrice(Artikl.getJedinicna_cijena());
                 viewHolder.setQuantity(1);
                 Toast.makeText(ctx, "Narudžba je zaprimljena" , Toast.LENGTH_LONG).show();
@@ -99,8 +100,8 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         });
     }
 
-    public void addOrder(Integer artikl, Integer narudzba, Double cijena, Integer kolicina) {
-        Map<String, Object> stavkaNarudzbe = new StavkaNarudzbe(artikl, narudzba, cijena, kolicina).toMap();
+    public void addOrder(Integer artikl, Integer narudzba, Double cijena, Integer kolicina, Double jedinicna_cijena) {
+        Map<String, Object> stavkaNarudzbe = new StavkaNarudzbe(artikl, narudzba, cijena, kolicina,jedinicna_cijena).toMap();
         database.collection("Stavka narudzbe")
                 .add(stavkaNarudzbe)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -115,6 +116,8 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
     public int getItemCount() {
         return articleList.size();
     }
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         View mView;
@@ -160,5 +163,8 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
             TextView articlePriceCurrency = itemView.findViewById(R.id.article_price_currency);
             articlePriceCurrency.setText(quantity.toString());
         }
+
     }
+
+
 }

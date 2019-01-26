@@ -1,5 +1,6 @@
 package hr.foi.morder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -30,7 +31,7 @@ import hr.foi.morder.model.Artikl;
 import hr.foi.morder.model.Kategorija;
 
 
-public class NarucivanjeActivity extends AppCompatActivity {
+public class NarucivanjeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
@@ -50,6 +51,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.article);
         drawer = findViewById(R.id.drawer);
+
         toggle = new ActionBarDrawerToggle(this, drawer, R.string.open, R.string.close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -57,12 +59,23 @@ public class NarucivanjeActivity extends AppCompatActivity {
         expandableListView = findViewById(R.id.navigationmenu);
         navigation = findViewById(R.id.nv);
         setupDrawerContent(navigation);
+        navigation.setNavigationItemSelectedListener(this);
 
         recyclerView = findViewById(R.id.article_recycler);
         database = FirebaseFirestore.getInstance();
         dohvatiKategorije();
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()){
+            case R.id.kosarica:
+                Intent intent = new Intent(this, KosaricaActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return true;
+    }
 
     private void dohvatiKategorije(){
         listChildEx = new HashMap<>();
@@ -149,6 +162,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(toggle.onOptionsItemSelected(item)){
+
             return true;
         }
         return super.onOptionsItemSelected(item);
