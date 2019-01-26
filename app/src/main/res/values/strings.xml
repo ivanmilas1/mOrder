@@ -31,4 +31,7 @@
     <string name="select">Odaberi</string>
     <string name="quantity_value">1</string>
     <string name="title_activity_detalji_narudzbe">DetaljiNarudzbe</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

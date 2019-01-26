@@ -50,5 +50,17 @@
         app:layout_constraintEnd_toEndOf="@+id/buttonEnterLoginGuest"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/buttonDelivery"
+        android:layout_width="346dp"
+        android:layout_height="109dp"
+        android:background="@color/colorAccent"
+        android:text="Naručite dostavu"
+        android:onClick="homeDelivery"
+        app:layout_constraintBottom_toTopOf="@+id/textViewWelcome"
+        app:layout_constraintEnd_toEndOf="@+id/textViewWelcome"
+        tools:layout_editor_absoluteX="288dp"
+        tools:layout_editor_absoluteY="122dp" />
+
 
 </android.support.constraint.ConstraintLayout>

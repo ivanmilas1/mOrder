@@ -3,6 +3,7 @@
     package="hr.foi.morder.scannerlib">
 
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -10,7 +11,7 @@
         <activity
             android:name=".ScannerStart"
             android:label="@string/title_activity_scanner_start"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
