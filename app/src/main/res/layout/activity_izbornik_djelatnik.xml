@@ -5,62 +5,59 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/food_wallpaper_backgroud"
-    tools:context=".IzbornikDjelatnikActivity">
+    tools:context=".IzbornikDjelatnikActivity"
+    tools:layout_editor_absoluteY="81dp">
 
     <Button
-        android:id="@+id/buttonOrdersView"
-        android:layout_width="0dp"
+        android:id="@+id/ButtonPregledKorisnika"
+        android:layout_width="250dp"
         android:layout_height="0dp"
-        android:layout_marginTop="333dp"
-        android:layout_marginBottom="63dp"
+        android:layout_marginEnd="204dp"
+        android:layout_marginBottom="189dp"
         android:background="@color/colorAccent"
-        android:onClick="OnClickViewOrders"
-        android:text="@string/pregled_narudzbi"
+        android:onClick="OnClickViewDjelatnik"
+        android:text="Pregled Korisnika"
         app:layout_constraintBottom_toTopOf="@+id/buttonSignOut"
-        app:layout_constraintEnd_toEndOf="@+id/buttonSignOut"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/buttonSignOut"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread_inside" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonOrdersView" />
+
+    <Button
+        android:id="@+id/buttonStartScanner"
+        android:layout_width="200dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="59dp"
+        android:layout_marginTop="206dp"
+        android:layout_marginBottom="53dp"
+        android:onClick="OnClickStartScanner"
+        android:text="Pokreni QR skener"
+        app:layout_constraintBottom_toTopOf="@+id/buttonOrdersView"
+        app:layout_constraintStart_toStartOf="@+id/buttonOrdersView"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonSignOut"
         android:layout_width="201dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="272dp"
-        android:layout_marginBottom="327dp"
+        android:layout_marginEnd="241dp"
+        android:layout_marginBottom="111dp"
         android:background="@color/colorAccent"
         android:onClick="OnClickSignOut"
         android:text="@string/odjava"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonOrdersView" />
+        app:layout_constraintTop_toBottomOf="@+id/ButtonPregledKorisnika" />
 
     <Button
-        android:id="@+id/ButtonPregledKorisnika"
-        android:layout_width="250dp"
-        android:layout_height="66dp"
-        android:layout_marginEnd="256dp"
-        android:layout_marginBottom="172dp"
+        android:id="@+id/buttonOrdersView"
+        android:layout_width="215dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="54dp"
+        android:layout_marginBottom="36dp"
         android:background="@color/colorAccent"
-        android:text="Pregled Korisnika"
-        android:onClick="OnClickViewDjelatnik"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSignOut"
-        app:layout_constraintVertical_bias="0.707" />
-
-    <Button
-        android:id="@+id/buttonStartScanner"
-        android:layout_width="200dp"
-        android:layout_height="88dp"
-        android:text="Pokreni QR skener"
-        android:onClick="OnClickStartScanner"
-        tools:layout_editor_absoluteX="295dp"
-        tools:layout_editor_absoluteY="198dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonOrdersView"
-        app:layout_constraintTop_toBottomOf="@+id/buttonOrdersView"
-        app:layout_constraintEnd_toEndOf="@+id/buttonOrdersView"
-        />
+        android:onClick="OnClickViewOrders"
+        android:text="@string/pregled_narudzbi"
+        app:layout_constraintBottom_toTopOf="@+id/ButtonPregledKorisnika"
+        app:layout_constraintEnd_toEndOf="@+id/ButtonPregledKorisnika"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStartScanner" />
 
 </android.support.constraint.ConstraintLayout>

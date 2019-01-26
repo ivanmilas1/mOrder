@@ -16,6 +16,7 @@ public class Djelatnik {
         this.email = email;
         this.tipDjelatnikaId = tipDjelatnikaId;
     }
+    public Djelatnik(){}
 
     public String getImePrezime() {
         return imePrezime;
