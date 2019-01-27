@@ -122,7 +122,7 @@ public class CodeGenerateFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    void generateCode(ArrayList<String> lista){
+    public void generateCode(ArrayList<String> lista){
         if(lista != null){
             MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
             try {
