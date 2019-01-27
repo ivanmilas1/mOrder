@@ -3,6 +3,7 @@ package hr.foi.morder.adapters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,9 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
@@ -23,6 +26,7 @@ import java.util.Map;
 
 import hr.foi.morder.R;
 import hr.foi.morder.model.Artikl;
+import hr.foi.morder.model.Narudzba;
 import hr.foi.morder.model.StavkaNarudzbe;
 
 public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecyclerAdapter.ViewHolder> {
@@ -30,11 +34,14 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
     private List<Artikl> articleList;
     private Context ctx;
     private FirebaseFirestore database;
+    public Integer brojNarudzbe;
+
 
     public ArticleRecyclerAdapter(List<Artikl> articleList, Context ctx, FirebaseFirestore database) {
         this.articleList = articleList;
         this.ctx = ctx;
         this.database = database;
+
     }
 
     @NonNull
@@ -46,6 +53,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int position) {
+
         final int itemPosition = position;
         final Artikl Artikl = articleList.get(itemPosition);
         viewHolder.setName(Artikl.getNaziv());
@@ -90,9 +98,14 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         viewHolder.order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
+                    zadnjiElement();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 Integer quantity = Integer.parseInt(String.valueOf(viewHolder.quantity.getText()));
                 Double price = Double.parseDouble(String.valueOf(viewHolder.price.getText()));
-                addOrder(Artikl.getId(), 1, price, quantity,Artikl.getJedinicna_cijena());
+                addOrder(Artikl.getId(), brojNarudzbe, price, quantity,Artikl.getJedinicna_cijena());
                 viewHolder.setPrice(Artikl.getJedinicna_cijena());
                 viewHolder.setQuantity(1);
                 Toast.makeText(ctx, "Narudžba je zaprimljena" , Toast.LENGTH_LONG).show();
@@ -165,6 +178,25 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         }
 
     }
+    private void zadnjiElement(){
+        database.collection("Narudzba").limit(1).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
 
+                            for(DocumentSnapshot documentSnapshot : task.getResult()){
+                                Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
+                                brojNarudzbe = narudzba.getId();
+                                brojNarudzbe = brojNarudzbe +1;
+
+
+                            }
+                        }else {
+                            Log.d("Error", "Error getting data");
+                        }
+                    }
+                });
+    }
 
 }

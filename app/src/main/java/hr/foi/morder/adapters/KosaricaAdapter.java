@@ -3,13 +3,22 @@ package hr.foi.morder.adapters;
 import android.support.annotation.NonNull;
 import hr.foi.morder.R;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.List;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
+import hr.foi.morder.model.Artikl;
 import hr.foi.morder.model.StavkaNarudzbe;
 
 public class KosaricaAdapter extends RecyclerView.Adapter<KosaricaAdapter.KosaricaViewHolder> {
@@ -33,9 +42,30 @@ public class KosaricaAdapter extends RecyclerView.Adapter<KosaricaAdapter.Kosari
     }
 
     @Override
-    public void onBindViewHolder(@NonNull KosaricaViewHolder kosaricaViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final KosaricaViewHolder kosaricaViewHolder, int i) {
+
         final StavkaNarudzbe stavkaNarudzbe = stavkaNarudzbeList.get(i);
-       // kosaricaViewHolder.textViewNazivProizvoda.setText(stavkaNarudzbe.getArtikl_id());
+        database.collection("Artikl").whereEqualTo("id",stavkaNarudzbe.getArtikl_id()).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                   @Override
+                                                   public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                       if(task.isSuccessful()){
+                                                           String naziv = null;
+                                                           for(DocumentSnapshot documentSnapshot : task.getResult()){
+                                                               Artikl artikl = documentSnapshot.toObject(Artikl.class);
+                                                               naziv = artikl.getNaziv();
+                                                           }
+                                                           kosaricaViewHolder.textViewNazivProizvoda.setText(naziv);
+                                                           kosaricaViewHolder.textViewJedinicnaCijena.setText(String.valueOf(stavkaNarudzbe.getJedinicna_cijena()));
+                                                           kosaricaViewHolder.textViewKolicina.setText(String.valueOf(stavkaNarudzbe.getKolicina()));
+                                                           kosaricaViewHolder.textViewCijena.setText(String.valueOf(stavkaNarudzbe.getCijena()));
+                                                       }else {
+                                                           Log.d("Error", "Error getting data");
+                                                       }
+                                                   }
+                                               });
+
+
 
     }
 

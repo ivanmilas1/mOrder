@@ -11,8 +11,8 @@
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="760dp"
+        android:layout_height="73dp"
         card_view:cardBackgroundColor="@color/colorNavigation"
         card_view:cardCornerRadius="10dp"
         card_view:cardElevation="5dp"
@@ -41,7 +41,8 @@
                 android:layout_marginTop="10dp"
                 android:baselineAligned="false"
                 android:text="Jednična cijena"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/textKolicina"
@@ -52,7 +53,8 @@
 
                 android:baselineAligned="false"
                 android:text="Količina"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/textCijena"
@@ -60,7 +62,15 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:baselineAligned="false"
-                android:text="Cijena" />
+                android:text="Cijena"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Kn" />
 
         </LinearLayout>
 

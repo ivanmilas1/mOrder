@@ -10,7 +10,7 @@ public class StavkaNarudzbe {
     public double cijena;
     public Integer kolicina;
     public Date vrijeme_narucivanja;
-    double jedinicna_cijena;
+    public double jedinicna_cijena;
 
 
     public StavkaNarudzbe() {

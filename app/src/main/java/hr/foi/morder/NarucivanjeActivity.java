@@ -167,4 +167,5 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

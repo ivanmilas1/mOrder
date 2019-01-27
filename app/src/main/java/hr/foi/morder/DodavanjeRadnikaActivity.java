@@ -77,6 +77,7 @@ public class DodavanjeRadnikaActivity extends AppCompatActivity {
          }
 
     }
+    //Dodavanje djelatnika u bazu, provjera lozinke te e-mail adrese
     private void dodajDjelatnika() {
         boolean zastavica = true;
         loadDjelatnici();
@@ -119,7 +120,7 @@ public class DodavanjeRadnikaActivity extends AppCompatActivity {
             Toast.makeText(this, "Morate unijeti ime korisnika", Toast.LENGTH_LONG).show();
         }
     }
-
+    //Prikaz djelatnika koji se nalaze u sustavu
     private void loadDjelatnici(){
         databaseDjelatnik.collection("Djelatnik")
                 .get()
