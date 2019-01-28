@@ -18,6 +18,18 @@ public class Narudzba {
     Integer racun_id;
     String status;
 
+    public Narudzba() {
+    }
+
+    public Narudzba(Double iznos_narudzbe) {
+        this.iznos_narudzbe = iznos_narudzbe;
+    }
+
+    public Narudzba(Integer id, String status){
+        this.id = id;
+        this.status = status;
+    }
+
     public Narudzba(Integer id, Double iznos_narudzbe, Integer korisnik_id, Integer racun_id, String status) {
         this.id = id;
         this.iznos_narudzbe = iznos_narudzbe;
@@ -26,17 +38,12 @@ public class Narudzba {
         this.status = status;
     }
 
-    public Narudzba(Integer id, String status){
-        this.id = id;
-        this.status = status;
+    public FirebaseFirestore getDatabase() {
+        return database;
     }
 
-    public Narudzba(Double cijena){
-        this.iznos_narudzbe = cijena;
-    }
-
-    public Narudzba(){
-
+    public void setDatabase(FirebaseFirestore database) {
+        this.database = database;
     }
 
     public Integer getId() {
@@ -98,6 +105,4 @@ public class Narudzba {
                     }
                 });
     }
-
 }
-

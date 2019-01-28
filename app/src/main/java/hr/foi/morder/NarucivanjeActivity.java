@@ -158,7 +158,6 @@ public class NarucivanjeActivity extends AppCompatActivity {
                         } else {
                             Log.d("Error", "Error getting data");
                         }
-                        removeHomePageHeaderText();
                     }
                 });
     }
@@ -183,6 +182,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
                         } else {
                             Log.d("Error", "Error getting data");
                         }
+                        removeHomePageHeaderText();
                     }
                 });
     }

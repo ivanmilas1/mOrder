@@ -11,10 +11,8 @@ public class StavkaNarudzbe {
     public Integer kolicina;
     public Date vrijeme_narucivanja;
 
-
     public StavkaNarudzbe() {
     }
-
 
     public StavkaNarudzbe(Integer artikl_id, Integer narudzbaId, double cijena, Integer kolicina) {
         this.artikl_id = artikl_id;

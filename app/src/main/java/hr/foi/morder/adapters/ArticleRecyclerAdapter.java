@@ -53,7 +53,6 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         return new ArticleRecyclerAdapter.ViewHolder(view);
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int position) {
         final int itemPosition = position;
@@ -105,7 +104,8 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
                 price = Double.parseDouble(String.valueOf(viewHolder.price.getText()));
                 id = Integer.parseInt(String.valueOf(viewHolder.id.getText()));
 
-                viewHolder.setPrice(Artikl.getJedinicna_cijena());
+
+viewHolder.setPrice(Artikl.getJedinicna_cijena());
                 viewHolder.setQuantity(1);
                 Toast.makeText(ctx, "Narudžba je zaprimljena" , Toast.LENGTH_LONG).show();
 
@@ -190,7 +190,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         }
 
         public void setImage(Context ctx, String image) {
-            ImageView article_image = (ImageView) mView.findViewById(R.id.article_image);
+            ImageView article_image = mView.findViewById(R.id.article_image);
             Picasso.with(ctx).load(image).into(article_image);
         }
 
@@ -201,7 +201,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
 
         public void setPriceCurrency(String quantity) {
             TextView articlePriceCurrency = itemView.findViewById(R.id.article_price_currency);
-            articlePriceCurrency.setText(quantity.toString());
+            articlePriceCurrency.setText(quantity);
         }
     }
 }
