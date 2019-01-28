@@ -27,9 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import hr.foi.morder.adapters.ArticleRecyclerAdapter;
 import hr.foi.morder.adapters.DjelatnikRecyclerAdapter;
-import hr.foi.morder.model.Artikl;
 import hr.foi.morder.model.Djelatnik;
 
 public class DodavanjeRadnikaActivity extends AppCompatActivity {
@@ -38,14 +36,11 @@ public class DodavanjeRadnikaActivity extends AppCompatActivity {
     public  DjelatnikRecyclerAdapter djelatnikRecyclerAdapter;
     private List<Djelatnik> djelatnikList;
     private Button button;
-
-
     private EditText ime;
     private EditText email;
     private EditText lozinka;
     private Spinner spinnerTip;
     private FirebaseFirestore databaseDjelatnik;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,11 +49,11 @@ public class DodavanjeRadnikaActivity extends AppCompatActivity {
         djelatnikList = new ArrayList<>();
         buildRecyclerView();
         databaseDjelatnik = FirebaseFirestore.getInstance();
-        ime = (EditText) findViewById(R.id.input_name);
-        email = (EditText) findViewById(R.id.input_email);
-        lozinka = (EditText) findViewById(R.id.input_password);
-        button = (Button) findViewById(R.id.btn_signup);
-        spinnerTip = (Spinner) findViewById(R.id.spinner);
+        ime = findViewById(R.id.input_name);
+        email = findViewById(R.id.input_email);
+        lozinka = findViewById(R.id.input_password);
+        button = findViewById(R.id.btn_signup);
+        spinnerTip = findViewById(R.id.spinner);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,12 +68,11 @@ public class DodavanjeRadnikaActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.input_email)).setText(intent.getStringExtra("Email"));
         String a = intent.getStringExtra("Azuriranje");
         if(TextUtils.isEmpty(a)){
-            button.setText("Stvori korisnika");
+            button.setText("Kreiraj korisnika");
          }
-
     }
+
     private void dodajDjelatnika() {
-        boolean zastavica = true;
         loadDjelatnici();
         Integer tipKorisnika = null;
         String naziv = ime.getText().toString().trim();
@@ -130,8 +124,8 @@ public class DodavanjeRadnikaActivity extends AppCompatActivity {
                             List<Djelatnik> djelatnikList = new ArrayList<>();
                             for(DocumentSnapshot documentSnapshot: task.getResult()){
                                 Djelatnik djelatnik = documentSnapshot.toObject(Djelatnik.class);
-                                djelatnik.getEmail();
                                 djelatnik.getImePrezime();
+                                djelatnik.getEmail();
                                 djelatnik.getTipDjelatnikaId();
                                 djelatnikList.add(djelatnik);
                             }
@@ -147,11 +141,9 @@ public class DodavanjeRadnikaActivity extends AppCompatActivity {
                 });
     }
     public void buildRecyclerView(){
-
-        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        recyclerView = findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(djelatnikRecyclerAdapter);
     }
-
 }

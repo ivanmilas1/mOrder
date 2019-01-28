@@ -16,8 +16,6 @@
         android:paddingTop="0dp"
         android:paddingRight="24dp">
 
-        <!--  Name Label -->
-
         <android.support.design.widget.TextInputLayout
             android:layout_width="368dp"
             android:layout_height="wrap_content"
@@ -28,11 +26,9 @@
                 android:id="@+id/input_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Username"
+                android:hint="@string/korisnicko_ime"
                 android:inputType="textCapWords" />
         </android.support.design.widget.TextInputLayout>
-
-        <!-- Email Label -->
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="364dp"
@@ -44,11 +40,9 @@
                 android:id="@+id/input_email"
                 android:layout_width="368dp"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress" />
         </android.support.design.widget.TextInputLayout>
-
-        <!-- Password Label -->
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="367dp"
@@ -60,13 +54,11 @@
                 android:id="@+id/input_password"
                 android:layout_width="370dp"
                 android:layout_height="wrap_content"
-                android:hint="Password"
+                android:hint="@string/pin"
                 android:inputType="textPassword|number"
                 android:maxLength="4" />
 
         </android.support.design.widget.TextInputLayout>
-
-        <!-- Signup Button -->
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="370dp"
@@ -104,7 +96,6 @@
             android:layout_width="match_parent"
             android:layout_height="425dp"
             android:scrollbars="vertical" />
-
     </LinearLayout>
 </ScrollView>
 

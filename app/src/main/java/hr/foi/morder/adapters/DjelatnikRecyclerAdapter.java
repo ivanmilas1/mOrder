@@ -8,9 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -19,23 +17,16 @@ import java.util.List;
 import hr.foi.morder.DodavanjeRadnikaActivity;
 import hr.foi.morder.R;
 import hr.foi.morder.model.Djelatnik;
-import hr.foi.morder.model.Korisnik;
-
-import static android.widget.Toast.LENGTH_SHORT;
 
 public class DjelatnikRecyclerAdapter extends RecyclerView.Adapter<DjelatnikRecyclerAdapter.DjelatnikViewHoleder>  {
-
     private Context context;
     private List<Djelatnik> DjelatnikList;
     private FirebaseFirestore database;
 
-
     public DjelatnikRecyclerAdapter(Context context, List<Djelatnik> djelatnikList, FirebaseFirestore database) {
-
         this.context = context;
         this.DjelatnikList = djelatnikList;
         this.database = database;
-
     }
 
     @NonNull
@@ -48,7 +39,7 @@ public class DjelatnikRecyclerAdapter extends RecyclerView.Adapter<DjelatnikRecy
 
     @Override
     public void onBindViewHolder(@NonNull DjelatnikViewHoleder djelatnikViewHoleder, int i) {
-        Integer tipDjelatnik = null;
+        Integer tipDjelatnik;
         String tipKorisnika = null;
         final Djelatnik djelatnik = DjelatnikList.get(i);
         tipDjelatnik = djelatnik.getTipDjelatnikaId();
@@ -63,7 +54,6 @@ public class DjelatnikRecyclerAdapter extends RecyclerView.Adapter<DjelatnikRecy
                 tipKorisnika = "Administrator";
                 break;
         }
-
         djelatnikViewHoleder.textViewIme.setText(djelatnik.getImePrezime());
         djelatnikViewHoleder.textViewDjelatnikId.setText(tipKorisnika);
         djelatnikViewHoleder.textViewEmail.setText(djelatnik.getEmail());
@@ -75,7 +65,6 @@ public class DjelatnikRecyclerAdapter extends RecyclerView.Adapter<DjelatnikRecy
     }
 
     public class DjelatnikViewHoleder extends RecyclerView.ViewHolder{
-
         View view;
         public TextView textViewEmail;
         public TextView textViewIme;
@@ -104,14 +93,8 @@ public class DjelatnikRecyclerAdapter extends RecyclerView.Adapter<DjelatnikRecy
                     myIntent.putExtra("Email", textViewEmail.getText().toString());
                     myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     context.startActivity(myIntent);
-
                 }
             });
-
-
         }
     }
-
 }
-
-
