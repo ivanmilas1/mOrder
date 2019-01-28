@@ -15,6 +15,7 @@ public class StavkaNarudzbe {
     public StavkaNarudzbe() {
     }
 
+
     public StavkaNarudzbe(Integer artikl_id, Integer narudzbaId, double cijena, Integer kolicina) {
         this.artikl_id = artikl_id;
         this.narudzba_id = narudzbaId;

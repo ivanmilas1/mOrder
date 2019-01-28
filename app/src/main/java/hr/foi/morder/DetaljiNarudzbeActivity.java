@@ -30,8 +30,8 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
     private FirebaseFirestore database;
     Button btnPlaceOrder;
     private ListView listView;
-    private DjelatnikPregledRacunaListAdapter djelatnikPregledRacunaStolaListAdapter;
     int stolID;
+    private DjelatnikPregledRacunaListAdapter djelatnikPregledRacunaStolaListAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
