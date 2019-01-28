@@ -1,23 +1,25 @@
 package hr.foi.morder.model;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class StavkaNarudzbe {
-    Integer artikl_id;
-    Integer narudzbaId;
-    Double cijena;
-    Integer kolicina;
+    public Integer artikl_id;
+    public Integer narudzba_id;
+    public double cijena;
+    public Integer kolicina;
+    public Date vrijeme_narucivanja;
 
-    public StavkaNarudzbe(Integer artikl_id, Integer narudzbaId, Double cijena, Integer kolicina) {
-        this.artikl_id = artikl_id;
-        this.narudzbaId = narudzbaId;
-        this.cijena = cijena;
-        this.kolicina = kolicina;
-    }
 
     public StavkaNarudzbe() {
+    }
 
+    public StavkaNarudzbe(Integer artikl_id, Integer narudzbaId, double cijena, Integer kolicina) {
+        this.artikl_id = artikl_id;
+        this.narudzba_id = narudzbaId;
+        this.cijena = cijena;
+        this.kolicina = kolicina;
     }
 
     public Integer getArtikl_id() {
@@ -25,22 +27,22 @@ public class StavkaNarudzbe {
     }
 
     public void setArtikl_id(Integer artikl_id) {
-        artikl_id = artikl_id;
+        this.artikl_id = artikl_id;
     }
 
-    public Integer getNarudzbaId() {
-        return narudzbaId;
+    public Integer getNarudzba_id() {
+        return narudzba_id;
     }
 
-    public void setNarudzbaId(Integer narudzbaId) {
-        this.narudzbaId = narudzbaId;
+    public void setNarudzba_id(Integer narudzba_id) {
+        this.narudzba_id = narudzba_id;
     }
 
-    public Double getCijena() {
+    public double getCijena() {
         return cijena;
     }
 
-    public void setCijena(Double cijena) {
+    public void setCijena(double cijena) {
         this.cijena = cijena;
     }
 
@@ -50,6 +52,14 @@ public class StavkaNarudzbe {
 
     public void setKolicina(Integer kolicina) {
         this.kolicina = kolicina;
+    }
+
+    public Date getVrijeme_narucivanja() {
+        return vrijeme_narucivanja;
+    }
+
+    public void setVrijeme_narucivanja(Date vrijeme_narucivanja) {
+        this.vrijeme_narucivanja = vrijeme_narucivanja;
     }
 
     public Map<String, Object> toMap() {

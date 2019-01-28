@@ -18,14 +18,16 @@
         android:text="@string/pregled_narudzbi"
         app:layout_constraintBottom_toTopOf="@+id/buttonSignOut"
         app:layout_constraintEnd_toEndOf="@+id/buttonSignOut"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/buttonSignOut"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
 
     <Button
         android:id="@+id/buttonSignOut"
         android:layout_width="201dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="209dp"
+        android:layout_marginEnd="272dp"
         android:layout_marginBottom="327dp"
         android:background="@color/colorAccent"
         android:onClick="OnClickSignOut"
@@ -33,5 +35,32 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonOrdersView" />
+
+    <Button
+        android:id="@+id/ButtonPregledKorisnika"
+        android:layout_width="250dp"
+        android:layout_height="66dp"
+        android:layout_marginEnd="256dp"
+        android:layout_marginBottom="172dp"
+        android:background="@color/colorAccent"
+        android:text="Pregled Korisnika"
+        android:onClick="OnClickViewDjelatnik"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSignOut"
+        app:layout_constraintVertical_bias="0.707" />
+
+    <Button
+        android:id="@+id/buttonStartScanner"
+        android:layout_width="200dp"
+        android:layout_height="88dp"
+        android:text="Pokreni QR skener"
+        android:onClick="OnClickStartScanner"
+        tools:layout_editor_absoluteX="295dp"
+        tools:layout_editor_absoluteY="198dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonOrdersView"
+        app:layout_constraintTop_toBottomOf="@+id/buttonOrdersView"
+        app:layout_constraintEnd_toEndOf="@+id/buttonOrdersView"
+        />
 
 </android.support.constraint.ConstraintLayout>
