@@ -69,7 +69,6 @@ public class NarucivanjeActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.article_recycler);
         database = FirebaseFirestore.getInstance();
 
-        setHomePageHeaderText();
         loadLastArticles();
         dohvatiKategorije();
         dohvatiIdNarudzbe();
@@ -199,7 +198,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
                                 Artikl artikl = documentSnapshot.toObject(Artikl.class);
                                 articlesList.add(artikl);
                             }
-
+                            setHomePageHeaderText();
                             adapter = new ArticleRecyclerAdapter(articlesList, getApplicationContext(), database);
                             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                             recyclerView.setLayoutManager(layoutManager);
