@@ -39,6 +39,8 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
     private Integer quantity;
     private Double price;
     private Integer id;
+    private String narudzbaDokument;
+    private Double iznosNarudzbe;
 
     public ArticleRecyclerAdapter(List<Artikl> articleList, Context ctx, FirebaseFirestore database) {
         this.articleList = articleList;
@@ -119,6 +121,8 @@ viewHolder.setPrice(Artikl.getJedinicna_cijena());
 
                                     for(DocumentSnapshot documentSnapshot: task.getResult()){
                                         Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
+                                        narudzbaDokument = documentSnapshot.getId();
+                                        iznosNarudzbe = narudzba.getIznos_narudzbe();
                                         narudzba.getId();
                                         narudzbaList.add(narudzba);
                                     }
@@ -127,6 +131,9 @@ viewHolder.setPrice(Artikl.getJedinicna_cijena());
                                         idNarudzba = n.getId();
                                     }
                                     addOrder(id,idNarudzba, price, quantity);
+                                    database.collection("Narudzba").document(narudzbaDokument).update("iznos_narudzbe", iznosNarudzbe+price);
+
+
                                 }
                                 else{
                                     Log.d("Error", "Error getting data");

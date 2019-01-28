@@ -27,12 +27,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import hr.foi.morder.adapters.ArticleRecyclerAdapter;
 import hr.foi.morder.adapters.ExpendableListAdapter;
 import hr.foi.morder.model.Artikl;
 import hr.foi.morder.model.Kategorija;
 import hr.foi.morder.model.Narudzba;
+import hr.foi.morder.model.Stol;
 
 public class NarucivanjeActivity extends AppCompatActivity {
 
@@ -50,6 +52,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
     private HashMap<String, List<String>> listChildEx;
     private Long childId;
     private Integer idNarudzba;
+    private String stolId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +92,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            List<Narudzba> narudzbaList = new ArrayList<>();
+                            final List<Narudzba> narudzbaList = new ArrayList<>();
                             for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                 Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
                                 narudzba.getId();
@@ -99,7 +102,27 @@ public class NarucivanjeActivity extends AppCompatActivity {
                             for (Narudzba n : narudzbaList) {
                                 idNarudzba = n.getId();
                             }
-                            addIdNarudzba(idNarudzba + 1, "U pripremi");
+                            addIdNarudzba(idNarudzba + 1, 0.00);
+
+                            database.collection("Stol").whereEqualTo("stanje","slobodan").limit(1)
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if(task.isSuccessful()){
+                                                List<Stol> stolList = new ArrayList<>();
+                                                for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                                                    stolId = documentSnapshot.getId();
+
+                                                }
+
+                                                database.collection("Stol").document(stolId).update("narudzba_id",idNarudzba+1);
+                                                database.collection("Stol").document(stolId).update("stanje","narudzbaUPripremi");
+                                            }
+
+                                        }
+                                    });
+
                         } else {
                             Log.d("Error", "Error getting data");
                         }
@@ -107,8 +130,9 @@ public class NarucivanjeActivity extends AppCompatActivity {
                 });
     }
 
-    public void addIdNarudzba(Integer id, String status) {
-        Map<String, Object> idNarudzbe = new Narudzba(id, status).toMap();
+
+    public void addIdNarudzba(Integer id, Double cijena) {
+        Map<String, Object> idNarudzbe = new Narudzba(id, cijena).toMap();
         database.collection("Narudzba")
                 .add(idNarudzbe)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -118,6 +142,8 @@ public class NarucivanjeActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
 
     private void dohvatiKategorije() {
         listChildEx = new HashMap<>();
