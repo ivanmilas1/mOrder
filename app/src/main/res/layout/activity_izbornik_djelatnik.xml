@@ -43,8 +43,8 @@
         android:layout_marginEnd="256dp"
         android:layout_marginBottom="172dp"
         android:background="@color/colorAccent"
-        android:text="Pregled Korisnika"
         android:onClick="OnClickViewDjelatnik"
+        android:text="Pregled Korisnika"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonSignOut"
@@ -54,13 +54,13 @@
         android:id="@+id/buttonStartScanner"
         android:layout_width="200dp"
         android:layout_height="88dp"
-        android:text="Pokreni QR skener"
         android:onClick="OnClickStartScanner"
+        android:text="Pokreni QR skener"
+        app:layout_constraintBottom_toTopOf="@+id/buttonOrdersView"
+        app:layout_constraintEnd_toEndOf="@+id/buttonOrdersView"
+        app:layout_constraintTop_toBottomOf="@+id/buttonOrdersView"
         tools:layout_editor_absoluteX="295dp"
         tools:layout_editor_absoluteY="198dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonOrdersView"
-        app:layout_constraintTop_toBottomOf="@+id/buttonOrdersView"
-        app:layout_constraintEnd_toEndOf="@+id/buttonOrdersView"
         />
 
 </android.support.constraint.ConstraintLayout>

@@ -15,6 +15,7 @@ public class StavkaNarudzbe {
     public StavkaNarudzbe() {
     }
 
+
     public StavkaNarudzbe(Integer artikl_id, Integer narudzbaId, double cijena, Integer kolicina) {
         this.artikl_id = artikl_id;
         this.narudzba_id = narudzbaId;
@@ -65,7 +66,7 @@ public class StavkaNarudzbe {
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("artikl_id", this.artikl_id);
-        result.put("narudzba_id", this.narudzbaId);
+        result.put("narudzba_id", this.narudzba_id);
         result.put("cijena", this.cijena);
         result.put("kolicina", this.kolicina);
         return result;
