@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/leyout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DostavaActivity">
@@ -9,25 +10,37 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="600dp"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="248dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
+
         <Button
+            android:id="@+id/btnPlaceOrder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Potvrdi"
-            android:id="@+id/btnPlaceOrder"
-            />
+            android:text="Potvrdi" />
     </LinearLayout>
+
+    <fragment
+        android:id="@+id/fragmentProbni"
+        android:name="hr.foi.morder.scannerlib.CodeGenerateFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/leyout"
+        app:layout_constraintTop_toTopOf="@id/leyout"
+        tools:layout_editor_absoluteX="157dp"
+        tools:layout_editor_absoluteY="776dp" />
 
 </android.support.constraint.ConstraintLayout>

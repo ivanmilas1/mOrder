@@ -1,9 +1,9 @@
 package hr.foi.morder;
 
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,22 +18,21 @@ public class DostavaActivity extends AppCompatActivity implements CodeGenerateFr
     Button button;
     FragmentManager manager;
     CodeGenerateFragment fragment;
+    String idNarudzbe;
     ArrayList<String> lista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dostava);
-
         imageView = findViewById(R.id.imageView);
-        button = findViewById(R.id.potvrdi);
+        button = findViewById(R.id.btnPlaceOrder);
 
         lista = new ArrayList<>();
         lista.add("probno");
-        lista.add("probno2");
 
         manager = getSupportFragmentManager();
-        fragment = (CodeGenerateFragment)manager.findFragmentById(R.id.fragLayout);
+        fragment = (CodeGenerateFragment)manager.findFragmentById(R.id.fragmentProbni);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
