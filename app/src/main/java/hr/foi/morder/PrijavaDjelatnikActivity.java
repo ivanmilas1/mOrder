@@ -14,8 +14,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.concurrent.ExecutionException;
-
 import hr.foi.morder.model.Korisnik;
 
 public class PrijavaDjelatnikActivity extends AppCompatActivity {
@@ -26,7 +24,7 @@ public class PrijavaDjelatnikActivity extends AppCompatActivity {
         setContentView(R.layout.activity_prijava);
     }
 
-    public void onClickSignIn(View view) throws ExecutionException, InterruptedException {
+    public void onClickSignIn(View view) {
         EditText editTextPassword = findViewById(R.id.editTextPassword);
         String pin = editTextPassword.getText().toString();
         // Access a Cloud Firestore instance from your Activity
