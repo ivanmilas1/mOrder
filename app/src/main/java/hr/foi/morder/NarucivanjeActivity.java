@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -39,6 +40,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
     private NavigationView navigation;
+    private TextView textViewNovoUPonudi;
     private RecyclerView recyclerView;
     private FirebaseFirestore database;
     private ArticleRecyclerAdapter adapter;
@@ -49,7 +51,6 @@ public class NarucivanjeActivity extends AppCompatActivity {
     private HashMap<String, List<String>> listChildEx;
     private Long childId;
     private Integer idNarudzba;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,15 +65,24 @@ public class NarucivanjeActivity extends AppCompatActivity {
         navigation = findViewById(R.id.nv);
         setupDrawerContent(navigation);
 
+        textViewNovoUPonudi = findViewById(R.id.NaslovNovoUPonudi);
+
         recyclerView = findViewById(R.id.article_recycler);
         database = FirebaseFirestore.getInstance();
+
+        setHomePageHeaderText();
         loadLastArticles();
         dohvatiKategorije();
         dohvatiIdNarudzbe();
-
     }
 
+    private void setHomePageHeaderText() {
+        textViewNovoUPonudi.setText(R.string.novo_u_ponudi);
+    }
 
+    private void removeHomePageHeaderText() {
+        textViewNovoUPonudi.setText("");
+    }
 
     private void dohvatiIdNarudzbe() {
         database.collection("Narudzba").orderBy("id", Query.Direction.DESCENDING).limit(1)
@@ -82,7 +92,6 @@ public class NarucivanjeActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
                             List<Narudzba> narudzbaList = new ArrayList<>();
-
                             for(DocumentSnapshot documentSnapshot: task.getResult()){
                                 Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
                                 narudzba.getId();
@@ -100,7 +109,6 @@ public class NarucivanjeActivity extends AppCompatActivity {
                     }
                 });
     }
-
 
     public void addIdNarudzba(Integer id, String status) {
         Map<String, Object> idNarudzbe = new Narudzba(id, status).toMap();
@@ -129,7 +137,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
                             }
                             listChildEx.put("Jelovnik", kategorijaList);
                             listChild = listChildEx;
-                            listHeader = new ArrayList<String>(listChild.keySet());
+                            listHeader = new ArrayList<>(listChild.keySet());
                             expandableListAdapter = new ExpendableListAdapter(getApplicationContext(), listHeader, listChild);
                             expandableListView.setAdapter(expandableListAdapter);
                             expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
@@ -147,11 +155,13 @@ public class NarucivanjeActivity extends AppCompatActivity {
                                 public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                                     return false;
                                 }
-                            });
+                            }
+                            );
                         }
                         else{
                             Log.d("Error", "Error getting data");
                         }
+                        removeHomePageHeaderText();
                     }
                 });
     }
@@ -169,7 +179,6 @@ public class NarucivanjeActivity extends AppCompatActivity {
                                 Artikl artikl = documentSnapshot.toObject(Artikl.class);
                                 articlesList.add(artikl);
                             }
-
                             adapter = new ArticleRecyclerAdapter(articlesList, getApplicationContext(), database);
                             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                             recyclerView.setLayoutManager(layoutManager);

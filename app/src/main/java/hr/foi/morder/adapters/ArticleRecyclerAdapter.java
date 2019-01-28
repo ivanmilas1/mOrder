@@ -154,7 +154,6 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         View mView;
-        private Context ctx;
         public Button quantityAdd;
         public Button quantityRemove;
         public Button order;

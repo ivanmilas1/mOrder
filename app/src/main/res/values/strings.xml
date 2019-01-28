@@ -31,4 +31,6 @@
     <string name="select">Odaberi</string>
     <string name="quantity_value">1</string>
     <string name="title_activity_detalji_narudzbe">DetaljiNarudzbe</string>
+    <string name="novo_u_ponudi">Novo u ponudi !</string>
+    <string name="article_id">id</string>
 </resources>
