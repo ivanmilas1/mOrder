@@ -90,20 +90,19 @@ public class NarucivanjeActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             List<Narudzba> narudzbaList = new ArrayList<>();
-                            for(DocumentSnapshot documentSnapshot: task.getResult()){
+                            for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                 Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
                                 narudzba.getId();
                                 narudzbaList.add(narudzba);
                             }
 
-                            for (Narudzba n: narudzbaList){
+                            for (Narudzba n : narudzbaList) {
                                 idNarudzba = n.getId();
                             }
-                            addIdNarudzba(idNarudzba+1, "U pripremi");
-                        }
-                        else{
+                            addIdNarudzba(idNarudzba + 1, "U pripremi");
+                        } else {
                             Log.d("Error", "Error getting data");
                         }
                     }
@@ -122,16 +121,16 @@ public class NarucivanjeActivity extends AppCompatActivity {
                 });
     }
 
-    private void dohvatiKategorije(){
+    private void dohvatiKategorije() {
         listChildEx = new HashMap<>();
         database.collection("Kategorija")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             List<String> kategorijaList = new ArrayList<>();
-                            for(DocumentSnapshot documentSnapshot: task.getResult()){
+                            for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                 Kategorija kategorija = documentSnapshot.toObject(Kategorija.class);
                                 kategorijaList.add(kategorija.getNaziv());
                             }
@@ -143,7 +142,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
                             expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
                                 @Override
                                 public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                                    childId = parent.getExpandableListAdapter().getChildId(groupPosition, childPosition)+1;
+                                    childId = parent.getExpandableListAdapter().getChildId(groupPosition, childPosition) + 1;
                                     v.setSelected(true);
                                     loadArticleList(childId);
                                     drawer.closeDrawers();
@@ -151,14 +150,13 @@ public class NarucivanjeActivity extends AppCompatActivity {
                                 }
                             });
                             expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-                                @Override
-                                public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                                    return false;
-                                }
-                            }
+                                                                           @Override
+                                                                           public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                                                                               return false;
+                                                                           }
+                                                                       }
                             );
-                        }
-                        else{
+                        } else {
                             Log.d("Error", "Error getting data");
                         }
                         removeHomePageHeaderText();
@@ -173,9 +171,9 @@ public class NarucivanjeActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             List<Artikl> articlesList = new ArrayList<>();
-                            for(DocumentSnapshot documentSnapshot: task.getResult()){
+                            for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                 Artikl artikl = documentSnapshot.toObject(Artikl.class);
                                 articlesList.add(artikl);
                             }
@@ -183,8 +181,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
                             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                             recyclerView.setLayoutManager(layoutManager);
                             recyclerView.setAdapter(adapter);
-                        }
-                        else{
+                        } else {
                             Log.d("Error", "Error getting data");
                         }
                     }
@@ -192,14 +189,14 @@ public class NarucivanjeActivity extends AppCompatActivity {
     }
 
     private void loadLastArticles() {
-        database.collection("Artikl").orderBy("id",Query.Direction.DESCENDING).limit(7)
+        database.collection("Artikl").orderBy("id", Query.Direction.DESCENDING).limit(7)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             List<Artikl> articlesList = new ArrayList<>();
-                            for(DocumentSnapshot documentSnapshot: task.getResult()){
+                            for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                 Artikl artikl = documentSnapshot.toObject(Artikl.class);
                                 articlesList.add(artikl);
                             }
@@ -208,15 +205,14 @@ public class NarucivanjeActivity extends AppCompatActivity {
                             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                             recyclerView.setLayoutManager(layoutManager);
                             recyclerView.setAdapter(adapter);
-                        }
-                        else{
+                        } else {
                             Log.d("Error", "Error getting data");
                         }
                     }
                 });
     }
 
-    private void setupDrawerContent(NavigationView nv){
+    private void setupDrawerContent(NavigationView nv) {
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -226,13 +222,13 @@ public class NarucivanjeActivity extends AppCompatActivity {
         });
     }
 
-    private void selectDrawerView(MenuItem item){
+    private void selectDrawerView(MenuItem item) {
 
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(toggle.onOptionsItemSelected(item)){
+        if (toggle.onOptionsItemSelected(item)) {
             return true;
         }
         return super.onOptionsItemSelected(item);
