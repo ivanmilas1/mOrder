@@ -5,15 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/food_wallpaper_backgroud"
-    tools:context=".IzbornikDjelatnikActivity"
-    tools:layout_editor_absoluteY="81dp">
+    tools:context=".IzbornikDjelatnikActivity">
+
+    <Button
+        android:id="@+id/buttonOrdersView"
+        android:layout_width="251dp"
+        android:layout_height="61dp"
+        android:layout_marginBottom="31dp"
+        android:background="@color/colorAccent"
+        android:onClick="OnClickViewOrders"
+        android:text="@string/pregled_narudzbi"
+        app:layout_constraintBottom_toTopOf="@+id/ButtonPregledKorisnika"
+        app:layout_constraintEnd_toEndOf="@+id/ButtonPregledKorisnika"
+        app:layout_constraintHorizontal_bias="0.775"
+        app:layout_constraintStart_toStartOf="@+id/ButtonPregledKorisnika"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStartScanner" />
+
+    <Button
+        android:id="@+id/buttonSignOut"
+        android:layout_width="220dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="197dp"
+        android:layout_marginBottom="207dp"
+        android:background="@color/colorAccent"
+        android:onClick="OnClickSignOut"
+        android:text="@string/odjava"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ButtonPregledKorisnika" />
 
     <Button
         android:id="@+id/ButtonPregledKorisnika"
-        android:layout_width="250dp"
+        android:layout_width="238dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="204dp"
-        android:layout_marginBottom="189dp"
+        android:layout_marginEnd="197dp"
+        android:layout_marginBottom="164dp"
         android:background="@color/colorAccent"
         android:onClick="OnClickViewDjelatnik"
         android:text="Pregled Korisnika"
@@ -23,41 +49,17 @@
 
     <Button
         android:id="@+id/buttonStartScanner"
-        android:layout_width="200dp"
+        android:layout_width="251dp"
         android:layout_height="0dp"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="206dp"
-        android:layout_marginBottom="53dp"
+        android:layout_marginTop="278dp"
+        android:layout_marginBottom="38dp"
+        android:background="@color/colorAccent"
         android:onClick="OnClickStartScanner"
         android:text="Pokreni QR skener"
         app:layout_constraintBottom_toTopOf="@+id/buttonOrdersView"
+        app:layout_constraintEnd_toEndOf="@+id/buttonOrdersView"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/buttonOrdersView"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/buttonSignOut"
-        android:layout_width="201dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="241dp"
-        android:layout_marginBottom="111dp"
-        android:background="@color/colorAccent"
-        android:onClick="OnClickSignOut"
-        android:text="@string/odjava"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ButtonPregledKorisnika" />
-
-    <Button
-        android:id="@+id/buttonOrdersView"
-        android:layout_width="215dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="54dp"
-        android:layout_marginBottom="36dp"
-        android:background="@color/colorAccent"
-        android:onClick="OnClickViewOrders"
-        android:text="@string/pregled_narudzbi"
-        app:layout_constraintBottom_toTopOf="@+id/ButtonPregledKorisnika"
-        app:layout_constraintEnd_toEndOf="@+id/ButtonPregledKorisnika"
-        app:layout_constraintTop_toBottomOf="@+id/buttonStartScanner" />
 
 </android.support.constraint.ConstraintLayout>
