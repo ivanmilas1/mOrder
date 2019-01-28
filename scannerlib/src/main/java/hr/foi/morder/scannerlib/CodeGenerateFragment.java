@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.zxing.BarcodeFormat;
@@ -15,6 +16,8 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -28,9 +31,6 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class CodeGenerateFragment extends Fragment {
-
-    private View myFragmentView;
-    private ImageView imageView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -77,10 +77,8 @@ public class CodeGenerateFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        myFragmentView = inflater.inflate(R.layout.fragment_code_generate, container, false);
-        imageView = myFragmentView.findViewById(R.id.imageView);
         // Inflate the layout for this fragment
-        return myFragmentView;
+        return inflater.inflate(R.layout.fragment_code_generate, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -122,20 +120,19 @@ public class CodeGenerateFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void generateCode(ArrayList<String> lista){
-        if(lista != null){
+    public void generateCode(ImageView prikaz, String tekst){
+        if(tekst != null){
             MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
             try {
-                BitMatrix bitMatrix = multiFormatWriter.encode(lista.toString(), BarcodeFormat.QR_CODE, 500, 500);
+                BitMatrix bitMatrix = multiFormatWriter.encode(tekst, BarcodeFormat.QR_CODE, 500, 500);
                 BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
                 Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
-                imageView.setImageBitmap(bitmap);
+                prikaz.setImageBitmap(bitmap);
             }
             catch (WriterException e){
                 e.printStackTrace();
             }
         }
     }
-
 
 }
