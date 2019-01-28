@@ -6,17 +6,27 @@ public class Artikl {
     public Double jedinicna_cijena;
     public Integer kategorija_id;
     public String slika;
+    public Integer id;
 
-    public Artikl(String naziv, String jedinicna_mjera, Double jedinicna_cijena, Integer kategorija_id, String slika) {
+    public Artikl(Integer id, String naziv, String jedinicna_mjera, Double jedinicna_cijena, Integer kategorija_id, String slika) {
         this.naziv = naziv;
         this.jedinicna_mjera = jedinicna_mjera;
         this.jedinicna_cijena = jedinicna_cijena;
         this.kategorija_id = kategorija_id;
         this.slika = slika;
+        this.id = id;
     }
 
     public Artikl(){
 
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNaziv() {
@@ -57,5 +67,9 @@ public class Artikl {
 
     public void setSlika(String slika) {
         this.slika = slika;
+    }
+
+    public void load(){
+
     }
 }

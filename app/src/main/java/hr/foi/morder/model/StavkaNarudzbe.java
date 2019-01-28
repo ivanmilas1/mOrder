@@ -11,7 +11,6 @@ public class StavkaNarudzbe {
     public Integer kolicina;
     public Date vrijeme_narucivanja;
 
-
     public StavkaNarudzbe() {
     }
 

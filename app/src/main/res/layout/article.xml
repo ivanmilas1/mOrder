@@ -15,14 +15,13 @@
         android:layout_marginEnd="3dp">
 
         <TextView
-            android:id="@+id/novo"
+            android:id="@+id/NaslovNovoUPonudi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="25dp"
             android:layout_marginEnd="50dp"
-            android:text="Novo u ponudi !"
             android:textAppearance="@style/TextAppearance.Compat.Notification.Info"
             android:textColor="@color/colorNavigation"
             android:textSize="29dp" />
