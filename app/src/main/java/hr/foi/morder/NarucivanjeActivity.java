@@ -34,7 +34,6 @@ import hr.foi.morder.model.Artikl;
 import hr.foi.morder.model.Kategorija;
 import hr.foi.morder.model.Narudzba;
 
-
 public class NarucivanjeActivity extends AppCompatActivity {
 
     private DrawerLayout drawer;
