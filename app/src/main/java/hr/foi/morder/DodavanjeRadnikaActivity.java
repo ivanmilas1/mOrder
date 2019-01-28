@@ -22,22 +22,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import hr.foi.morder.adapters.KorisnikRecyclerAdapter;
 import hr.foi.morder.model.Djelatnik;
 
 public class DodavanjeRadnikaActivity extends AppCompatActivity {
-
     RecyclerView recyclerView;
-    KorisnikRecyclerAdapter korisnikRecyclerAdapter;
-
     List<Djelatnik> djelatnikList;
-
     Button button;
     EditText ime;
     EditText email;
     EditText lozinka;
     Spinner spinnerTip;
-
     FirebaseFirestore databaseDjelatnik;
 
     @Override
@@ -46,18 +40,17 @@ public class DodavanjeRadnikaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dodavanje_radnika);
 
         djelatnikList = new ArrayList<>();
-        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        recyclerView = findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         databaseDjelatnik = FirebaseFirestore.getInstance();
 
-        ime = (EditText) findViewById(R.id.input_name);
-        email = (EditText) findViewById(R.id.input_email);
-        lozinka = (EditText) findViewById(R.id.input_password);
-        button = (Button) findViewById(R.id.btn_signup);
-        spinnerTip = (Spinner) findViewById(R.id.spinner);
-
+        ime = findViewById(R.id.input_name);
+        email = findViewById(R.id.input_email);
+        lozinka = findViewById(R.id.input_password);
+        button = findViewById(R.id.btn_signup);
+        spinnerTip = findViewById(R.id.spinner);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,11 +58,9 @@ public class DodavanjeRadnikaActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
     private void dodajDjelatnika() {
-
         Integer tipKorisnika = null;
         String naziv = ime.getText().toString().trim();
         String mail = email.getText().toString();
@@ -77,22 +68,19 @@ public class DodavanjeRadnikaActivity extends AppCompatActivity {
         String tip = spinnerTip.getSelectedItem().toString();
         switch (tip) {
             case "Konobar":
-                tipKorisnika =1;
+                tipKorisnika = 1;
                 break;
             case "Voditelj":
-                tipKorisnika =2;
+                tipKorisnika = 2;
                 break;
             case "Administrator":
-                tipKorisnika =3;
+                tipKorisnika = 3;
                 break;
-
         }
-
 
         if (!TextUtils.isEmpty(naziv)) {
             if (!TextUtils.isEmpty(mail)) {
                 if (!TextUtils.isEmpty(password)) {
-
                     Map<String, Object> djelatnik = new Djelatnik(naziv, mail, password, tipKorisnika).toMap();
                     databaseDjelatnik.collection("Djelatnik")
                             .add(djelatnik)
@@ -102,10 +90,7 @@ public class DodavanjeRadnikaActivity extends AppCompatActivity {
 
                                 }
                             });
-
-
                     Toast.makeText(this, "Korisnik je uspješno dodan", Toast.LENGTH_LONG).show();
-
                 } else {
                     Toast.makeText(this, "Morate unijeti lozinku", Toast.LENGTH_LONG).show();
                 }
