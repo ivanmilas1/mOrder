@@ -34,9 +34,16 @@ import hr.foi.morder.model.Artikl;
 import hr.foi.morder.model.Kategorija;
 import hr.foi.morder.model.Narudzba;
 
+/**
+ * The type Narucivanje activity.
+ * Set content view activity_prijava layout
+ * @author Nikola Gluhak
+ */
 public class NarucivanjeActivity extends AppCompatActivity {
 
+
     private DrawerLayout drawer;
+
     private ActionBarDrawerToggle toggle;
     private NavigationView navigation;
     private TextView textViewNovoUPonudi;
@@ -50,6 +57,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
     private HashMap<String, List<String>> listChildEx;
     private Long childId;
     private Integer idNarudzba;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +90,13 @@ public class NarucivanjeActivity extends AppCompatActivity {
         textViewNovoUPonudi.setText("");
     }
 
+    /**
+     * Finding order Id
+     * Firebase connection to "Narudzba" collection
+     * Ordering by id descending to find last order
+     * Adds one on last order number, that represent order in processing
+     *@author Nikola Gluhak
+     */
     private void dohvatiIdNarudzbe() {
         database.collection("Narudzba").orderBy("id", Query.Direction.DESCENDING).limit(1)
                 .get()
@@ -107,6 +122,14 @@ public class NarucivanjeActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Add id narudzba. Adding id value to order.
+     *Firebase connection to "Narudzba" collection
+     * @param id     the id represents order id number
+     * @param status the status defines table status, free, in processing or taken.
+     * @author Nikola Gluhak
+     *
+     */
     public void addIdNarudzba(Integer id, String status) {
         Map<String, Object> idNarudzbe = new Narudzba(id, status).toMap();
         database.collection("Narudzba")
@@ -119,6 +142,13 @@ public class NarucivanjeActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Dohvati kategorije. Creating categories from data gathered from Firestore based on their "Kategorija_id".
+     * Creating new adapter for recycler viwe
+     * Setting recycler view layout manager from application context
+     * Setting the adapter into recycler view
+     * @author Nikola Gluhak
+     */
     private void dohvatiKategorije() {
         listChildEx = new HashMap<>();
         database.collection("Kategorija")
@@ -160,7 +190,14 @@ public class NarucivanjeActivity extends AppCompatActivity {
                     }
                 });
     }
-
+    /**
+     * Load articels List loading articels from Firestore database depending on their "kategorija_id" field.
+     * Creating new adapter for recycler viwe
+     * Setting recycler view layout manager from application context
+     * Setting the adapter into recycler view
+     * @param idKategorije    the idKategorije respresents category id number
+     * @author Nikola Gluhak
+     */
     private void loadArticleList(long idKategorije) {
         database.collection("Artikl")
                 .whereEqualTo("kategorija_id", idKategorije)
@@ -185,7 +222,15 @@ public class NarucivanjeActivity extends AppCompatActivity {
                     }
                 });
     }
-
+    /**
+     * Load last articles fetching last 7 articles from Firestore collection "Artikl" and orders them by "id" field descending
+     * Adding data to articlesList list
+     * Creating new adapter for recycler viwe
+     * Setting recycler view layout manager from application context
+     * Setting the adapter into recycler view
+     *@author Nikola Gluhak
+     *
+     */
     private void loadLastArticles() {
         database.collection("Artikl").orderBy("id", Query.Direction.DESCENDING).limit(7)
                 .get()
@@ -210,6 +255,11 @@ public class NarucivanjeActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Click on navigation item marks it
+     * @param nv navigation view for drawer
+     * @author Nikola Gluhak
+     */
     private void setupDrawerContent(NavigationView nv) {
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override

@@ -35,11 +35,17 @@
     <string name="email">Email</string>
     <string name="lozinka">Lozinka</string>
     <string name="pin">PIN</string>
+    <string name="naziv_proizvoda">Naziv proizvoda</string>
     <string name="novo_u_ponudi">Novo u ponudi!</string>
+    <string name="cijena_proizvoda">Cijena proizvoda</string>
     <array name="tip_korisnika">
         <item>Konobar</item>
         <item>Administrator</item>
         <item>Voditelj</item>
+    </array>
+    <array name="tip_proizvoda">
+        <item>Piće</item>
+        <item>Jelo</item>
     </array>
 
 </resources>

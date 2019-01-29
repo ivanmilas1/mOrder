@@ -16,6 +16,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import hr.foi.morder.model.Korisnik;
 
+/**
+ * The type Prijava djelatnik activity.
+ * Set content view activity_prijava layout
+ * @author Danijel Pintarić
+ */
 public class PrijavaDjelatnikActivity extends AppCompatActivity {
 
     @Override
@@ -24,6 +29,13 @@ public class PrijavaDjelatnikActivity extends AppCompatActivity {
         setContentView(R.layout.activity_prijava);
     }
 
+    /**
+     * On click sign in authentication for app users. Checks pin value from values on Firebase Database collection "Korisnik" field "lozinka".
+     * If correct, prints welcome message and starts IzbornikDjelatnikActivity
+     *If error occurs during fetching data and comparing equalty, displays error message
+     * @param view the view
+     *@author Danijel Pintarić
+     */
     public void onClickSignIn(View view) {
         EditText editTextPassword = findViewById(R.id.editTextPassword);
         String pin = editTextPassword.getText().toString();

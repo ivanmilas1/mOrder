@@ -30,9 +30,17 @@ import java.util.Map;
 import hr.foi.morder.adapters.DjelatnikRecyclerAdapter;
 import hr.foi.morder.model.Djelatnik;
 
+/**
+ * The type Dodavanje radnika activity implemented for adding new workers in app and also to update data about them.
+ *  * Set content view activity_dodavanje_radnika layout
+ *  @author Ivan Milas
+ */
 public class DodavanjeRadnikaActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    /**
+     * The Djelatnik recycler adapter for showing data about all workers from database.
+     */
     public  DjelatnikRecyclerAdapter djelatnikRecyclerAdapter;
     private List<Djelatnik> djelatnikList;
     private Button button;
@@ -71,7 +79,15 @@ public class DodavanjeRadnikaActivity extends AppCompatActivity {
             button.setText("Kreiraj korisnika");
          }
     }
-
+    /**
+     * The dodaj Djelatnika method for adding new worker. Data from text fields is updated to Firestore database.
+     * Takes data from input fields and from spinner
+     * Checking if e-mail is valid
+     * Checking if field "naziv" is empty, it must not be empty
+     * Checking if field "password" is empty, it must not be empty
+     * If error occurs during fetching data, displays error message
+     * @author Ivan Milas
+     */
     private void dodajDjelatnika() {
         loadDjelatnici();
         Integer tipKorisnika = null;
@@ -113,7 +129,14 @@ public class DodavanjeRadnikaActivity extends AppCompatActivity {
             Toast.makeText(this, "Morate unijeti ime korisnika", Toast.LENGTH_LONG).show();
         }
     }
-
+    /**
+     * The load Djelatnici gets data from Firestore database collection "Djelatnik" , stores data in List djelatnikList and calls method djelatnikRecyclerAdapter.
+     * Creating new adapter for recycler viwe
+     * Setting recycler view layout manager from application context
+     * Setting the adapter into recycler view
+     * If error occurs during fetching data, displays error message
+     * @author Ivan Milas
+     */
     private void loadDjelatnici(){
         databaseDjelatnik.collection("Djelatnik")
                 .get()
@@ -140,6 +163,13 @@ public class DodavanjeRadnikaActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    /**
+     * Build recycler view for creating new Recycler view and setting the adapter for this recycler view.
+     * Find recycler view by id
+     * Set layout manager and set adapter for recycler view
+     * @author Ivan Milas
+     */
     public void buildRecyclerView(){
         recyclerView = findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);
