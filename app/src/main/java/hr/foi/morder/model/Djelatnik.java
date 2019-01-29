@@ -1,6 +1,5 @@
 package hr.foi.morder.model;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 

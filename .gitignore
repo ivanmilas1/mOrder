@@ -13,6 +13,10 @@ bin/
 gen/
 out/
 
+#.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
+*.iml
+.idea
+
 # Gradle files
 .gradle/
 build/
@@ -63,3 +67,5 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
+
+gradle-wrapper.properties

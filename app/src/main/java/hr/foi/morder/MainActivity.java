@@ -19,7 +19,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void enterLoginEmployee(View view) {
-        Intent intent = new Intent(this, PrijavaDjelatnikActivity.class);
+        Intent intent = new Intent(this, IzbornikDjelatnikActivity.class);
+        startActivity(intent);
+    }
+
+    public void homeDelivery(View view) {
+        Intent intent = new Intent(this, DostavaActivity.class);
         startActivity(intent);
     }
 }

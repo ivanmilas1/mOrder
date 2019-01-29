@@ -9,10 +9,8 @@ public class Artikl {
     public Integer kategorija_id;
     public String slika;
 
-
-
     public Artikl(Integer id, String naziv, String jedinicna_mjera, Double jedinicna_cijena, Integer kategorija_id, String slika) {
-        this.id =id;
+        this.id = id;
         this.naziv = naziv;
         this.jedinicna_mjera = jedinicna_mjera;
         this.jedinicna_cijena = jedinicna_cijena;
@@ -22,6 +20,14 @@ public class Artikl {
 
     public Artikl(){
 
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNaziv() {
@@ -64,11 +70,7 @@ public class Artikl {
         this.slika = slika;
     }
 
-    public Integer getId() {
-        return id;
-    }
+    public void load(){
 
-    public void setId(Integer id) {
-        this.id = id;
     }
 }

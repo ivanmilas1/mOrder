@@ -18,8 +18,11 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +37,12 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
     private List<Artikl> articleList;
     private Context ctx;
     private FirebaseFirestore database;
+    private Integer idNarudzba;
+    private Integer quantity;
+    private Double price;
+    private Integer id;
+    private String narudzbaDokument;
+    private Double iznosNarudzbe;
     public Integer brojNarudzbe;
 
 
@@ -41,7 +50,6 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         this.articleList = articleList;
         this.ctx = ctx;
         this.database = database;
-
     }
 
     @NonNull
@@ -56,6 +64,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
 
         final int itemPosition = position;
         final Artikl Artikl = articleList.get(itemPosition);
+        viewHolder.setId(Artikl.getId());
         viewHolder.setName(Artikl.getNaziv());
         viewHolder.setPrice(Artikl.getJedinicna_cijena());
         viewHolder.setImage(ctx, Artikl.getSlika());
@@ -98,6 +107,12 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         viewHolder.order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                quantity = Integer.parseInt(String.valueOf(viewHolder.quantity.getText()));
+                price = Double.parseDouble(String.valueOf(viewHolder.price.getText()));
+                id = Integer.parseInt(String.valueOf(viewHolder.id.getText()));
+
+
+viewHolder.setPrice(Artikl.getJedinicna_cijena());
                 try {
                     zadnjiElement();
                 } catch (Exception e) {
@@ -109,6 +124,36 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
                 viewHolder.setPrice(Artikl.getJedinicna_cijena());
                 viewHolder.setQuantity(1);
                 Toast.makeText(ctx, "Narudžba je zaprimljena" , Toast.LENGTH_LONG).show();
+
+                database.collection("Narudzba").orderBy("id", Query.Direction.DESCENDING).limit(1)
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()){
+                                    List<Narudzba> narudzbaList = new ArrayList<>();
+
+                                    for(DocumentSnapshot documentSnapshot: task.getResult()){
+                                        Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
+                                        narudzbaDokument = documentSnapshot.getId();
+                                        iznosNarudzbe = narudzba.getIznos_narudzbe();
+                                        narudzba.getId();
+                                        narudzbaList.add(narudzba);
+                                    }
+
+                                    for (Narudzba n: narudzbaList){
+                                        idNarudzba = n.getId();
+                                    }
+                                    addOrder(id,idNarudzba, price, quantity);
+                                    database.collection("Narudzba").document(narudzbaDokument).update("iznos_narudzbe", iznosNarudzbe+price);
+
+
+                                }
+                                else{
+                                    Log.d("Error", "Error getting data");
+                                }
+                            }
+                        });
             }
         });
     }
@@ -130,17 +175,14 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         return articleList.size();
     }
 
-
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         View mView;
-        private Context ctx;
         public Button quantityAdd;
         public Button quantityRemove;
         public Button order;
         public TextView price;
         public TextView quantity;
-
+        public TextView id;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -150,6 +192,12 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
             order = mView.findViewById(R.id.button_order);
             price = mView.findViewById(R.id.article_price);
             quantity = mView.findViewById(R.id.article_quantity);
+            id = mView.findViewById(R.id.article_id);
+        }
+
+        public void setId(Integer id) {
+            TextView articleId = itemView.findViewById(R.id.article_id);
+            articleId.setText(id.toString());
         }
 
         public void setName(String name) {
@@ -163,7 +211,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         }
 
         public void setImage(Context ctx, String image) {
-            ImageView article_image = (ImageView) mView.findViewById(R.id.article_image);
+            ImageView article_image = mView.findViewById(R.id.article_image);
             Picasso.with(ctx).load(image).into(article_image);
         }
 
@@ -174,9 +222,8 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
 
         public void setPriceCurrency(String quantity) {
             TextView articlePriceCurrency = itemView.findViewById(R.id.article_price_currency);
-            articlePriceCurrency.setText(quantity.toString());
+            articlePriceCurrency.setText(quantity);
         }
-
     }
     private void zadnjiElement(){
         database.collection("Narudzba").limit(1).get()

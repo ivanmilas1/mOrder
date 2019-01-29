@@ -12,7 +12,6 @@ public class StavkaNarudzbe {
     public Date vrijeme_narucivanja;
     public double jedinicna_cijena;
 
-
     public StavkaNarudzbe() {
     }
 
