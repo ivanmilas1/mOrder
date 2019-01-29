@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import hr.foi.morder.adapters.ArticleRecyclerAdapter;
 import hr.foi.morder.adapters.ExpendableListAdapter;
@@ -213,7 +212,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
     }
 
     private void loadLastArticles() {
-        database.collection("Artikl").orderBy("id", Query.Direction.DESCENDING).limit(7)
+        database.collection("Artikl").orderBy("id", Query.Direction.DESCENDING).limit(3)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
