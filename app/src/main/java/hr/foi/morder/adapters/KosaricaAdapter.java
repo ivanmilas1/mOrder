@@ -49,14 +49,18 @@ public class KosaricaAdapter extends RecyclerView.Adapter<KosaricaAdapter.Kosari
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            String naziv = null;
+                            String naziv = "";
+                            double cijena = 0, kolicina = 0;
                             for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                 Artikl artikl = documentSnapshot.toObject(Artikl.class);
                                 naziv = artikl.getNaziv();
+                                cijena = artikl.getJedinicna_cijena();
                             }
+                            kolicina = stavkaNarudzbe.kolicina;
                             kosaricaViewHolder.textViewNazivProizvoda.setText(naziv);
-                            kosaricaViewHolder.textViewKolicina.setText(String.valueOf(stavkaNarudzbe.getKolicina()));
-                            kosaricaViewHolder.textViewCijena.setText(String.valueOf(stavkaNarudzbe.getCijena()));
+                            kosaricaViewHolder.textViewJedinicnaCijena.setText(String.valueOf(cijena));
+                            kosaricaViewHolder.textViewKolicina.setText(String.valueOf(kolicina));
+                            kosaricaViewHolder.textViewCijena.setText(String.valueOf(cijena * kolicina));
                         } else {
                             Log.d("Error", "Error getting data");
                         }

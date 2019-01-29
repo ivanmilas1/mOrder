@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ public class KosaricaActivity extends AppCompatActivity {
         naruci.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //dovrsiNarudzbu(); ne dodaje brojNarudzbe ni ukupnaCijena na firestore
             }
         });
@@ -92,7 +94,7 @@ public class KosaricaActivity extends AppCompatActivity {
 
     //Dohvat zadnjeg id narudzbe, pod tim id se spremaju artikli koji su u kosarici
     private void zadnjiElement() {
-        databaseStavkaNarudzbe.collection("Narudzba").limit(1).get()
+        databaseStavkaNarudzbe.collection("Narudzba").orderBy("id", Query.Direction.DESCENDING).limit(1).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -100,7 +102,7 @@ public class KosaricaActivity extends AppCompatActivity {
                             for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                 Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
                                 brojNarudzbe = narudzba.getId();
-                                brojNarudzbe = brojNarudzbe + 1;
+                                //brojNarudzbe = brojNarudzbe + 1;
                                 loadStavkeKosarice();
                             }
                         } else {

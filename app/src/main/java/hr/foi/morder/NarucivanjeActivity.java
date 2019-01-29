@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -114,17 +113,10 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                                             if (task.isSuccessful()) {
                                                 for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                                     stolId = documentSnapshot.getId();
-
                                                 }
-                                                try {
                                                     database.collection("Stol").document(stolId).update("narudzba_id", idNarudzba + 1);
                                                     database.collection("Stol").document(stolId).update("stanje", "narudzbaUPripremi");
-                                                }
-                                                catch (NullPointerException e){
-                                                    Toast.makeText(getApplicationContext(), "Svi stolovi su zauzeti", Toast.LENGTH_LONG);
-                                                }
                                             }
-
                                         }
                                     });
 
