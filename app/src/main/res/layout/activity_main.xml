@@ -63,6 +63,7 @@
         app:layout_constraintBottom_toTopOf="@+id/buttonEnterLoginGuest"
         app:layout_constraintEnd_toEndOf="@+id/buttonEnterLoginGuest"
         app:layout_constraintTop_toBottomOf="@+id/textViewWelcome" />
+
     /
 
 
