@@ -22,4 +22,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, IzbornikDjelatnikActivity.class);
         startActivity(intent);
     }
+
+    public void homeDelivery(View view) {
+        Intent intent = new Intent(this, DostavaActivity.class);
+        startActivity(intent);
+    }
 }
