@@ -18,24 +18,29 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-import hr.foi.morder.adapters.ListAdapter;
+import hr.foi.morder.adapters.DjelatnikPregledRacunaListAdapter;
 import hr.foi.morder.model.Artikl;
+import hr.foi.morder.model.Narudzba;
+import hr.foi.morder.model.Racun;
+import hr.foi.morder.model.StavkaNarudzbe;
 
-public class DetaljiNarudzbeActivity extends AppCompatActivity
-{
+public class DetaljiNarudzbeActivity extends AppCompatActivity {
     ArrayList<Artikl> listaArtikala = new ArrayList<>();
+    ArrayList<StavkaNarudzbe> listaStavkiNarudžbi = new ArrayList<>();
     private FirebaseFirestore database;
     Button btnPlaceOrder;
     private ListView listView;
-    private ListAdapter listAdapter;
+    int stolID;
+    private DjelatnikPregledRacunaListAdapter djelatnikPregledRacunaStolaListAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalji_narudzbe2);
         Intent intent = getIntent();
-        String stolID = intent.getStringExtra("stolID");
-        getArticles();
+        stolID = Integer.parseInt(intent.getStringExtra("stolID"));
+        database = FirebaseFirestore.getInstance();
+        getBill();
 
         btnPlaceOrder = findViewById(R.id.btnPlaceOrder);
         btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
@@ -45,24 +50,87 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity
             }
         });
     }
-    public void getArticles(){
-        database = FirebaseFirestore.getInstance();
-        database.collection("Artikl")
+
+    public void getBill() {
+        database.collection("Racun")
+                .whereEqualTo("stol_id", stolID)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                        if(task.isSuccessful()){
+                            for(DocumentSnapshot documentSnapshot: task.getResult()){
+                                Racun racun = documentSnapshot.toObject(Racun.class);
+                                getOrders(racun.getId());
+                            }
+                        }
+                        else{
+                            Log.d("Error", "Error getting data");
+                        }
+                    }
+                });
+    }
+    public void getOrders(int racunID) {
+        database.collection("Narudzba")
+                .whereEqualTo("racun_id", racunID)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for(DocumentSnapshot documentSnapshot: task.getResult()){
+                                Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
+                                getOrderItem(narudzba.getId());
+                            }
+                        }
+                        else{
+                            Log.d("Error", "Error getting data");
+                        }
+                    }
+                });
+    }
+
+    public void getOrderItem(int orderID) {
+        database.collection("Stavka narudzbe")
+                .whereEqualTo("narudzba_id", orderID)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for(DocumentSnapshot documentSnapshot: task.getResult()){
+                                StavkaNarudzbe stavkaNarudzbe = documentSnapshot.toObject(StavkaNarudzbe.class);
+                                listaStavkiNarudžbi.add(stavkaNarudzbe);
+                                getOrderArticles(stavkaNarudzbe.getArtikl_id());
+                            }
+                        }
+                        else{
+                            Log.d("Error", "Error getting data");
+                        }
+                    }
+                });
+    }
+
+    public void getOrderArticles(int articleID) {
+        database.collection("Artikl")
+                .whereEqualTo("id", articleID)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for(DocumentSnapshot documentSnapshot: task.getResult()){
                                 Artikl artikl = documentSnapshot.toObject(Artikl.class);
                                 listaArtikala.add(artikl);
                             }
-                        } else {
+                            listView = findViewById(R.id.customListView);
+                            djelatnikPregledRacunaStolaListAdapter = new DjelatnikPregledRacunaListAdapter
+                                    (getApplicationContext(), listaArtikala, listaStavkiNarudžbi);
+                            listView.setAdapter(djelatnikPregledRacunaStolaListAdapter);
+                        }
+                        else{
                             Log.d("Error", "Error getting data");
                         }
-                        listView = findViewById(R.id.customListView);
-                        listAdapter = new ListAdapter(getApplicationContext(), listaArtikala);
-                        listView.setAdapter(listAdapter);
                     }
                 });
     }

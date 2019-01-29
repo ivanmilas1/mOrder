@@ -10,6 +10,18 @@ public class Korisnik {
     public String adresaPrebivalista;
     public TipKorisnika tipKorisnika;
 
+    public Korisnik(Integer id, String imePrezime, String lozinka, Date datumRodjenja, String adresaPrebivalista, TipKorisnika tipKorisnika) {
+        this.id = id;
+        this.imePrezime = imePrezime;
+        this.lozinka = lozinka;
+        this.datumRodjenja = datumRodjenja;
+        this.adresaPrebivalista = adresaPrebivalista;
+        this.tipKorisnika = tipKorisnika;
+    }
+
+    public Korisnik() {
+    }
+
     public Integer getId() {
         return id;
     }
@@ -57,4 +69,7 @@ public class Korisnik {
     public void setTipKorisnika(TipKorisnika tipKorisnika) {
         this.tipKorisnika = tipKorisnika;
     }
+
+
 }
+
