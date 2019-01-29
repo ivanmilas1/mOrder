@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -34,7 +35,6 @@ import hr.foi.morder.adapters.ExpendableListAdapter;
 import hr.foi.morder.model.Artikl;
 import hr.foi.morder.model.Kategorija;
 import hr.foi.morder.model.Narudzba;
-import hr.foi.morder.model.Stol;
 
 public class NarucivanjeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -69,7 +69,7 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
         setupDrawerContent(navigation);
         navigation.setNavigationItemSelectedListener(this);
 
-        textViewNovoUPonudi = findViewById(R.id.NaslovNovoUPonudi);
+        textViewNovoUPonudi = findViewById(R.id.naslovNovoUPonudi);
 
         recyclerView = findViewById(R.id.article_recycler);
         database = FirebaseFirestore.getInstance();
@@ -106,20 +106,23 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                             }
                             addIdNarudzba(idNarudzba + 1, 0.00);
 
-                            database.collection("Stol").whereEqualTo("stanje","slobodan").limit(1)
+                            database.collection("Stol").whereEqualTo("stanje", "slobodan").limit(1)
                                     .get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                            if(task.isSuccessful()){
-                                                List<Stol> stolList = new ArrayList<>();
+                                            if (task.isSuccessful()) {
                                                 for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                                     stolId = documentSnapshot.getId();
 
                                                 }
-
-                                                database.collection("Stol").document(stolId).update("narudzba_id",idNarudzba+1);
-                                                database.collection("Stol").document(stolId).update("stanje","narudzbaUPripremi");
+                                                try {
+                                                    database.collection("Stol").document(stolId).update("narudzba_id", idNarudzba + 1);
+                                                    database.collection("Stol").document(stolId).update("stanje", "narudzbaUPripremi");
+                                                }
+                                                catch (NullPointerException e){
+                                                    Toast.makeText(getApplicationContext(), "Svi stolovi su zauzeti", Toast.LENGTH_LONG);
+                                                }
                                             }
 
                                         }
@@ -145,10 +148,9 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                 });
     }
 
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()){
+        switch (menuItem.getItemId()) {
             case R.id.kosarica:
                 Intent intent = new Intent(this, KosaricaActivity.class);
                 startActivity(intent);
@@ -264,7 +266,7 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(toggle.onOptionsItemSelected(item)){
+        if (toggle.onOptionsItemSelected(item)) {
 
             return true;
         }

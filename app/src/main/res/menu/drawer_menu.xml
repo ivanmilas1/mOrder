@@ -5,6 +5,5 @@
         android:id="@+id/kosarica"
         android:icon="@drawable/pic_bag"
         android:title="Košarica" />
-
     <item android:id="@+id/kontakt" android:title="@string/kontakt" android:icon="@drawable/pic_contact" />
 </menu>

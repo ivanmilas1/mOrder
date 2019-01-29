@@ -10,19 +10,15 @@ public class StavkaNarudzbe {
     public double cijena;
     public Integer kolicina;
     public Date vrijeme_narucivanja;
-    public double jedinicna_cijena;
 
     public StavkaNarudzbe() {
     }
 
-
-
-    public StavkaNarudzbe(Integer artikl_id, Integer narudzbaId, double cijena, Integer kolicina, Double jedinicna_cijena) {
+    public StavkaNarudzbe(Integer artikl_id, Integer narudzbaId, double cijena, Integer kolicina) {
         this.artikl_id = artikl_id;
         this.narudzba_id = narudzbaId;
         this.cijena = cijena;
         this.kolicina = kolicina;
-        this.jedinicna_cijena = jedinicna_cijena;
     }
 
     public Integer getArtikl_id() {
@@ -64,12 +60,6 @@ public class StavkaNarudzbe {
     public void setVrijeme_narucivanja(Date vrijeme_narucivanja) {
         this.vrijeme_narucivanja = vrijeme_narucivanja;
     }
-    public double getJedinicna_cijena() {
-        return jedinicna_cijena;
-    }
-    public void setJedinicna_cijena(double jedinicna_cijena) {
-        this.jedinicna_cijena = jedinicna_cijena;
-    }
 
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
@@ -77,7 +67,6 @@ public class StavkaNarudzbe {
         result.put("narudzba_id", this.narudzba_id);
         result.put("cijena", this.cijena);
         result.put("kolicina", this.kolicina);
-        result.put("jedinicna_cijena",this.jedinicna_cijena);
         return result;
     }
 }

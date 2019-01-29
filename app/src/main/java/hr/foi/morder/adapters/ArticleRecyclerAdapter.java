@@ -17,13 +17,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -112,28 +110,28 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
                 id = Integer.parseInt(String.valueOf(viewHolder.id.getText()));
 
 
-viewHolder.setPrice(Artikl.getJedinicna_cijena());
+                viewHolder.setPrice(Artikl.getJedinicna_cijena());
                 try {
                     zadnjiElement();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                Integer quantity = Integer.parseInt(String.valueOf(viewHolder.quantity.getText()));
-                Double price = Double.parseDouble(String.valueOf(viewHolder.price.getText()));
-                addOrder(Artikl.getId(), brojNarudzbe, price, quantity,Artikl.getJedinicna_cijena());
+                final Integer quantity = Integer.parseInt(String.valueOf(viewHolder.quantity.getText()));
+                final Double price = Double.parseDouble(String.valueOf(viewHolder.price.getText()));
+                addOrder(Artikl.getId(), brojNarudzbe, price, quantity);
                 viewHolder.setPrice(Artikl.getJedinicna_cijena());
                 viewHolder.setQuantity(1);
-                Toast.makeText(ctx, "Narudžba je zaprimljena" , Toast.LENGTH_LONG).show();
+                Toast.makeText(ctx, "Narudžba je zaprimljena", Toast.LENGTH_SHORT).show();
 
                 database.collection("Narudzba").orderBy("id", Query.Direction.DESCENDING).limit(1)
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     List<Narudzba> narudzbaList = new ArrayList<>();
 
-                                    for(DocumentSnapshot documentSnapshot: task.getResult()){
+                                    for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                         Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
                                         narudzbaDokument = documentSnapshot.getId();
                                         iznosNarudzbe = narudzba.getIznos_narudzbe();
@@ -141,15 +139,14 @@ viewHolder.setPrice(Artikl.getJedinicna_cijena());
                                         narudzbaList.add(narudzba);
                                     }
 
-                                    for (Narudzba n: narudzbaList){
+                                    for (Narudzba n : narudzbaList) {
                                         idNarudzba = n.getId();
                                     }
-                                    addOrder(id,idNarudzba, price, quantity);
-                                    database.collection("Narudzba").document(narudzbaDokument).update("iznos_narudzbe", iznosNarudzbe+price);
+                                    addOrder(id, idNarudzba, price, quantity);
+                                    database.collection("Narudzba").document(narudzbaDokument).update("iznos_narudzbe", iznosNarudzbe + price);
 
 
-                                }
-                                else{
+                                } else {
                                     Log.d("Error", "Error getting data");
                                 }
                             }
@@ -158,8 +155,8 @@ viewHolder.setPrice(Artikl.getJedinicna_cijena());
         });
     }
 
-    public void addOrder(Integer artikl, Integer narudzba, Double cijena, Integer kolicina, Double jedinicna_cijena) {
-        Map<String, Object> stavkaNarudzbe = new StavkaNarudzbe(artikl, narudzba, cijena, kolicina,jedinicna_cijena).toMap();
+    public void addOrder(Integer artikl, Integer narudzba, Double cijena, Integer kolicina) {
+        Map<String, Object> stavkaNarudzbe = new StavkaNarudzbe(artikl, narudzba, cijena, kolicina).toMap();
         database.collection("Stavka narudzbe")
                 .add(stavkaNarudzbe)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -225,25 +222,25 @@ viewHolder.setPrice(Artikl.getJedinicna_cijena());
             articlePriceCurrency.setText(quantity);
         }
     }
-    private void zadnjiElement(){
+
+    private void zadnjiElement() {
         database.collection("Narudzba").limit(1).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
 
-                            for(DocumentSnapshot documentSnapshot : task.getResult()){
+                            for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                 Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
                                 brojNarudzbe = narudzba.getId();
-                                brojNarudzbe = brojNarudzbe +1;
+                                brojNarudzbe = brojNarudzbe + 1;
 
 
                             }
-                        }else {
+                        } else {
                             Log.d("Error", "Error getting data");
                         }
                     }
                 });
     }
-
 }
