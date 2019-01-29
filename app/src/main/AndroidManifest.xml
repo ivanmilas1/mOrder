@@ -28,6 +28,7 @@
         <activity android:name=".DetaljiNarudzbeActivity" />
         <activity android:name=".PrijavaDjelatnikActivity" />
         <activity android:name=".IzbornikDjelatnikActivity" />
+        <activity android:name=".NarucivanjeDostavaActivity" />
         <activity android:name=".NarucivanjeActivity" />
     </application>
 
