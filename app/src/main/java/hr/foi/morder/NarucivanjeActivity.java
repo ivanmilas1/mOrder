@@ -1,5 +1,6 @@
 package hr.foi.morder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -35,7 +36,7 @@ import hr.foi.morder.model.Kategorija;
 import hr.foi.morder.model.Narudzba;
 import hr.foi.morder.model.Stol;
 
-public class NarucivanjeActivity extends AppCompatActivity {
+public class NarucivanjeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
@@ -58,6 +59,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.article);
         drawer = findViewById(R.id.drawer);
+
         toggle = new ActionBarDrawerToggle(this, drawer, R.string.open, R.string.close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -65,6 +67,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
         expandableListView = findViewById(R.id.navigationmenu);
         navigation = findViewById(R.id.nv);
         setupDrawerContent(navigation);
+        navigation.setNavigationItemSelectedListener(this);
 
         textViewNovoUPonudi = findViewById(R.id.NaslovNovoUPonudi);
 
@@ -143,6 +146,16 @@ public class NarucivanjeActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()){
+            case R.id.kosarica:
+                Intent intent = new Intent(this, KosaricaActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return true;
+    }
 
     private void dohvatiKategorije() {
         listChildEx = new HashMap<>();
@@ -251,7 +264,8 @@ public class NarucivanjeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (toggle.onOptionsItemSelected(item)) {
+        if(toggle.onOptionsItemSelected(item)){
+
             return true;
         }
         return super.onOptionsItemSelected(item);

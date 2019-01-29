@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/pocetna" android:title="@string/pocetna" android:icon="@drawable/pic_home"/>
-    <item android:id="@+id/narudzba" android:title="@string/narudzba" android:icon="@drawable/pic_bag"/>
+    <item
+        android:id="@+id/kosarica"
+        android:icon="@drawable/pic_bag"
+        android:title="Košarica" />
+
     <item android:id="@+id/kontakt" android:title="@string/kontakt" android:icon="@drawable/pic_contact" />
 </menu>

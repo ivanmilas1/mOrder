@@ -3,6 +3,7 @@ package hr.foi.morder.model;
 import java.util.Date;
 
 public class Racun {
+
     public int id;
     public Date vrijeme_izdavanja;
     public Stol stol;
