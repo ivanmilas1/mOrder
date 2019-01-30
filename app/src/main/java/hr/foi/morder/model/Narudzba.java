@@ -25,10 +25,10 @@ public class Narudzba {
         this.iznos_narudzbe = iznos_narudzbe;
     }
 
-    public Narudzba(Integer id, Double iznos, Integer racun){
+    public Narudzba(Integer id, Double iznos, String status){
         this.id = id;
         this.iznos_narudzbe = iznos;
-        this.racun_id = racun;
+        this.status = status;
     }
 
     public Narudzba(Integer id, Double iznos_narudzbe, Integer korisnik_id, Integer racun_id, String status) {
@@ -92,6 +92,7 @@ public class Narudzba {
         result.put("id", this.id);
         result.put("iznos_narudzbe", this.iznos_narudzbe);
         result.put("racun_id", this.racun_id);
+        result.put("restoran", this.status);
         return result;
     }
 

@@ -110,7 +110,9 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                             for (Narudzba n : narudzbaList) {
                                 idNarudzba = n.getId();
                             }
-                            database.collection("Stol").whereEqualTo("stanje", "slobodan").limit(1)
+                            addIdNarudzba(idNarudzba + 1, 0.00, "restoran");
+
+                            /*database.collection("Stol").whereEqualTo("stanje", "slobodan").limit(1)
                                     .get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                         @Override
@@ -128,8 +130,8 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                                                     stol = s.getId();
                                                 }
 
-                                                database.collection("Stol").document(stolId).update("narudzba_id", idNarudzba + 1);
-                                                database.collection("Stol").document(stolId).update("stanje", "narudzbaUPripremi");
+                                                //database.collection("Stol").document(stolId).update("narudzba_id", idNarudzba + 1);
+                                                //database.collection("Stol").document(stolId).update("stanje", "narudzbaUPripremi");
 
                                                 database.collection("Racun").orderBy("id", Query.Direction.DESCENDING).limit(1)
                                                         .get()
@@ -147,8 +149,8 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                                                                     for (Racun r : racunLista) {
                                                                         racunId = r.getId();
                                                                     }
-                                                                    addRacun(racunId + 1, stol);
-                                                                    addIdNarudzba(idNarudzba + 1, 0.00, racunId + 1);
+                                                                    //addRacun(racunId + 1, stol);
+                                                                    //addIdNarudzba(idNarudzba + 1, 0.00, "restoran");
 
                                                                 } else {
                                                                     Log.d("Error", "Error getting data");
@@ -157,7 +159,7 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                                                         });
                                             }
                                         }
-                                    });
+                                    });*/
 
                         } else {
                             Log.d("Error", "Error getting data");
@@ -178,8 +180,8 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                 });
     }
 
-    public void addIdNarudzba(Integer id, Double cijena, Integer racun) {
-        Map<String, Object> idNarudzbe = new Narudzba(id, cijena, racun).toMap();
+    public void addIdNarudzba(Integer id, Double cijena, String status) {
+        Map<String, Object> idNarudzbe = new Narudzba(id, cijena, status).toMap();
         database.collection("Narudzba")
                 .add(idNarudzbe)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -231,12 +233,11 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                                 }
                             });
                             expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-                                                                           @Override
-                                                                           public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                                                                               return false;
-                                                                           }
-                                                                       }
-                            );
+                                @Override
+                                public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                                    return false;
+                                    }
+                            });
                         } else {
                             Log.d("Error", "Error getting data");
                         }

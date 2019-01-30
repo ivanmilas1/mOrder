@@ -138,7 +138,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
                                         idNarudzba = n.getId();
                                     }
                                     addOrder(id, idNarudzba, price, quantity);
-                                    database.collection("Narudzba").document(narudzbaDokument).update("iznos_narudzbe", iznosNarudzbe + price);
+                                    //database.collection("Narudzba").document(narudzbaDokument).update("iznos_narudzbe", iznosNarudzbe + price);
 
 
                                 } else {

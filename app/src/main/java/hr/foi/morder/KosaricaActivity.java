@@ -1,5 +1,6 @@
 package hr.foi.morder;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,9 +10,11 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -19,10 +22,13 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import hr.foi.morder.adapters.KosaricaAdapter;
 import hr.foi.morder.model.Narudzba;
+import hr.foi.morder.model.Racun;
 import hr.foi.morder.model.StavkaNarudzbe;
+import hr.foi.morder.model.Stol;
 
 public class KosaricaActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -33,6 +39,12 @@ public class KosaricaActivity extends AppCompatActivity {
     public Double ukupnaCijena = 0.0;
     private FirebaseFirestore database;
     private String idNarudzbe = "";
+    private String stolId;
+    private Integer racunId;
+    private String racunDokument;
+    private Integer stol;
+    private String narudzbaDokument;
+    private String stolStanje;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,23 +58,93 @@ public class KosaricaActivity extends AppCompatActivity {
         naruci.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // postavljanje stanja stola u "zauzet"
-                database.collection("Stol").document(idNarudzbe).update("stanje","zauzet");
+                if(stolStanje == "slobodan"){
+
+                    Toast.makeText(getApplicationContext(), "Slobodan", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    dovrsiNarudzbu();
+                }
             }
         });
     }
 
     //Narudžba koja će sadržavati elemente košarice
-//    private void dovrsiNarudzbu() {
-//        Map<String, Object> narudzba = new Narudzba(brojNarudzbe, ukupnaCijena, 0).toMap();
-//        database.collection("Narudzba")
-//                .add(narudzba)
-//                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<DocumentReference> task) {
-//                    }
-//                });
-//    }
+    private void dovrsiNarudzbu() {
+        database.collection("Stol").whereEqualTo("stanje", "slobodan").limit(1)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            List<Stol> listStolova = new ArrayList<>();
+                            for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                                Stol stol = documentSnapshot.toObject(Stol.class);
+                                stolId = documentSnapshot.getId();
+                                stol.getId();
+                                stol.getStanje();
+                                listStolova.add(stol);
+
+                            }
+                            for (Stol s : listStolova) {
+                                stol = s.getId();
+                                stolStanje = s.getStanje();
+                            }
+
+                            database.collection("Stol").document(stolId).update("narudzba_id", brojNarudzbe);
+                            database.collection("Stol").document(stolId).update("stanje", "zauzet");
+
+
+                            database.collection("Racun").orderBy("id", Query.Direction.DESCENDING).limit(1)
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                final List<Racun> racunLista = new ArrayList<>();
+                                                for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                                                    Racun racun = documentSnapshot.toObject(Racun.class);
+                                                    racun.getId();
+                                                    racunLista.add(racun);
+                                                }
+
+                                                for (Racun r : racunLista) {
+                                                    racunId = r.getId();
+                                                }
+                                                addRacun(racunId + 1, stol);
+                                                database.collection("Narudzba").document(idNarudzbe).update("racun_id", racunId+1);
+                                            } else {
+                                                Log.d("Error", "Error getting data");
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                });
+    }
+
+    public void nastaviNarudzbu(){
+        database.collection("Stol").whereEqualTo("id", stolId)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                    }
+                });
+    }
+
+    public void addRacun(Integer id, Integer stol) {
+        Map<String, Object> idRacuna = new Racun(id, stol).toMap();
+        database.collection("Racun")
+                .add(idRacuna)
+                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+
+                    }
+                });
+    }
 
     //Dohvaćanje svih stavki koje je korisnik odabrao, spremaju se prvo na firestore te se onda dobavljaju i prikazuju, nisu vezani za narudzbu
     private void loadStavkeKosarice() {
@@ -91,6 +173,7 @@ public class KosaricaActivity extends AppCompatActivity {
                 });
     }
 
+
     //Dohvat zadnjeg id narudzbe, pod tim id se spremaju artikli koji su u kosarici
     private void zadnjiElement() {
         database.collection("Narudzba").orderBy("id", Query.Direction.DESCENDING).limit(1).get()
@@ -102,7 +185,6 @@ public class KosaricaActivity extends AppCompatActivity {
                                 idNarudzbe = documentSnapshot.getId();
                                 Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
                                 brojNarudzbe = narudzba.getId();
-                                //brojNarudzbe = brojNarudzbe + 1;
                                 loadStavkeKosarice();
                             }
                         } else {
