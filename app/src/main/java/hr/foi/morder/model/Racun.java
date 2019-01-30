@@ -20,7 +20,6 @@ public class Racun {
     /**
      * The Stol. Table on whom order was made
      */
-    public Stol stol;
     public Integer stol_id;
 
     public Racun() {
@@ -72,8 +71,6 @@ public class Racun {
      *
      * @return the stol
      */
-    public Stol getStol() {
-        return stol;
     public Integer getStol() {
         return stol_id;
     }
@@ -82,13 +79,6 @@ public class Racun {
         this.stol_id = stol;
     }
 
-    /**
-     * Sets stol.
-     *
-     * @param stol the stol
-     */
-    public void setStol(Stol stol) {
-        this.stol = stol;
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("id", this.id);

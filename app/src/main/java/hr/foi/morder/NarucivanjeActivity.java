@@ -42,12 +42,8 @@ import hr.foi.morder.model.Stol;
  * Set content view activity_prijava layout
  * @author Nikola Gluhak
  */
-public class NarucivanjeActivity extends AppCompatActivity {
 public class NarucivanjeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-
     private DrawerLayout drawer;
-
     private ActionBarDrawerToggle toggle;
     private NavigationView navigation;
     private TextView textViewNovoUPonudi;
@@ -63,10 +59,9 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
     private Integer idNarudzba;
     private String stolId;
     private Integer racunId;
-    private String racunDokument;
     private Integer stol;
+    private String racunDokument;
     private String narudzbaDokument;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,6 +187,8 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
      */
     public void addIdNarudzba(Integer id, String status) {
         Map<String, Object> idNarudzbe = new Narudzba(id, status).toMap();
+    }
+
     public void addRacun(Integer id, Integer stol) {
         Map<String, Object> idRacuna = new Racun(id, stol).toMap();
         database.collection("Racun")

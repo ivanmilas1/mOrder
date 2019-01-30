@@ -5,9 +5,12 @@ package hr.foi.morder.model;
  */
 public class Artikl {
     /**
-     * The Naziv. Represents article name
+     * The Id. Article id value
      */
     public Integer id;
+    /**
+     * The Naziv. Represents article name
+     */
     public String naziv;
     /**
      * The Jedinicna mjera. Counting mesaure of article
@@ -25,10 +28,6 @@ public class Artikl {
      * The Slika. Article picture
      */
     public String slika;
-    /**
-     * The Id. Article id value
-     */
-    public Integer id;
 
     /**
      * Instantiates a new Artikl.

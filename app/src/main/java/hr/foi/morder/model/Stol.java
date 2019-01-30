@@ -3,8 +3,6 @@ package hr.foi.morder.model;
 /**
  * The type Stol.
  */
-import java.util.HashMap;
-import java.util.Map;
 
 public class Stol {
 

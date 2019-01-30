@@ -51,17 +51,18 @@ public class Narudzba {
         this.iznos_narudzbe = iznos_narudzbe;
     }
 
-    public Narudzba(Integer id, Double iznos, Integer racun){
-    /**
-     * Instantiates a new Narudzba.
-     *
-     * @param id     the id
-     * @param status the status
-     */
+    public Narudzba(Integer id, Double iznos, Integer racun) {
+        /**
+         * Instantiates a new Narudzba.
+         *
+         * @param id     the id
+         * @param status the status
+         */
+    }
+
     public Narudzba(Integer id, String status){
         this.id = id;
-        this.iznos_narudzbe = iznos;
-        this.racun_id = racun;
+        this.status = status;
     }
 
     /**

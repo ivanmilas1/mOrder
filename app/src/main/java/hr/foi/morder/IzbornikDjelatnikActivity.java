@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import hr.foi.morder.scannerlib.ScannerStart;
+
 /**
  * The type Izbornik djelatnik activity defines which activity user want to start next.
+ *
  * @author Danijel Pintarić
  */
-import hr.foi.morder.scannerlib.ScannerStart;
 
 public class IzbornikDjelatnikActivity extends AppCompatActivity {
 
@@ -51,17 +53,15 @@ public class IzbornikDjelatnikActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DodavanjeRadnikaActivity.class);
         startActivity(intent);
     }
-
-    public void OnClickStartQR(View view){
-        Intent intent=new Intent(this, ScannerStart.class);
-        startActivity(intent);
     /**
      * On click start scanner starts modular activity for creating QR code.
      *
      * @param view the view
      * @author Danijel Pintarić
      */
-    public void OnClickStartScanner(View view){
-
+    public void OnClickStartQR(View view) {
+        Intent intent = new Intent(this, ScannerStart.class);
+        startActivity(intent);
     }
+
 }
