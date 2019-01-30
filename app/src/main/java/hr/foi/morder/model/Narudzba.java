@@ -25,9 +25,10 @@ public class Narudzba {
         this.iznos_narudzbe = iznos_narudzbe;
     }
 
-    public Narudzba(Integer id, Double iznos){
+    public Narudzba(Integer id, Double iznos, Integer racun){
         this.id = id;
         this.iznos_narudzbe = iznos;
+        this.racun_id = racun;
     }
 
     public Narudzba(Integer id, Double iznos_narudzbe, Integer korisnik_id, Integer racun_id, String status) {
@@ -90,6 +91,7 @@ public class Narudzba {
         HashMap<String, Object> result = new HashMap<>();
         result.put("id", this.id);
         result.put("iznos_narudzbe", this.iznos_narudzbe);
+        result.put("racun_id", this.racun_id);
         return result;
     }
 
