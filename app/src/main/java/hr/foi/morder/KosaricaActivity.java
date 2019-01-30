@@ -47,7 +47,6 @@ public class KosaricaActivity extends AppCompatActivity {
         naruci.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 //dovrsiNarudzbu(); ne dodaje brojNarudzbe ni ukupnaCijena na firestore
             }
         });
@@ -55,7 +54,7 @@ public class KosaricaActivity extends AppCompatActivity {
 
     //Narudžba koja će sadržavati elemente košarice
     private void dovrsiNarudzbu() {
-        Map<String, Object> narudzba = new Narudzba(brojNarudzbe, ukupnaCijena).toMap();
+        Map<String, Object> narudzba = new Narudzba(brojNarudzbe, ukupnaCijena, 0).toMap();
         databaseStavkaNarudzbe.collection("Narudzba")
                 .add(narudzba)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {

@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void homeDelivery(View view) {
-        Intent intent = new Intent(this, DostavaActivity.class);
+        Intent intent = new Intent(this, NarucivanjeDostavaActivity.class);
         startActivity(intent);
     }
 }
