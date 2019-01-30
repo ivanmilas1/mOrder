@@ -33,7 +33,6 @@ import hr.foi.morder.adapters.ExpendableListAdapter;
 import hr.foi.morder.model.Artikl;
 import hr.foi.morder.model.Kategorija;
 import hr.foi.morder.model.Narudzba;
-import hr.foi.morder.model.Stol;
 
 public class NarucivanjeDostavaActivity extends AppCompatActivity {
 
@@ -66,7 +65,7 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
         navigation = findViewById(R.id.nv);
         setupDrawerContent(navigation);
 
-        textViewNovoUPonudi = findViewById(R.id.NaslovNovoUPonudi);
+        textViewNovoUPonudi = findViewById(R.id.naslovNovoUPonudi);
 
         recyclerView = findViewById(R.id.article_recycler);
         database = FirebaseFirestore.getInstance();
