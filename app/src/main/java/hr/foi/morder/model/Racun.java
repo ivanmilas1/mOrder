@@ -9,6 +9,18 @@ public class Racun {
     public int id;
     public Date vrijeme_izdavanja;
     public Integer stol_id;
+    public String dostava;
+    public Integer sifra;
+
+    public Integer getSifra() {
+        return sifra;
+    }
+
+    public void setSifra(Integer sifra) {
+        this.sifra = sifra;
+    }
+
+
 
     public Racun() {
     }
@@ -47,5 +59,17 @@ public class Racun {
         result.put("id", this.id);
         result.put("stol_id", this.stol_id);
         return result;
+    }
+    public String getDostava() {
+        return dostava;
+    }
+
+    public void setDostava(String dostava) {
+        this.dostava = dostava;
+    }
+
+    public Racun(int id, String dostava){
+        this.id = id;
+        this.dostava = dostava;
     }
 }

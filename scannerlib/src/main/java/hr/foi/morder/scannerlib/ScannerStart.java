@@ -24,7 +24,7 @@ public class ScannerStart extends AppCompatActivity implements ZXingScannerView.
 
     private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView scannerView;
-
+    public  String sifra;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +33,8 @@ public class ScannerStart extends AppCompatActivity implements ZXingScannerView.
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Intent intent = getIntent();
+        sifra = intent.getStringExtra("Pin");
         /*
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +73,12 @@ public class ScannerStart extends AppCompatActivity implements ZXingScannerView.
                 startActivity(intent);
             }
         });
-        builder.setMessage(scanResult);
+        if(scanResult.equals(String.valueOf(sifra))){
+            builder.setMessage("Narudžba uspješno dostavljenja");
+        }
+        else {
+            builder.setMessage("Kriva adresa");
+        }
 
         AlertDialog alert = builder.create();
         alert.show();
