@@ -51,18 +51,17 @@ public class Narudzba {
         this.iznos_narudzbe = iznos_narudzbe;
     }
 
-    public Narudzba(Integer id, Double iznos, Integer racun) {
-        /**
-         * Instantiates a new Narudzba.
-         *
-         * @param id     the id
-         * @param status the status
-         */
+    public Narudzba(Integer id, Double iznos, String status){
+        this.id = id;
+        this.iznos_narudzbe = iznos;
+        this.status = status;
     }
 
-    public Narudzba(Integer id, String status){
+    public Narudzba(Integer id, Double iznos, String status, Integer racunID){
         this.id = id;
+        this.iznos_narudzbe = iznos;
         this.status = status;
+        this.racun_id = racunID;
     }
 
     /**
@@ -200,6 +199,7 @@ public class Narudzba {
         result.put("id", this.id);
         result.put("iznos_narudzbe", this.iznos_narudzbe);
         result.put("racun_id", this.racun_id);
+        result.put("restoran", this.status);
         return result;
     }
 

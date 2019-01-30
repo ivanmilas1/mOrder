@@ -34,8 +34,6 @@ import hr.foi.morder.adapters.ExpendableListAdapter;
 import hr.foi.morder.model.Artikl;
 import hr.foi.morder.model.Kategorija;
 import hr.foi.morder.model.Narudzba;
-import hr.foi.morder.model.Racun;
-import hr.foi.morder.model.Stol;
 
 /**
  * The type Narucivanje activity.
@@ -58,9 +56,9 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
     private Long childId;
     private Integer idNarudzba;
     private String stolId;
-    private Integer racunId;
-    private Integer stol;
+    private Integer racunId = 0;
     private String racunDokument;
+    private Integer stol;
     private String narudzbaDokument;
 
     @Override
@@ -68,6 +66,10 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
         super.onCreate(savedInstanceState);
         setContentView(R.layout.article);
         drawer = findViewById(R.id.drawer);
+
+        //potrebno da košarica funkcionira
+        Intent intent = getIntent();
+        racunId = (intent.getIntExtra("racunID", 0));
 
         toggle = new ActionBarDrawerToggle(this, drawer, R.string.open, R.string.close);
         drawer.addDrawerListener(toggle);
@@ -121,55 +123,12 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                             for (Narudzba n : narudzbaList) {
                                 idNarudzba = n.getId();
                             }
-                            database.collection("Stol").whereEqualTo("stanje", "slobodan").limit(1)
-                                    .get()
-                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                            if (task.isSuccessful()) {
-                                                List<Stol> listStolova = new ArrayList<>();
-                                                for (DocumentSnapshot documentSnapshot : task.getResult()) {
-                                                    Stol stol = documentSnapshot.toObject(Stol.class);
-                                                    stolId = documentSnapshot.getId();
-                                                    stol.getId();
-                                                    listStolova.add(stol);
-
-                                                }
-                                                for (Stol s : listStolova) {
-                                                    stol = s.getId();
-                                                }
-
-                                                database.collection("Stol").document(stolId).update("narudzba_id", idNarudzba + 1);
-                                                database.collection("Stol").document(stolId).update("stanje", "narudzbaUPripremi");
-
-                                                database.collection("Racun").orderBy("id", Query.Direction.DESCENDING).limit(1)
-                                                        .get()
-                                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                            @Override
-                                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                                if (task.isSuccessful()) {
-                                                                    final List<Racun> racunLista = new ArrayList<>();
-                                                                    for (DocumentSnapshot documentSnapshot : task.getResult()) {
-                                                                        Racun racun = documentSnapshot.toObject(Racun.class);
-                                                                        racun.getId();
-                                                                        racunLista.add(racun);
-                                                                    }
-
-                                                                    for (Racun r : racunLista) {
-                                                                        racunId = r.getId();
-                                                                    }
-                                                                    addRacun(racunId + 1, stol);
-                                                                    addIdNarudzba(idNarudzba + 1, 0.00, racunId + 1);
-
-                                                                } else {
-                                                                    Log.d("Error", "Error getting data");
-                                                                }
-                                                            }
-                                                        });
-                                            }
-                                        }
-                                    });
-
+                            if (racunId == 0){
+                                addIdNarudzba(idNarudzba + 1, 0.00, "restoran");
+                            }
+                            else {
+                                addNarudzba(idNarudzba + 1, 0.00, "restoran", racunId);
+                            }
                         } else {
                             Log.d("Error", "Error getting data");
                         }
@@ -185,14 +144,10 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
      * @author Nikola Gluhak
      *
      */
-    public void addIdNarudzba(Integer id, String status) {
-        Map<String, Object> idNarudzbe = new Narudzba(id, status).toMap();
-    }
-
-    public void addRacun(Integer id, Integer stol) {
-        Map<String, Object> idRacuna = new Racun(id, stol).toMap();
-        database.collection("Racun")
-                .add(idRacuna)
+    public void addIdNarudzba(Integer id, Double cijena, String status) {
+        Map<String, Object> idNarudzbe = new Narudzba(id, cijena, status).toMap();
+        database.collection("Narudzba")
+                .add(idNarudzbe)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
@@ -201,8 +156,8 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                 });
     }
 
-    public void addIdNarudzba(Integer id, Double cijena, Integer racun) {
-        Map<String, Object> idNarudzbe = new Narudzba(id, cijena, racun).toMap();
+    public void addNarudzba(Integer id, Double cijena, String status, Integer racunID) {
+        Map<String, Object> idNarudzbe = new Narudzba(id, cijena, status, racunID).toMap();
         database.collection("Narudzba")
                 .add(idNarudzbe)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -261,12 +216,11 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                                 }
                             });
                             expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-                                                                           @Override
-                                                                           public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                                                                               return false;
-                                                                           }
-                                                                       }
-                            );
+                                @Override
+                                public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                                    return false;
+                                    }
+                            });
                         } else {
                             Log.d("Error", "Error getting data");
                         }

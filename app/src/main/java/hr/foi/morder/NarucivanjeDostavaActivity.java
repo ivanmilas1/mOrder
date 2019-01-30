@@ -100,7 +100,7 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
                             for (Narudzba n : narudzbaList) {
                                 idNarudzba = n.getId();
                             }
-                            addIdNarudzba(idNarudzba + 1, 0.00, 0);
+                            addIdNarudzba(idNarudzba + 1, 0.00, "dostava");
 
 
                         } else {
@@ -111,8 +111,8 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
     }
 
 
-    public void addIdNarudzba(Integer id, Double cijena, Integer racun) {
-        Map<String, Object> idNarudzbe = new Narudzba(id, cijena, racun).toMap();
+    public void addIdNarudzba(Integer id, Double cijena, String status) {
+        Map<String, Object> idNarudzbe = new Narudzba(id, cijena, status).toMap();
         database.collection("Narudzba")
                 .add(idNarudzbe)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
