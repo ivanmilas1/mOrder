@@ -3,6 +3,9 @@ package hr.foi.morder.model;
 /**
  * The type Stol.
  */
+import java.util.HashMap;
+import java.util.Map;
+
 public class Stol {
 
     /**
@@ -17,6 +20,7 @@ public class Stol {
      * The Racun. Bill which is made on current table.
      */
     public Racun racun;
+    public Integer narudzba_id;
 
     /**
      * The enum Stanje narudzbe.
@@ -39,6 +43,23 @@ public class Stol {
      *
      * @return the id
      */
+    public Stol() {
+
+    }
+
+    public Stol(Integer id){
+        this.id = id;
+
+    }
+
+    public Integer getNarudzba_id() {
+        return narudzba_id;
+    }
+
+    public void setNarudzba_id(Integer narudzba_id) {
+        this.narudzba_id = narudzba_id;
+    }
+
     public int getId() {
         return id;
     }

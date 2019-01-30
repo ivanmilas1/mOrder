@@ -9,6 +9,8 @@ import android.view.View;
  * The type Izbornik djelatnik activity defines which activity user want to start next.
  * @author Danijel Pintarić
  */
+import hr.foi.morder.scannerlib.ScannerStart;
+
 public class IzbornikDjelatnikActivity extends AppCompatActivity {
 
     @Override
@@ -50,6 +52,9 @@ public class IzbornikDjelatnikActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void OnClickStartQR(View view){
+        Intent intent=new Intent(this, ScannerStart.class);
+        startActivity(intent);
     /**
      * On click start scanner starts modular activity for creating QR code.
      *

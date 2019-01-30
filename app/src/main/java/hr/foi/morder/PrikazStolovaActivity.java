@@ -153,11 +153,11 @@ public class PrikazStolovaActivity extends AppCompatActivity {
      * @author Marko Fabijan Pavlovi훶
      */
     private void initColors() {
-        //ako nema narud탑be
+        //ako nema narud얺e
         crvena = Color.rgb(179, 5, 5);
-        //ako je narud탑ba u izradi
+        //ako je narud얺a u izradi
         zuta = Color.rgb(225, 206, 132);
-        //ako je narud탑ba poslu탑ena
+        //ako je narud얺a poslu엁na
         zelena = Color.rgb(78, 255, 167);
     }
 

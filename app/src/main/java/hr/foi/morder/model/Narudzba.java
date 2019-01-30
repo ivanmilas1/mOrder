@@ -51,6 +51,7 @@ public class Narudzba {
         this.iznos_narudzbe = iznos_narudzbe;
     }
 
+    public Narudzba(Integer id, Double iznos, Integer racun){
     /**
      * Instantiates a new Narudzba.
      *
@@ -59,7 +60,8 @@ public class Narudzba {
      */
     public Narudzba(Integer id, String status){
         this.id = id;
-        this.status = status;
+        this.iznos_narudzbe = iznos;
+        this.racun_id = racun;
     }
 
     /**
@@ -195,8 +197,8 @@ public class Narudzba {
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("id", this.id);
-        result.put("status", this.status);
         result.put("iznos_narudzbe", this.iznos_narudzbe);
+        result.put("racun_id", this.racun_id);
         return result;
     }
 

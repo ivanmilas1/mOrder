@@ -7,6 +7,7 @@ public class Artikl {
     /**
      * The Naziv. Represents article name
      */
+    public Integer id;
     public String naziv;
     /**
      * The Jedinicna mjera. Counting mesaure of article
@@ -40,12 +41,12 @@ public class Artikl {
      * @param slika            the slika
      */
     public Artikl(Integer id, String naziv, String jedinicna_mjera, Double jedinicna_cijena, Integer kategorija_id, String slika) {
+        this.id = id;
         this.naziv = naziv;
         this.jedinicna_mjera = jedinicna_mjera;
         this.jedinicna_cijena = jedinicna_cijena;
         this.kategorija_id = kategorija_id;
         this.slika = slika;
-        this.id = id;
     }
 
     /**

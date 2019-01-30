@@ -72,7 +72,7 @@ public class ExpendableListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         String header = (String) getGroup(groupPosition);
-        if(convertView == null){
+        if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.nav_header_name, null);
         }
@@ -83,12 +83,12 @@ public class ExpendableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        final String child =  getChild(groupPosition, childPosition);
-        if(convertView == null){
+        final String child = getChild(groupPosition, childPosition);
+        if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.submenu, null);
         }
-        TextView textChild= convertView.findViewById(R.id.submenu);
+        TextView textChild = convertView.findViewById(R.id.submenu);
         textChild.setText(child);
         return convertView;
     }
