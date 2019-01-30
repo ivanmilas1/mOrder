@@ -124,7 +124,6 @@ DjelatnikPregledRacunaListAdapter extends BaseAdapter {
             if (stavkaNarudzbe.kolicina > 0) {
                 stavkaNarudzbe.kolicina -= 1;
             }
-
         }
         etKolicina.setText(stavkaNarudzbe.kolicina + "");
     }
