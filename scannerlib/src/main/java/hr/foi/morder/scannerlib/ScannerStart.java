@@ -21,7 +21,6 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import static android.Manifest.permission_group.CAMERA;
 
 public class ScannerStart extends AppCompatActivity implements ZXingScannerView.ResultHandler {
-
     private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView scannerView;
 
@@ -32,17 +31,6 @@ public class ScannerStart extends AppCompatActivity implements ZXingScannerView.
         setContentView(scannerView);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        /*
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        */
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkPermission()) {
@@ -74,10 +62,6 @@ public class ScannerStart extends AppCompatActivity implements ZXingScannerView.
                 startActivity(intent);
             }
         });
-
-//        if (scanResult.eq(idRacun)) {
-//            // narudzba je potvrđena
-//        }
 
         builder.setMessage(scanResult);
 
