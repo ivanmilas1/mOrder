@@ -42,7 +42,6 @@ public class KosaricaAdapter extends RecyclerView.Adapter<KosaricaAdapter.Kosari
 
     @Override
     public void onBindViewHolder(@NonNull final KosaricaViewHolder kosaricaViewHolder, int i) {
-
         final StavkaNarudzbe stavkaNarudzbe = stavkaNarudzbeList.get(i);
         database.collection("Artikl").whereEqualTo("id", stavkaNarudzbe.getArtikl_id()).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

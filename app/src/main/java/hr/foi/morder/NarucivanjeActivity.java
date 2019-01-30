@@ -110,14 +110,12 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                             for (Narudzba n : narudzbaList) {
                                 idNarudzba = n.getId();
                             }
-
-
                             database.collection("Stol").whereEqualTo("stanje", "slobodan").limit(1)
                                     .get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                            if(task.isSuccessful()){
+                                            if (task.isSuccessful()) {
                                                 List<Stol> listStolova = new ArrayList<>();
                                                 for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                                     Stol stol = documentSnapshot.toObject(Stol.class);
@@ -126,12 +124,12 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                                                     listStolova.add(stol);
 
                                                 }
-                                                for(Stol s: listStolova){
+                                                for (Stol s : listStolova) {
                                                     stol = s.getId();
                                                 }
 
-                                                database.collection("Stol").document(stolId).update("narudzba_id",idNarudzba+1);
-                                                database.collection("Stol").document(stolId).update("stanje","narudzbaUPripremi");
+                                                database.collection("Stol").document(stolId).update("narudzba_id", idNarudzba + 1);
+                                                database.collection("Stol").document(stolId).update("stanje", "narudzbaUPripremi");
 
                                                 database.collection("Racun").orderBy("id", Query.Direction.DESCENDING).limit(1)
                                                         .get()
@@ -141,7 +139,7 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                                                                 if (task.isSuccessful()) {
                                                                     final List<Racun> racunLista = new ArrayList<>();
                                                                     for (DocumentSnapshot documentSnapshot : task.getResult()) {
-                                                                        Racun racun  = documentSnapshot.toObject(Racun.class);
+                                                                        Racun racun = documentSnapshot.toObject(Racun.class);
                                                                         racun.getId();
                                                                         racunLista.add(racun);
                                                                     }
@@ -149,8 +147,8 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                                                                     for (Racun r : racunLista) {
                                                                         racunId = r.getId();
                                                                     }
-                                                                    addRacun(racunId+1, stol);
-                                                                    addIdNarudzba(idNarudzba + 1, 0.00,racunId+1);
+                                                                    addRacun(racunId + 1, stol);
+                                                                    addIdNarudzba(idNarudzba + 1, 0.00, racunId + 1);
 
                                                                 } else {
                                                                     Log.d("Error", "Error getting data");
@@ -168,10 +166,8 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                 });
     }
 
-
-
     public void addRacun(Integer id, Integer stol) {
-        Map<String, Object> idRacuna = new Racun(id,stol).toMap();
+        Map<String, Object> idRacuna = new Racun(id, stol).toMap();
         database.collection("Racun")
                 .add(idRacuna)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -218,6 +214,7 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                                 Kategorija kategorija = documentSnapshot.toObject(Kategorija.class);
                                 kategorijaList.add(kategorija.getNaziv());
                             }
+
                             listChildEx.put("Jelovnik", kategorijaList);
                             listChild = listChildEx;
                             listHeader = new ArrayList<>(listChild.keySet());

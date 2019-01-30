@@ -12,7 +12,6 @@ import android.widget.Button;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -20,7 +19,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import hr.foi.morder.adapters.KosaricaAdapter;
 import hr.foi.morder.model.Narudzba;
@@ -33,7 +31,8 @@ public class KosaricaActivity extends AppCompatActivity {
     private Button naruci;
     public Integer brojNarudzbe = 0;
     public Double ukupnaCijena = 0.0;
-    private FirebaseFirestore databaseStavkaNarudzbe;
+    private FirebaseFirestore database;
+    private String idNarudzbe = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,32 +40,33 @@ public class KosaricaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_kosarica);
         stavkaNarudzbeList = new ArrayList<>();
         buildRecyclerView();
-        databaseStavkaNarudzbe = FirebaseFirestore.getInstance();
+        database = FirebaseFirestore.getInstance();
         naruci = findViewById(R.id.buttonNaruci);
         zadnjiElement();
         naruci.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //dovrsiNarudzbu(); ne dodaje brojNarudzbe ni ukupnaCijena na firestore
+                // postavljanje stanja stola u "zauzet"
+                database.collection("Stol").document(idNarudzbe).update("stanje","zauzet");
             }
         });
     }
 
     //Narudžba koja će sadržavati elemente košarice
-    private void dovrsiNarudzbu() {
-        Map<String, Object> narudzba = new Narudzba(brojNarudzbe, ukupnaCijena, 0).toMap();
-        databaseStavkaNarudzbe.collection("Narudzba")
-                .add(narudzba)
-                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
-                    }
-                });
-    }
+//    private void dovrsiNarudzbu() {
+//        Map<String, Object> narudzba = new Narudzba(brojNarudzbe, ukupnaCijena, 0).toMap();
+//        database.collection("Narudzba")
+//                .add(narudzba)
+//                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<DocumentReference> task) {
+//                    }
+//                });
+//    }
 
     //Dohvaćanje svih stavki koje je korisnik odabrao, spremaju se prvo na firestore te se onda dobavljaju i prikazuju, nisu vezani za narudzbu
     private void loadStavkeKosarice() {
-        databaseStavkaNarudzbe.collection("Stavka narudzbe").whereEqualTo("narudzba_id", brojNarudzbe).get()
+        database.collection("Stavka narudzbe").whereEqualTo("narudzba_id", brojNarudzbe).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -80,7 +80,7 @@ public class KosaricaActivity extends AppCompatActivity {
                                 stavkaNarudzbeList.add(stavkaNarudzbe);
                                 ukupnaCijena = ukupnaCijena + stavkaNarudzbe.getCijena();
                             }
-                            kosaricaAdapter = new KosaricaAdapter(getApplicationContext(), stavkaNarudzbeList, databaseStavkaNarudzbe);
+                            kosaricaAdapter = new KosaricaAdapter(getApplicationContext(), stavkaNarudzbeList, database);
                             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager((getApplicationContext()));
                             recyclerView.setLayoutManager(layoutManager);
                             recyclerView.setAdapter(kosaricaAdapter);
@@ -93,12 +93,13 @@ public class KosaricaActivity extends AppCompatActivity {
 
     //Dohvat zadnjeg id narudzbe, pod tim id se spremaju artikli koji su u kosarici
     private void zadnjiElement() {
-        databaseStavkaNarudzbe.collection("Narudzba").orderBy("id", Query.Direction.DESCENDING).limit(1).get()
+        database.collection("Narudzba").orderBy("id", Query.Direction.DESCENDING).limit(1).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                                idNarudzbe = documentSnapshot.getId();
                                 Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
                                 brojNarudzbe = narudzba.getId();
                                 //brojNarudzbe = brojNarudzbe + 1;
