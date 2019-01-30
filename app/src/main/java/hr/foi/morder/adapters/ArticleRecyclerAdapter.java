@@ -38,14 +38,10 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
     private List<Artikl> articleList;
     private Context ctx;
     private FirebaseFirestore database;
-    private Integer idNarudzba;
-    private Integer quantity;
-    private Double price;
-    private Integer id;
+    private Integer idNarudzba, id;
+    private Integer quantity, brojNarudzbe;
+    private Double price, iznosNarudzbe;
     private String narudzbaDokument;
-    private Double iznosNarudzbe;
-    public Integer brojNarudzbe;
-
 
     /**
      * Instantiates a new Article recycler adapter.
@@ -139,7 +135,6 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
                 price = Double.parseDouble(String.valueOf(viewHolder.price.getText()));
                 id = Integer.parseInt(String.valueOf(viewHolder.id.getText()));
 
-
                 viewHolder.setPrice(Artikl.getJedinicna_cijena());
                 try {
                     zadnjiElement();
@@ -151,7 +146,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
                 addOrder(Artikl.getId(), brojNarudzbe, price, quantity);
                 viewHolder.setPrice(Artikl.getJedinicna_cijena());
                 viewHolder.setQuantity(1);
-                Toast.makeText(ctx, "Narudžba je zaprimljena", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx, "Narudžba je stavljena u košaricu.", Toast.LENGTH_SHORT).show();
 
                 database.collection("Narudzba").orderBy("id", Query.Direction.DESCENDING).limit(1)
                         .get()
