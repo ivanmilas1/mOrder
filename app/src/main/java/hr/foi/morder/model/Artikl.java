@@ -1,7 +1,7 @@
 package hr.foi.morder.model;
 
 /**
- * The type Artikl.
+ * The type Artikl represents an article, an item in the cart.
  */
 public class Artikl {
     /**
@@ -21,7 +21,7 @@ public class Artikl {
      */
     public Double jedinicna_cijena;
     /**
-     * The Kategorija id. Article category
+     * The Kategorija id. Article category, which can be appetizer, main course, dessert or drink.
      */
     public Integer kategorija_id;
     /**

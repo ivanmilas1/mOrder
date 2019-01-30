@@ -14,6 +14,9 @@ import java.util.Map;
  * The type Narudzba.
  */
 public class Narudzba {
+    /**
+     * An instance of connection with database.
+     */
     private FirebaseFirestore database;
     /**
      * The Id. Order id number
@@ -51,6 +54,12 @@ public class Narudzba {
         this.iznos_narudzbe = iznos_narudzbe;
     }
 
+    /**
+     * Instantiates a new Narudzba.
+     *
+     * @param id     the id
+     * @param status the status
+     */
     public Narudzba(Integer id, Double iznos, String status){
         this.id = id;
         this.iznos_narudzbe = iznos;
@@ -197,6 +206,7 @@ public class Narudzba {
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("id", this.id);
+        result.put("status", this.status);
         result.put("iznos_narudzbe", this.iznos_narudzbe);
         result.put("racun_id", this.racun_id);
         result.put("restoran", this.status);

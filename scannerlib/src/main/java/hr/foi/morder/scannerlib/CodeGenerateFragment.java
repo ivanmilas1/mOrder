@@ -15,8 +15,6 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
-
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -100,6 +98,10 @@ public class CodeGenerateFragment extends Fragment {
         mListener = null;
     }
 
+    /*
+     * Generates QR code based on String-type input on ImageView.
+     * This code is used to detect an order delivery.
+     */
     public void generateCode(ImageView prikaz, String tekst){
         if(tekst != null){
             MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
@@ -129,5 +131,4 @@ public class CodeGenerateFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
 }

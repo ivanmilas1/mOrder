@@ -53,6 +53,7 @@ public class IzbornikDjelatnikActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DodavanjeRadnikaActivity.class);
         startActivity(intent);
     }
+
     /**
      * On click start scanner starts modular activity for creating QR code.
      *
@@ -63,5 +64,4 @@ public class IzbornikDjelatnikActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ScannerStart.class);
         startActivity(intent);
     }
-
 }
