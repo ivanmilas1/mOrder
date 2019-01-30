@@ -132,7 +132,7 @@ public class StavkaNarudzbe {
     }
 
     /**
-     * Sets vrijeme narucivanja.
+     * Sets vrijeme narucivanja. This is the time when a customer started its order.
      *
      * @param vrijeme_narucivanja the vrijeme narucivanja
      */

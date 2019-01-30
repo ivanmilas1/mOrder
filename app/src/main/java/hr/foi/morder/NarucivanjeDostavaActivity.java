@@ -34,6 +34,9 @@ import hr.foi.morder.model.Artikl;
 import hr.foi.morder.model.Kategorija;
 import hr.foi.morder.model.Narudzba;
 
+/**
+ * The type Narucivanje dostava activity.
+ */
 public class NarucivanjeDostavaActivity extends AppCompatActivity {
 
     private DrawerLayout drawer;
@@ -75,14 +78,23 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
         dohvatiIdNarudzbe();
     }
 
+    /*
+     * Sets the page title about new articles.
+     */
     private void setHomePageHeaderText() {
         textViewNovoUPonudi.setText(R.string.novo_u_ponudi);
     }
 
+    /*
+     * Removes title about new articles.
+     */
     private void removeHomePageHeaderText() {
         textViewNovoUPonudi.setText("");
     }
 
+    /*
+     * Returns order ID from last order as a query result.
+     */
     private void dohvatiIdNarudzbe() {
         database.collection("Narudzba").orderBy("id", Query.Direction.DESCENDING).limit(1)
                 .get()
@@ -100,7 +112,7 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
                             for (Narudzba n : narudzbaList) {
                                 idNarudzba = n.getId();
                             }
-                            addIdNarudzba(idNarudzba + 1, 0.00, 0);
+                            addIdNarudzba(idNarudzba + 1, 0.00, "dostava");
 
 
                         } else {
@@ -111,8 +123,16 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
     }
 
 
-    public void addIdNarudzba(Integer id, Double cijena, Integer racun) {
-        Map<String, Object> idNarudzbe = new Narudzba(id, cijena, racun).toMap();
+    /**
+     * Add id narudzba.
+     *
+     * @param id     the id
+     * @param cijena the cijena
+     * @param status  the racun
+     */
+
+    public void addIdNarudzba(Integer id, Double cijena, String status) {
+        Map<String, Object> idNarudzbe = new Narudzba(id, cijena, status).toMap();
         database.collection("Narudzba")
                 .add(idNarudzbe)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -122,9 +142,9 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
                     }
                 });
     }
-
-
-
+    /*
+     * Get categories from database.
+     */
     private void dohvatiKategorije() {
         listChildEx = new HashMap<>();
         database.collection("Kategorija")
@@ -167,6 +187,9 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
                 });
     }
 
+    /*
+     * Loads list of articles grouped by category.
+     */
     private void loadArticleList(long idKategorije) {
         database.collection("Artikl")
                 .whereEqualTo("kategorija_id", idKategorije)
@@ -192,6 +215,9 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
                 });
     }
 
+    /*
+     * Loads the last article as query result.
+     */
     private void loadLastArticles() {
         database.collection("Artikl").orderBy("id", Query.Direction.DESCENDING).limit(3)
                 .get()

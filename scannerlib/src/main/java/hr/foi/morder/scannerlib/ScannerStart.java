@@ -21,7 +21,6 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import static android.Manifest.permission_group.CAMERA;
 
 public class ScannerStart extends AppCompatActivity implements ZXingScannerView.ResultHandler {
-
     private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView scannerView;
     public  String sifra;
@@ -55,6 +54,9 @@ public class ScannerStart extends AppCompatActivity implements ZXingScannerView.
         }
     }
 
+    /*
+     * Decodes result scanned from QR code into String value.
+     */
     @Override
     public void handleResult(Result result) {
         final String scanResult = result.getText();
@@ -73,6 +75,8 @@ public class ScannerStart extends AppCompatActivity implements ZXingScannerView.
                 startActivity(intent);
             }
         });
+
+        builder.setMessage(scanResult);
         if(scanResult.equals(String.valueOf(sifra))){
             builder.setMessage("Narudžba uspješno dostavljenja");
         }
@@ -84,14 +88,23 @@ public class ScannerStart extends AppCompatActivity implements ZXingScannerView.
         alert.show();
     }
 
+    /*
+     * Checks if camera scanner is allowed to be opened.
+     */
     private boolean checkPermission() {
         return (ContextCompat.checkSelfPermission(ScannerStart.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED);
     }
 
+    /*
+     * Asks phone/tablet user to allow camera scanning.
+     */
     private void requestPermission() {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA);
     }
 
+    /*
+     * Starts camera scanner if it is allowed.
+     */
     public void onRequestPermissionsResult(int requestCode, String permission[], int grantResults[]) {
         switch (requestCode) {
             case REQUEST_CAMERA:
@@ -123,12 +136,18 @@ public class ScannerStart extends AppCompatActivity implements ZXingScannerView.
         new AlertDialog.Builder(ScannerStart.this).setMessage(message).setPositiveButton("OK", listener).setNegativeButton("Cancel", null).create().show();
     }
 
+    /*
+     * Closes camera.
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();
         scannerView.stopCamera();
     }
 
+    /*
+     * Checks permission for the camera and starts it if user allows, otherwise denies the start.
+     */
     @Override
     public void onResume() {
         super.onResume();

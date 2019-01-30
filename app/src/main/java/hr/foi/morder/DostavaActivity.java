@@ -12,13 +12,36 @@ import java.util.ArrayList;
 
 import hr.foi.morder.scannerlib.CodeGenerateFragment;
 
+/**
+ * The type Dostava activity implements the fragment which generates a QR code
+ * depending on receipt ID. This code is later used to check correctness of the order.
+ * @author Marko Fabijan Pavlović
+ */
 public class DostavaActivity extends AppCompatActivity implements CodeGenerateFragment.OnFragmentInteractionListener {
 
+    /**
+     * The Image view on which screen is set generated QR code.
+     */
     ImageView imageView;
+    /**
+     * The Button on which click is started the process of generating QR code.
+     */
     Button button;
+    /**
+     * The Manager which is used for transaction between fragment and activity.
+     */
     FragmentManager manager;
+    /**
+     * The Fragment which consists code to generate QR code.
+     */
     CodeGenerateFragment fragment;
+    /**
+     * The Id narudzbe is the ID of receipt which is issued for order delivery.
+     */
     String idNarudzbe;
+    /**
+     * The Lista.
+     */
     ArrayList<String> lista;
 
     @Override
@@ -42,6 +65,11 @@ public class DostavaActivity extends AppCompatActivity implements CodeGenerateFr
         });
     }
 
+    /**
+     * On fragment interaction.
+     *
+     * @param uri the uri
+     */
     @Override
     public void onFragmentInteraction(Uri uri) {
 

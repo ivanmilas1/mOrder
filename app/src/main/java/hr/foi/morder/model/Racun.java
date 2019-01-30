@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The type Racun.
+ * The type Racun is a receipt which is generated when an order is confirmed by an employee.
  */
 public class Racun {
     /**
@@ -13,6 +13,9 @@ public class Racun {
      */
 
     public int id;
+    /**
+     * The Vrijeme izdavanja. Date and time of ordering
+     */
     public Date vrijeme_izdavanja;
     /**
      * The Stol. Table on whom order was made
@@ -36,6 +39,14 @@ public class Racun {
     public Racun(int id, Integer stol) {
         this.id = id;
         this.stol_id = stol;
+    }
+
+    public Integer getStol_id() {
+        return stol_id;
+    }
+
+    public void setStol_id(Integer stol_id) {
+        this.stol_id = stol_id;
     }
 
     /**
@@ -65,10 +76,20 @@ public class Racun {
         return vrijeme_izdavanja;
     }
 
+    /**
+     * Sets vrijeme izdavanja.
+     *
+     * @param vrijeme_izdavanja the vrijeme izdavanja
+     */
     public void setVrijeme_izdavanja(Date vrijeme_izdavanja) {
         this.vrijeme_izdavanja = vrijeme_izdavanja;
     }
 
+    /**
+     * Gets stol.
+     *
+     * @return the stol
+     */
     public Integer getStol() {
         return stol_id;
     }
