@@ -58,9 +58,7 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
     private String stolId;
     private Integer racunId = 0;
     private String racunDokument;
-    private Integer racunId;
     private Integer stol;
-    private String racunDokument;
     private String narudzbaDokument;
 
     @Override
