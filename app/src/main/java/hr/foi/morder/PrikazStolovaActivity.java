@@ -75,7 +75,7 @@ public class PrikazStolovaActivity extends AppCompatActivity {
      * Connects table with its button
      * @param listOfButtons Each button represents table
      * @param listaStolova Table list
-     * @author Marko Fabijan Pavlović
+     * @author Marko Fabijan PavloviÄ‡
      */
     private void getTables(final List<Button> listOfButtons, final List<Stol> listaStolova) {
         database = FirebaseFirestore.getInstance();
@@ -106,7 +106,7 @@ public class PrikazStolovaActivity extends AppCompatActivity {
      * Status "zauzet" red color
      * @param listOfButtons Each button represents table
      * @param listaStolova Table list
-     * @author Marko Fabijan Pavlović
+     * @author Marko Fabijan PavloviÄ‡
      */
     private void setButtonBehaviour(List<Button> listOfButtons, List<Stol> listaStolova) {
         for (Stol item : listaStolova) {
@@ -129,7 +129,7 @@ public class PrikazStolovaActivity extends AppCompatActivity {
      * On button click opening activity DetaljiNarudzbeActivity
      * Intent passing data about table id
      * @param listOfButtons Each button represents table
-     * @author Marko Fabijan Pavlović
+     * @author Marko Fabijan PavloviÄ‡
      */
     private void setOnClickListenerForAllButtons(List<Button> listOfButtons) {
         for (final Button itemButton : listOfButtons) {
@@ -150,7 +150,7 @@ public class PrikazStolovaActivity extends AppCompatActivity {
      * crvena red
      * zuta yellow
      * zelena green
-     * @author Marko Fabijan Pavlović
+     * @author Marko Fabijan PavloviÄ‡
      */
     private void initColors() {
         //ako nema narudžbe

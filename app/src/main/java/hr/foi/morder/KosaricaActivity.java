@@ -25,12 +25,12 @@ import hr.foi.morder.model.Narudzba;
 import hr.foi.morder.model.StavkaNarudzbe;
 
 public class KosaricaActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
     public KosaricaAdapter kosaricaAdapter;
     public List<StavkaNarudzbe> stavkaNarudzbeList;
-    private Button naruci;
     public Integer brojNarudzbe = 0;
     public Double ukupnaCijena = 0.0;
+    private RecyclerView recyclerView;
+    private Button naruci;
     private FirebaseFirestore database;
     private String idNarudzbe = "";
 

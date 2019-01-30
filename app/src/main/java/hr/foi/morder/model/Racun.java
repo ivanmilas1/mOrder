@@ -4,10 +4,19 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The type Racun.
+ */
 public class Racun {
+    /**
+     * The Id. Bill id value.
+     */
 
     public int id;
     public Date vrijeme_izdavanja;
+    /**
+     * The Stol. Table on whom order was made
+     */
     public Integer stol_id;
     public String dostava;
     public Integer sifra;
@@ -30,14 +39,29 @@ public class Racun {
         this.stol_id = stol;
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Gets vrijeme izdavanja.
+     *
+     * @return the vrijeme izdavanja
+     */
     public Date getVrijeme_izdavanja() {
         return vrijeme_izdavanja;
     }
@@ -60,6 +84,7 @@ public class Racun {
         result.put("stol_id", this.stol_id);
         return result;
     }
+    }
     public String getDostava() {
         return dostava;
     }
@@ -71,5 +96,4 @@ public class Racun {
     public Racun(int id, String dostava){
         this.id = id;
         this.dostava = dostava;
-    }
 }
