@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/food_wallpaper_backgroud"
+    tools:context=".ValidiranjePrekoLozinkeActivity"
+    tools:layout_editor_absoluteY="89dp">
+
+    <Button
+        android:id="@+id/buttonSignIn"
+        android:layout_width="287dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="151dp"
+        android:layout_marginBottom="312dp"
+        android:background="@color/colorAccent"
+        android:onClick="onClickValidate"
+        android:text="Validiraj lozinku"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="114dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="76dp"
+        android:layout_marginBottom="52dp"
+        android:ems="6"
+        android:hint="******"
+        android:inputType="numberPassword"
+        android:maxLength="6"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSignIn"
+        app:layout_constraintStart_toStartOf="@+id/buttonSignIn" />
+
+</android.support.constraint.ConstraintLayout>

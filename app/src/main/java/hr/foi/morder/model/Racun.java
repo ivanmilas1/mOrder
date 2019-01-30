@@ -22,6 +22,7 @@ public class Racun {
      */
     public Integer stol_id;
     public String dostava;
+    public Long kod;
     public Integer sifra;
 
     public Integer getSifra() {
@@ -116,5 +117,13 @@ public class Racun {
     public Racun(int id, String dostava) {
         this.id = id;
         this.dostava = dostava;
+    }
+
+    public Long getKod() {
+        return kod;
+    }
+
+    public void setKod(Long kod) {
+        this.kod = kod;
     }
 }

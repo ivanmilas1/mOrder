@@ -60,7 +60,7 @@ public class ScannerStart extends AppCompatActivity implements ZXingScannerView.
     @Override
     public void handleResult(Result result) {
         final String scanResult = result.getText();
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Scan Result");
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
@@ -76,16 +76,22 @@ public class ScannerStart extends AppCompatActivity implements ZXingScannerView.
             }
         });
 
-        builder.setMessage(scanResult);
-        if(scanResult.equals(String.valueOf(sifra))){
-            builder.setMessage("Narudžba uspješno dostavljenja");
-        }
-        else {
-            builder.setMessage("Kriva adresa");
-        }
+        DostavaManager dostavaManager = new DostavaManager() {
+            @Override
+            public void validirajNarudzbuDostave() {
+                builder.setMessage(scanResult);
+                if(scanResult.equals(String.valueOf(sifra))){
+                    builder.setMessage("Narudžba uspješno dostavljenja");
+                }
+                else {
+                    builder.setMessage("Kriva adresa");
+                }
 
-        AlertDialog alert = builder.create();
-        alert.show();
+                AlertDialog alert = builder.create();
+                alert.show();
+            }};
+
+        dostavaManager.validirajNarudzbuDostave();
     }
 
     /*

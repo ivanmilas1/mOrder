@@ -17,7 +17,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-import hr.foi.morder.R;
 import hr.foi.morder.adapters.DostavaRecyclerAdapter;
 import hr.foi.morder.model.Racun;
 
@@ -28,8 +27,6 @@ public class ProvjeriDostavuActivity extends AppCompatActivity {
     public DostavaRecyclerAdapter dostavaRecyclerAdapter;
     private List<Racun> racunList;
 
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +35,6 @@ public class ProvjeriDostavuActivity extends AppCompatActivity {
         buildRecyclerView();
         databaseDostava = FirebaseFirestore.getInstance();
         loadRacuni();
-
-
     }
 
     private void loadRacuni() {

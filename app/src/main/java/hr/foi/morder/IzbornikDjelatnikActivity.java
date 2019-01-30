@@ -25,7 +25,7 @@ public class IzbornikDjelatnikActivity extends AppCompatActivity {
      * On click view orders starts PrikazStolovaActivity activity.
      *
      * @param view the view on Click from view calls new intent
-     *             @author Danijel Pintarić
+     * @author Danijel Pintarić
      */
     public void OnClickViewOrders(View view) {
         Intent i = new Intent(this, PrikazStolovaActivity.class);
@@ -36,7 +36,7 @@ public class IzbornikDjelatnikActivity extends AppCompatActivity {
      * On click sign out returns to MainActivity activity.
      *
      * @param view the view on Click from this view logs out from session
-     *             @author Danijel Pintarić
+     * @author Danijel Pintarić
      */
     public void OnClickSignOut(View view) {
         Intent intent = new Intent(this, MainActivity.class);
@@ -49,13 +49,19 @@ public class IzbornikDjelatnikActivity extends AppCompatActivity {
      * @param view the view
      * @author Danijel Pintarić
      */
-    public void OnClickViewDjelatnik(View view){
+    public void OnClickViewDjelatnik(View view) {
         Intent intent = new Intent(this, DodavanjeRadnikaActivity.class);
         startActivity(intent);
     }
 
-    public void OnClickStartQR(View view){
-        Intent intent=new Intent(this, ProvjeriDostavuActivity.class);
+    public void OnClickStartQR(View view) {
+        Intent intent = new Intent(this, ScannerStart.class);
+        startActivity(intent);
+    }
+
+
+    public void OnClickValidateGenericPassword(View view) {
+        Intent intent = new Intent(this, ValidiranjePrekoLozinkeActivity.class);
         startActivity(intent);
     }
 }

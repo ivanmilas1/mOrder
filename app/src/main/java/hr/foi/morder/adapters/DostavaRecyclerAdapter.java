@@ -65,7 +65,7 @@ public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecycler
             view.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View view) {
                 Intent intent = new Intent(context, ScannerStart.class);
-                intent.putExtra("Pin",textViewPin.getText().toString());
+                intent.putExtra("Pin",textViewId.getText().toString());
                 context.startActivity(intent);
                 }
             });
