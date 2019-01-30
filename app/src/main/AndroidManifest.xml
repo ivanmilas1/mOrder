@@ -19,6 +19,7 @@
         <activity android:name=".ScannerActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -31,5 +32,9 @@
         <activity android:name=".KosaricaActivity" />
         <activity android:name="NarucivanjeActivity"/>
         <activity android:name=".DodavanjeRadnikaActivity"/>
+        <activity android:name=".NarucivanjeDostavaActivity"/>
+        <activity android:name=".KosaricaDostavaActivity"/>
+        <activity android:name=".OdabirKorisnikaActivity"/>
+        <activity android:name=".GeneriraniKodActivity"/>
     </application>
 </manifest>

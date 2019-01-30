@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/food_wallpaper_backgroud"
+    tools:context="hr.foi.morder.OdabirKorisnikaActivity"
+    tools:layout_editor_absoluteY="89dp">
+
+    <Button
+        android:id="@+id/buttonNaruciDostavu"
+        android:layout_width="356dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginBottom="133dp"
+        android:background="@color/colorAccent"
+        android:onClick="naruciDostavu"
+        android:text="@string/naruciDostavu"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <Button
+        android:id="@+id/buttonQrKod"
+        android:layout_width="356dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="224dp"
+        android:layout_marginBottom="266dp"
+        android:background="@color/colorAccent"
+        android:onClick="dohvatiQrKod"
+        android:text="@string/qr_kod"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <Button
+        android:id="@+id/buttonGeneriraniKod"
+        android:layout_width="356dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="448dp"
+        android:layout_marginBottom="523dp"
+        android:background="@color/colorAccent"
+        android:onClick="dohvatiGeneriraniKod"
+        android:text="@string/generirani_kod"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+</android.support.constraint.ConstraintLayout>

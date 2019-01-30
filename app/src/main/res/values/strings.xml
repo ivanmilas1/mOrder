@@ -42,6 +42,9 @@
     <string name="ponisti">Ponisti</string>
     <string name="izdati_racun">Izdati račun</string>
     <string name="pregled_stolova">Pregled stolova</string>
+    <string name="naruciDostavu">Naruci dostavu</string>
+    <string name="qr_kod">Qr kod</string>
+    <string name="generirani_kod">Generirani kod</string>
     <array name="tip_korisnika">
         <item>Konobar</item>
         <item>Administrator</item>

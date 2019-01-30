@@ -22,12 +22,43 @@ public class Racun {
      */
     public Integer stol_id;
 
+    public String status;
+
+    public Integer generiraniKod;
+
     public Racun() {
     }
 
     public Racun(int id, Integer stol) {
         this.id = id;
         this.stol_id = stol;
+    }
+
+    public Racun(int id, String status) {
+        this.id = id;
+        this.status = status;
+    }
+
+    public Racun(int id, String status, Integer kod) {
+        this.id = id;
+        this.status = status;
+        this.generiraniKod = kod;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Integer getGeneriraniKod() {
+        return generiraniKod;
+    }
+
+    public void setGeneriraniKod(Integer generiraniKod) {
+        this.generiraniKod = generiraniKod;
     }
 
     /**
@@ -83,6 +114,9 @@ public class Racun {
         HashMap<String, Object> result = new HashMap<>();
         result.put("id", this.id);
         result.put("stol_id", this.stol_id);
+        result.put("status", this.status);
+        result.put("kod", this.generiraniKod);
+
         return result;
     }
 }

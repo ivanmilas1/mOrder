@@ -180,7 +180,7 @@ public class KosaricaActivity extends AppCompatActivity {
                                                 }
                                                 addRacun(racunId + 1, stolId);
                                                 database.collection("Narudzba").document(idNarudzbe).update("racun_id", racunId + 1);
-                                                //database.collection("Racun").document(racunDokument).update("stol", racunId + 1);
+
                                             } else {
                                                 Log.d("Error", "Error getting data");
                                             }

@@ -1,5 +1,6 @@
 package hr.foi.morder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -34,8 +35,12 @@ import hr.foi.morder.model.Artikl;
 import hr.foi.morder.model.Kategorija;
 import hr.foi.morder.model.Narudzba;
 
-public class NarucivanjeDostavaActivity extends AppCompatActivity {
-
+/**
+ * The type NarucivanjeDostava activity.
+ * Set content view activity_prijava layout
+ * @author Nikola Gluhak
+ */
+public class NarucivanjeDostavaActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
     private NavigationView navigation;
@@ -51,12 +56,21 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
     private Long childId;
     private Integer idNarudzba;
     private String stolId;
+    private Integer racunId = 0;
+    private String racunDokument;
+    private Integer stol;
+    private String narudzbaDokument;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.article);
         drawer = findViewById(R.id.drawer);
+
+        //potrebno da košarica funkcionira
+        Intent intent = getIntent();
+        racunId = (intent.getIntExtra("racunID", 0));
+
         toggle = new ActionBarDrawerToggle(this, drawer, R.string.open, R.string.close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -64,6 +78,7 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
         expandableListView = findViewById(R.id.navigationmenu);
         navigation = findViewById(R.id.nv);
         setupDrawerContent(navigation);
+        navigation.setNavigationItemSelectedListener(this);
 
         textViewNovoUPonudi = findViewById(R.id.naslovNovoUPonudi);
 
@@ -83,6 +98,13 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
         textViewNovoUPonudi.setText("");
     }
 
+    /**
+     * Finding order Id
+     * Firebase connection to "Narudzba" collection
+     * Ordering by id descending to find last order
+     * Adds one on last order number, that represent order in processing
+     *@author Nikola Gluhak
+     */
     private void dohvatiIdNarudzbe() {
         database.collection("Narudzba").orderBy("id", Query.Direction.DESCENDING).limit(1)
                 .get()
@@ -93,6 +115,7 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
                             final List<Narudzba> narudzbaList = new ArrayList<>();
                             for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                 Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
+                                narudzbaDokument = documentSnapshot.getId();
                                 narudzba.getId();
                                 narudzbaList.add(narudzba);
                             }
@@ -101,8 +124,6 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
                                 idNarudzba = n.getId();
                             }
                             addIdNarudzba(idNarudzba + 1, 0.00, "dostava");
-
-
                         } else {
                             Log.d("Error", "Error getting data");
                         }
@@ -110,7 +131,14 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
                 });
     }
 
-
+    /**
+     * Add id narudzba. Adding id value to order.
+     *Firebase connection to "Narudzba" collection
+     * @param id     the id represents order id number
+     * @param status the status defines table status, free, in processing or taken.
+     * @author Nikola Gluhak
+     *
+     */
     public void addIdNarudzba(Integer id, Double cijena, String status) {
         Map<String, Object> idNarudzbe = new Narudzba(id, cijena, status).toMap();
         database.collection("Narudzba")
@@ -123,7 +151,35 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
                 });
     }
 
+    public void addNarudzba(Integer id, Double cijena, String status, Integer racunID) {
+        Map<String, Object> idNarudzbe = new Narudzba(id, cijena, status, racunID).toMap();
+        database.collection("Narudzba")
+                .add(idNarudzbe)
+                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
 
+                    }
+                });
+    }
+
+    /**
+     * Dohvati kategorije. Creating categories from data gathered from Firestore based on their "Kategorija_id".
+     * Creating new adapter for recycler viwe
+     * Setting recycler view layout manager from application context
+     * Setting the adapter into recycler view
+     * @author Nikola Gluhak
+     */
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.kosarica:
+                Intent intent = new Intent(this, KosaricaDostavaActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return true;
+    }
 
     private void dohvatiKategorije() {
         listChildEx = new HashMap<>();
@@ -138,6 +194,7 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
                                 Kategorija kategorija = documentSnapshot.toObject(Kategorija.class);
                                 kategorijaList.add(kategorija.getNaziv());
                             }
+
                             listChildEx.put("Jelovnik", kategorijaList);
                             listChild = listChildEx;
                             listHeader = new ArrayList<>(listChild.keySet());
@@ -157,16 +214,22 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
                                 @Override
                                 public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                                     return false;
-                                    }
-                                    }
-                            );
+                                }
+                            });
                         } else {
                             Log.d("Error", "Error getting data");
                         }
                     }
                 });
     }
-
+    /**
+     * Load articels List loading articels from Firestore database depending on their "kategorija_id" field.
+     * Creating new adapter for recycler viwe
+     * Setting recycler view layout manager from application context
+     * Setting the adapter into recycler view
+     * @param idKategorije    the idKategorije respresents category id number
+     * @author Nikola Gluhak
+     */
     private void loadArticleList(long idKategorije) {
         database.collection("Artikl")
                 .whereEqualTo("kategorija_id", idKategorije)
@@ -191,7 +254,15 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
                     }
                 });
     }
-
+    /**
+     * Load last articles fetching last 7 articles from Firestore collection "Artikl" and orders them by "id" field descending
+     * Adding data to articlesList list
+     * Creating new adapter for recycler viwe
+     * Setting recycler view layout manager from application context
+     * Setting the adapter into recycler view
+     *@author Nikola Gluhak
+     *
+     */
     private void loadLastArticles() {
         database.collection("Artikl").orderBy("id", Query.Direction.DESCENDING).limit(3)
                 .get()
@@ -216,6 +287,11 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Click on navigation item marks it
+     * @param nv navigation view for drawer
+     * @author Nikola Gluhak
+     */
     private void setupDrawerContent(NavigationView nv) {
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -233,6 +309,7 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (toggle.onOptionsItemSelected(item)) {
+
             return true;
         }
         return super.onOptionsItemSelected(item);
