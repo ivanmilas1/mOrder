@@ -29,6 +29,9 @@ import hr.foi.morder.model.Artikl;
 import hr.foi.morder.model.Narudzba;
 import hr.foi.morder.model.StavkaNarudzbe;
 
+/**
+ * The type Article recycler adapter.
+ */
 public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecyclerAdapter.ViewHolder> {
 
     private List<Artikl> articleList;
@@ -39,6 +42,13 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
     private Double price, iznosNarudzbe;
     private String narudzbaDokument;
 
+    /**
+     * Instantiates a new Article recycler adapter.
+     *
+     * @param articleList the article list
+     * @param ctx         the application context
+     * @param database    the database we fetch data from
+     */
     public ArticleRecyclerAdapter(List<Artikl> articleList, Context ctx, FirebaseFirestore database) {
         this.articleList = articleList;
         this.ctx = ctx;
@@ -52,6 +62,11 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         return new ArticleRecyclerAdapter.ViewHolder(view);
     }
 
+    /**
+     *
+     * @param viewHolder View holder in which we want to display our objects
+     * @param position object position inside viewholder
+     */
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int position) {
 
@@ -67,6 +82,13 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         viewHolder.quantityAdd.setOnClickListener(new View.OnClickListener() {
             Double priceArticle1 = Double.parseDouble(String.valueOf(viewHolder.price.getText()));
 
+            /**
+             * Setting quantity of articles
+             * Adding article quantity into viewholder quantity
+             * Setting article price
+             * Adding article price into viewholder setPrice
+             * @param v setting the view
+             */
             @Override
             public void onClick(View v) {
                 int countQuantity = Integer.parseInt(String.valueOf(viewHolder.quantity.getText()));
@@ -79,6 +101,9 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
             }
         });
 
+        /**
+         * On click remove quantiity value
+         */
         viewHolder.quantityRemove.setOnClickListener(new View.OnClickListener() {
 
             Double priceArticle1 = Double.parseDouble(String.valueOf(viewHolder.price.getText()));
@@ -96,7 +121,12 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
                 }
             }
         });
-
+        /**
+         * Placing the order
+         * Sending data to firebase
+         * Prints message on successful order
+         * If failed returns error message
+         */
         viewHolder.order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,6 +163,14 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         });
     }
 
+    /**
+     * Add order. Adding every order article and his quantity and then sets its price
+     *
+     * @param artikl   the artikl, article id value
+     * @param narudzba the narudzba, order id value
+     * @param cijena   the cijena, article price
+     * @param kolicina the kolicina, article value
+     */
     public void addOrder(Integer artikl, Integer narudzba, Double cijena, Integer kolicina) {
         Map<String, Object> stavkaNarudzbe = new StavkaNarudzbe(artikl, narudzba, cijena, kolicina).toMap();
         database.collection("Stavka narudzbe")
@@ -150,15 +188,44 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         return articleList.size();
     }
 
+    /**
+     * The type View holder.
+     */
     public class ViewHolder extends RecyclerView.ViewHolder {
+        /**
+         * The M view.
+         */
         View mView;
+        /**
+         * The Quantity add.
+         */
         public Button quantityAdd;
+        /**
+         * The Quantity remove.
+         */
         public Button quantityRemove;
+        /**
+         * The Order.
+         */
         public Button order;
+        /**
+         * The Price.
+         */
         public TextView price;
+        /**
+         * The Quantity.
+         */
         public TextView quantity;
+        /**
+         * The Id.
+         */
         public TextView id;
 
+        /**
+         * Instantiates a new View holder.
+         *
+         * @param itemView the item view
+         */
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mView = itemView;
@@ -170,31 +237,62 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
             id = mView.findViewById(R.id.article_id);
         }
 
+        /**
+         * Sets id.
+         *
+         * @param id the id
+         */
         public void setId(Integer id) {
             TextView articleId = itemView.findViewById(R.id.article_id);
             articleId.setText(id.toString());
         }
 
+        /**
+         * Sets name.
+         *
+         * @param name the name
+         */
         public void setName(String name) {
             TextView article_name = mView.findViewById(R.id.article_name);
             article_name.setText(name);
         }
 
+        /**
+         * Sets price.
+         *
+         * @param price the price
+         */
         public void setPrice(Double price) {
             TextView article_price = mView.findViewById(R.id.article_price);
             article_price.setText(price.toString());
         }
 
+        /**
+         * Sets image.
+         *
+         * @param ctx   the ctx
+         * @param image the image
+         */
         public void setImage(Context ctx, String image) {
             ImageView article_image = mView.findViewById(R.id.article_image);
             Picasso.with(ctx).load(image).into(article_image);
         }
 
+        /**
+         * Sets quantity.
+         *
+         * @param quantity the quantity
+         */
         public void setQuantity(Integer quantity) {
             TextView articleQuantity = itemView.findViewById(R.id.article_quantity);
             articleQuantity.setText(quantity.toString());
         }
 
+        /**
+         * Sets price currency.
+         *
+         * @param quantity the quantity
+         */
         public void setPriceCurrency(String quantity) {
             TextView articlePriceCurrency = itemView.findViewById(R.id.article_price_currency);
             articlePriceCurrency.setText(quantity);

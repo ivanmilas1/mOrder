@@ -12,11 +12,21 @@ import java.util.List;
 
 import hr.foi.morder.R;
 
+/**
+ * The type Expendable list adapter.
+ */
 public class ExpendableListAdapter extends BaseExpandableListAdapter {
     private Context ctx;
     private List<String> headerList;
     private HashMap<String, List<String>> dataChildList;
 
+    /**
+     * Instantiates a new Expendable list adapter.
+     *
+     * @param context    the context
+     * @param listHeader the list header
+     * @param data       the data
+     */
     public ExpendableListAdapter(Context context, List<String> listHeader, HashMap<String, List<String>> data) {
         this.ctx = context;
         this.headerList = listHeader;

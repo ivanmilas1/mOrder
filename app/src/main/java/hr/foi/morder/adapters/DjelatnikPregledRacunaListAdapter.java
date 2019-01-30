@@ -15,11 +15,28 @@ import hr.foi.morder.R;
 import hr.foi.morder.model.Artikl;
 import hr.foi.morder.model.StavkaNarudzbe;
 
-public class DjelatnikPregledRacunaListAdapter extends BaseAdapter {
+/**
+ * The type Djelatnik pregled racuna list adapter.
+ */
+public class
+DjelatnikPregledRacunaListAdapter extends BaseAdapter {
+    /**
+     * The Lista artikala. List of Article objects
+     */
     public ArrayList<Artikl> listaArtikala;
+    /**
+     * The Lista stavki narudžbi. List of StavkaNarudzbe objects.
+     */
     public ArrayList<StavkaNarudzbe> listaStavkiNarudžbi;
     private Context context;
 
+    /**
+     * Instantiates a new Djelatnik pregled racuna list adapter.
+     *
+     * @param context             the context
+     * @param listaArtikala       the lista artikala
+     * @param listaStavkiNarudžbi the lista stavki narudžbi
+     */
     public DjelatnikPregledRacunaListAdapter(Context context, ArrayList<Artikl> listaArtikala, ArrayList<StavkaNarudzbe> listaStavkiNarudžbi) {
         this.context = context;
         this.listaArtikala = listaArtikala;
@@ -36,6 +53,12 @@ public class DjelatnikPregledRacunaListAdapter extends BaseAdapter {
         return listaArtikala.get(position);
     }
 
+    /**
+     * Gets item kolicina. Returns quantity of specific article
+     *
+     * @param position the position of article in list
+     * @return the item kolicina quantity of articles in list
+     */
     public StavkaNarudzbe getItemKolicina(int position) {
         return listaStavkiNarudžbi.get(position);
     }
@@ -45,6 +68,13 @@ public class DjelatnikPregledRacunaListAdapter extends BaseAdapter {
         return 0;
     }
 
+    /**
+     *
+     * @param position Item position inside the view
+     * @param convertView Current view
+     * @param parent Parent view
+     * @return returns value of row
+     */
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View row;

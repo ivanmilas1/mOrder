@@ -24,15 +24,39 @@ import hr.foi.morder.model.Narudzba;
 import hr.foi.morder.model.Racun;
 import hr.foi.morder.model.StavkaNarudzbe;
 
+/**
+ * The type Detalji narudzbe activity is used for preview of customers order depending on table.
+ *  * Set content view activity_detalji_narudzbe layout
+ *  @author Ivan Milas
+ */
 public class DetaljiNarudzbeActivity extends AppCompatActivity {
+    /**
+     * The Lista artikala is used to store articles from Firestore database.
+     */
     ArrayList<Artikl> listaArtikala = new ArrayList<>();
+    /**
+     * The Lista stavki narudžbi for storing order articles.
+     */
     ArrayList<StavkaNarudzbe> listaStavkiNarudžbi = new ArrayList<>();
     private FirebaseFirestore database;
-    Button btnPlaceOrder, buttonIssueBill;
+    Button  buttonIssueBill;
+    /**
+     * The Btn place order for submiting order an send update to Firestore server.
+     */
+    Button btnPlaceOrder;
     private ListView listView;
+    /**
+     * The Stol id represent table that consist order.
+     */
     int stolID;
     private DjelatnikPregledRacunaListAdapter djelatnikPregledRacunaStolaListAdapter;
 
+    /**
+     * On create defining buttons, intents and variables.
+     * Calling gettBill method.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +83,12 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Gets bill get data from Firestore. Data from "Racun" collection and document which has "stil_id" value that equals stolID.
+     *      *
+     *If error occurs during fetching data, displays error message
+     * @author Ivan Milas
+     */
     public void getBill() {
         database.collection("Racun")
                 .whereEqualTo("stol_id", stolID)
@@ -78,6 +108,14 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    /**
+     * Gets orders get data from Firestore. Data from "Narudzba" collection and and document which has "racun_id" value that equals racunID.
+     *
+     *If error occurs during fetching data, displays error message
+     * @param racunID the racun id current bill
+     * @author Ivan Milas
+     */
     public void getOrders(int racunID) {
         database.collection("Narudzba")
                 .whereEqualTo("racun_id", racunID)
@@ -98,6 +136,13 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Gets order item get data from Firestore. Data from "Stavka narudzbe" collection and document which has "narudzba_id" value that equals orderID.
+     *
+     *If error occurs during fetching data, displays error message
+     * @param orderID the order id current order
+     *  @author Ivan Milas
+     */
     public void getOrderItem(int orderID) {
         database.collection("Stavka narudzbe")
                 .whereEqualTo("narudzba_id", orderID)
@@ -119,6 +164,13 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Gets order articles  from Firestore. Data from "Artikl" collection and document which has "id" value that equals articleID.
+     *Adding article to listaArtikala list which consist of articles
+     * If error occurs during fetching data, displays error message
+     * @param articleID the article id selected article from article list
+     * @author Ivan Milas
+     */
     public void getOrderArticles(int articleID) {
         database.collection("Artikl")
                 .whereEqualTo("id", articleID)

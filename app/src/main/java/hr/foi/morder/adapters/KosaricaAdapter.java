@@ -73,11 +73,11 @@ public class KosaricaAdapter extends RecyclerView.Adapter<KosaricaAdapter.Kosari
     }
 
     public class KosaricaViewHolder extends RecyclerView.ViewHolder {
-        View view;
         public TextView textViewNazivProizvoda;
         public TextView textViewJedinicnaCijena;
         public TextView textViewKolicina;
         public TextView textViewCijena;
+        View view;
 
         public KosaricaViewHolder(@NonNull View itemView) {
             super(itemView);

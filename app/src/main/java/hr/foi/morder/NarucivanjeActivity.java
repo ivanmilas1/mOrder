@@ -35,8 +35,12 @@ import hr.foi.morder.model.Artikl;
 import hr.foi.morder.model.Kategorija;
 import hr.foi.morder.model.Narudzba;
 
+/**
+ * The type Narucivanje activity.
+ * Set content view activity_prijava layout
+ * @author Nikola Gluhak
+ */
 public class NarucivanjeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
     private NavigationView navigation;
@@ -54,7 +58,9 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
     private String stolId;
     private Integer racunId = 0;
     private String racunDokument;
+    private Integer racunId;
     private Integer stol;
+    private String racunDokument;
     private String narudzbaDokument;
 
     @Override
@@ -94,6 +100,13 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
         textViewNovoUPonudi.setText("");
     }
 
+    /**
+     * Finding order Id
+     * Firebase connection to "Narudzba" collection
+     * Ordering by id descending to find last order
+     * Adds one on last order number, that represent order in processing
+     *@author Nikola Gluhak
+     */
     private void dohvatiIdNarudzbe() {
         database.collection("Narudzba").orderBy("id", Query.Direction.DESCENDING).limit(1)
                 .get()
@@ -125,6 +138,14 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                 });
     }
 
+    /**
+     * Add id narudzba. Adding id value to order.
+     *Firebase connection to "Narudzba" collection
+     * @param id     the id represents order id number
+     * @param status the status defines table status, free, in processing or taken.
+     * @author Nikola Gluhak
+     *
+     */
     public void addIdNarudzba(Integer id, Double cijena, String status) {
         Map<String, Object> idNarudzbe = new Narudzba(id, cijena, status).toMap();
         database.collection("Narudzba")
@@ -149,6 +170,13 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                 });
     }
 
+    /**
+     * Dohvati kategorije. Creating categories from data gathered from Firestore based on their "Kategorija_id".
+     * Creating new adapter for recycler viwe
+     * Setting recycler view layout manager from application context
+     * Setting the adapter into recycler view
+     * @author Nikola Gluhak
+     */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
@@ -201,7 +229,14 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                     }
                 });
     }
-
+    /**
+     * Load articels List loading articels from Firestore database depending on their "kategorija_id" field.
+     * Creating new adapter for recycler viwe
+     * Setting recycler view layout manager from application context
+     * Setting the adapter into recycler view
+     * @param idKategorije    the idKategorije respresents category id number
+     * @author Nikola Gluhak
+     */
     private void loadArticleList(long idKategorije) {
         database.collection("Artikl")
                 .whereEqualTo("kategorija_id", idKategorije)
@@ -226,7 +261,15 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                     }
                 });
     }
-
+    /**
+     * Load last articles fetching last 7 articles from Firestore collection "Artikl" and orders them by "id" field descending
+     * Adding data to articlesList list
+     * Creating new adapter for recycler viwe
+     * Setting recycler view layout manager from application context
+     * Setting the adapter into recycler view
+     *@author Nikola Gluhak
+     *
+     */
     private void loadLastArticles() {
         database.collection("Artikl").orderBy("id", Query.Direction.DESCENDING).limit(3)
                 .get()
@@ -251,6 +294,11 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                 });
     }
 
+    /**
+     * Click on navigation item marks it
+     * @param nv navigation view for drawer
+     * @author Nikola Gluhak
+     */
     private void setupDrawerContent(NavigationView nv) {
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
