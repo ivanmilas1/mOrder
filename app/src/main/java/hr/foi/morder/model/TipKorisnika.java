@@ -1,7 +1,7 @@
 package hr.foi.morder.model;
 
 /**
- * The type Tip korisnika.
+ * The type Tip korisnika is a type of a user in the application, which can be employee or customer.
  */
 public class TipKorisnika {
     /**

@@ -14,6 +14,9 @@ import java.util.Map;
  * The type Narudzba.
  */
 public class Narudzba {
+    /**
+     * An instance of connection with database.
+     */
     private FirebaseFirestore database;
     /**
      * The Id. Order id number
@@ -59,7 +62,7 @@ public class Narudzba {
      */
     public Narudzba(Integer id, Double iznos, String status){
         this.id = id;
-        this.iznos_narudzbe = ;
+        this.iznos_narudzbe = iznos;
         this.status = status;
     }
 

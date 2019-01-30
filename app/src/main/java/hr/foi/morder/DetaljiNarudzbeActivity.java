@@ -35,7 +35,7 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
      */
     ArrayList<Artikl> listaArtikala = new ArrayList<>();
     /**
-     * The Lista stavki narudžbi for storing order articles.
+     * The Lista stavki narudžbi is a list used for storing order articles.
      */
     ArrayList<StavkaNarudzbe> listaStavkiNarudžbi = new ArrayList<>();
     private FirebaseFirestore database;
@@ -86,7 +86,7 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
     /**
      * Gets bill get data from Firestore. Data from "Racun" collection and document which has "stil_id" value that equals stolID.
      *      *
-     *If error occurs during fetching data, displays error message
+     * If error occurs during fetching data, displays error message.
      * @author Ivan Milas
      */
     public void getBill() {
@@ -110,9 +110,10 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
     }
 
     /**
-     * Gets orders get data from Firestore. Data from "Narudzba" collection and and document which has "racun_id" value that equals racunID.
+     * Gets orders get data from Firestore. Data from "Narudzba" collection
+     * and document which has "racun_id" value that equals racunID.
      *
-     *If error occurs during fetching data, displays error message
+     * If error occurs during fetching data, displays error message.
      * @param racunID the racun id current bill
      * @author Ivan Milas
      */

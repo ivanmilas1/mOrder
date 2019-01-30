@@ -141,7 +141,7 @@ public class KosaricaActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                 Racun racun = documentSnapshot.toObject(Racun.class);
-                                stolId = racun.getStol();
+                                stolId = racun.getStol_id();
                             }
                         } else {
                             Log.d("Error", "Error getting data");

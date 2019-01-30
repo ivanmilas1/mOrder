@@ -3,7 +3,7 @@ package hr.foi.morder.model;
 import java.util.Date;
 
 /**
- * The type Korisnik.
+ * The type Korisnik is a user which is not an employee in the restaurant, this is a customer who orders food through the aplication.
  */
 public class Korisnik {
     /**
@@ -11,19 +11,19 @@ public class Korisnik {
      */
     public Integer id;
     /**
-     * The Ime prezime. Users name and last name
+     * The Ime prezime. User's first and last name
      */
     public String imePrezime;
     /**
-     * The Lozinka.  Users password.
+     * The Lozinka. User's password.
      */
     public String lozinka;
     /**
-     * The Datum rodjenja. Users date of birth
+     * The Datum rodjenja. User's date of birth
      */
     public Date datumRodjenja;
     /**
-     * The Adresa prebivalista. Users adress
+     * The Adresa prebivalista. User's adress
      */
     public String adresaPrebivalista;
     /**
