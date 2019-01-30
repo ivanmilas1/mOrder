@@ -32,5 +32,6 @@
         <activity android:name="NarucivanjeActivity"/>
         <activity android:name=".DodavanjeRadnikaActivity"/>
         <activity android:name=".ProvjeriDostavuActivity"/>
+        <activity android:name=".DodavanjeArtiklaActivity"/>
     </application>
 </manifest>

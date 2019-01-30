@@ -1,5 +1,8 @@
 package hr.foi.morder.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * The type Artikl.
  */
@@ -169,4 +172,14 @@ public class Artikl {
     public void load(){
 
     }
+public Map<String, Object> toMap(){
+    HashMap<String, Object> result = new HashMap<>();
+    result.put("naziv",this.naziv);
+    result.put("jedinicna_cijena",this.jedinicna_cijena);
+    result.put("kategorija_id",this.kategorija_id);
+    result.put("id",this.id);
+    result.put("slika",this.slika);
+    return result;
+}
+
 }

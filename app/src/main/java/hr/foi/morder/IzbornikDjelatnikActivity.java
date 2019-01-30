@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import hr.foi.morder.scannerlib.ScannerStart;
-
 /**
  * The type Izbornik djelatnik activity defines which activity user want to start next.
  *
@@ -56,6 +54,10 @@ public class IzbornikDjelatnikActivity extends AppCompatActivity {
 
     public void OnClickStartQR(View view){
         Intent intent=new Intent(this, ProvjeriDostavuActivity.class);
+        startActivity(intent);
+    }
+    public void OnClickViewArtikl(View view){
+        Intent intent=new Intent(this, DodavanjeArtiklaActivity.class);
         startActivity(intent);
     }
 }
