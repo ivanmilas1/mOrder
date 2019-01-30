@@ -5,10 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import hr.foi.morder.scannerlib.ScannerStart;
+
 /**
  * The type Izbornik djelatnik activity defines which activity user want to start next.
+ *
  * @author Danijel Pintarić
  */
+
 public class IzbornikDjelatnikActivity extends AppCompatActivity {
 
     @Override
@@ -56,7 +60,8 @@ public class IzbornikDjelatnikActivity extends AppCompatActivity {
      * @param view the view
      * @author Danijel Pintarić
      */
-    public void OnClickStartScanner(View view){
-
+    public void OnClickStartQR(View view) {
+        Intent intent = new Intent(this, ScannerStart.class);
+        startActivity(intent);
     }
 }

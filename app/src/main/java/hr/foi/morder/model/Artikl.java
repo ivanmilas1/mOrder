@@ -5,6 +5,10 @@ package hr.foi.morder.model;
  */
 public class Artikl {
     /**
+     * The Id. Article id value
+     */
+    public Integer id;
+    /**
      * The Naziv. Represents article name
      */
     public String naziv;
@@ -24,10 +28,6 @@ public class Artikl {
      * The Slika. Article picture
      */
     public String slika;
-    /**
-     * The Id. Article id value
-     */
-    public Integer id;
 
     /**
      * Instantiates a new Artikl.
@@ -40,12 +40,12 @@ public class Artikl {
      * @param slika            the slika
      */
     public Artikl(Integer id, String naziv, String jedinicna_mjera, Double jedinicna_cijena, Integer kategorija_id, String slika) {
+        this.id = id;
         this.naziv = naziv;
         this.jedinicna_mjera = jedinicna_mjera;
         this.jedinicna_cijena = jedinicna_cijena;
         this.kategorija_id = kategorija_id;
         this.slika = slika;
-        this.id = id;
     }
 
     /**

@@ -1,5 +1,6 @@
 package hr.foi.morder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -39,11 +40,8 @@ import hr.foi.morder.model.Narudzba;
  * Set content view activity_prijava layout
  * @author Nikola Gluhak
  */
-public class NarucivanjeActivity extends AppCompatActivity {
-
-
+public class NarucivanjeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
-
     private ActionBarDrawerToggle toggle;
     private NavigationView navigation;
     private TextView textViewNovoUPonudi;
@@ -57,13 +55,22 @@ public class NarucivanjeActivity extends AppCompatActivity {
     private HashMap<String, List<String>> listChildEx;
     private Long childId;
     private Integer idNarudzba;
-
+    private String stolId;
+    private Integer racunId = 0;
+    private String racunDokument;
+    private Integer stol;
+    private String narudzbaDokument;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.article);
         drawer = findViewById(R.id.drawer);
+
+        //potrebno da košarica funkcionira
+        Intent intent = getIntent();
+        racunId = (intent.getIntExtra("racunID", 0));
+
         toggle = new ActionBarDrawerToggle(this, drawer, R.string.open, R.string.close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -71,8 +78,9 @@ public class NarucivanjeActivity extends AppCompatActivity {
         expandableListView = findViewById(R.id.navigationmenu);
         navigation = findViewById(R.id.nv);
         setupDrawerContent(navigation);
+        navigation.setNavigationItemSelectedListener(this);
 
-        textViewNovoUPonudi = findViewById(R.id.NaslovNovoUPonudi);
+        textViewNovoUPonudi = findViewById(R.id.naslovNovoUPonudi);
 
         recyclerView = findViewById(R.id.article_recycler);
         database = FirebaseFirestore.getInstance();
@@ -104,9 +112,10 @@ public class NarucivanjeActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            List<Narudzba> narudzbaList = new ArrayList<>();
+                            final List<Narudzba> narudzbaList = new ArrayList<>();
                             for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                 Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
+                                narudzbaDokument = documentSnapshot.getId();
                                 narudzba.getId();
                                 narudzbaList.add(narudzba);
                             }
@@ -114,7 +123,12 @@ public class NarucivanjeActivity extends AppCompatActivity {
                             for (Narudzba n : narudzbaList) {
                                 idNarudzba = n.getId();
                             }
-                            addIdNarudzba(idNarudzba + 1, "U pripremi");
+                            if (racunId == 0){
+                                addIdNarudzba(idNarudzba + 1, 0.00, "restoran");
+                            }
+                            else {
+                                addNarudzba(idNarudzba + 1, 0.00, "restoran", racunId);
+                            }
                         } else {
                             Log.d("Error", "Error getting data");
                         }
@@ -130,8 +144,20 @@ public class NarucivanjeActivity extends AppCompatActivity {
      * @author Nikola Gluhak
      *
      */
-    public void addIdNarudzba(Integer id, String status) {
-        Map<String, Object> idNarudzbe = new Narudzba(id, status).toMap();
+    public void addIdNarudzba(Integer id, Double cijena, String status) {
+        Map<String, Object> idNarudzbe = new Narudzba(id, cijena, status).toMap();
+        database.collection("Narudzba")
+                .add(idNarudzbe)
+                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+
+                    }
+                });
+    }
+
+    public void addNarudzba(Integer id, Double cijena, String status, Integer racunID) {
+        Map<String, Object> idNarudzbe = new Narudzba(id, cijena, status, racunID).toMap();
         database.collection("Narudzba")
                 .add(idNarudzbe)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -149,6 +175,17 @@ public class NarucivanjeActivity extends AppCompatActivity {
      * Setting the adapter into recycler view
      * @author Nikola Gluhak
      */
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.kosarica:
+                Intent intent = new Intent(this, KosaricaActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return true;
+    }
+
     private void dohvatiKategorije() {
         listChildEx = new HashMap<>();
         database.collection("Kategorija")
@@ -162,6 +199,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
                                 Kategorija kategorija = documentSnapshot.toObject(Kategorija.class);
                                 kategorijaList.add(kategorija.getNaziv());
                             }
+
                             listChildEx.put("Jelovnik", kategorijaList);
                             listChild = listChildEx;
                             listHeader = new ArrayList<>(listChild.keySet());
@@ -178,12 +216,11 @@ public class NarucivanjeActivity extends AppCompatActivity {
                                 }
                             });
                             expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-                                                                           @Override
-                                                                           public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                                                                               return false;
-                                                                           }
-                                                                       }
-                            );
+                                @Override
+                                public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                                    return false;
+                                    }
+                            });
                         } else {
                             Log.d("Error", "Error getting data");
                         }
@@ -232,7 +269,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
      *
      */
     private void loadLastArticles() {
-        database.collection("Artikl").orderBy("id", Query.Direction.DESCENDING).limit(7)
+        database.collection("Artikl").orderBy("id", Query.Direction.DESCENDING).limit(3)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -277,6 +314,7 @@ public class NarucivanjeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (toggle.onOptionsItemSelected(item)) {
+
             return true;
         }
         return super.onOptionsItemSelected(item);

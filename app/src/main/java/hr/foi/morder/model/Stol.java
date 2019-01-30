@@ -3,6 +3,7 @@ package hr.foi.morder.model;
 /**
  * The type Stol.
  */
+
 public class Stol {
 
     /**
@@ -39,6 +40,23 @@ public class Stol {
      *
      * @return the id
      */
+    public Stol() {
+
+    }
+
+    public Stol(Integer id){
+        this.id = id;
+
+    }
+
+    public Integer getNarudzba_id() {
+        return narudzba_id;
+    }
+
+    public void setNarudzba_id(Integer narudzba_id) {
+        this.narudzba_id = narudzba_id;
+    }
+
     public int getId() {
         return id;
     }
