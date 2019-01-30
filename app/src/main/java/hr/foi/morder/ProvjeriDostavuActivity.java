@@ -38,7 +38,7 @@ public class ProvjeriDostavuActivity extends AppCompatActivity {
     }
 
     private void loadRacuni() {
-        databaseDostava.collection("Racun").whereEqualTo("dostava","Da").get()
+        databaseDostava.collection("Racun").whereEqualTo("status","dostava").get()
             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -47,7 +47,7 @@ public class ProvjeriDostavuActivity extends AppCompatActivity {
                 for(DocumentSnapshot documentSnapshot:task.getResult()){
                 Racun racun = documentSnapshot.toObject(Racun.class);
                 racun.getId();
-                racun.getDostava();
+                racun.getStatus();
                 racunList.add(racun);
                 }
                 dostavaRecyclerAdapter = new DostavaRecyclerAdapter(getApplicationContext(), racunList, databaseDostava);

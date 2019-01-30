@@ -22,8 +22,7 @@ public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecycler
     private List<Racun> racunList;
     private FirebaseFirestore database;
 
-    public  DostavaRecyclerAdapter(Context context, List<Racun> racuns, FirebaseFirestore database){
-
+    public DostavaRecyclerAdapter(Context context, List<Racun> racuns, FirebaseFirestore database) {
         this.context = context;
         this.racunList = racuns;
         this.database = database;
@@ -36,19 +35,24 @@ public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecycler
         View view = inflater.inflate(R.layout.card_view_pregled_dostave, null);
         return new DostavaViewHolder(view);
     }
+
     @Override
     public void onBindViewHolder(@NonNull DostavaRecyclerAdapter.DostavaViewHolder dostavaViewHolder, int i) {
 
         final Racun racun = racunList.get(i);
 
         dostavaViewHolder.textViewId.setText(String.valueOf(racun.getId()));
-        dostavaViewHolder.textViewPin.setText(String.valueOf(racun.getSifra()));
+        dostavaViewHolder.textViewQR.setText(String.valueOf(racun.getKod()));
+        dostavaViewHolder.textViewPin.setText(String.valueOf(racun.getStatus()));
 
     }
-    @Override
-    public int getItemCount(){return racunList.size();}
 
-    public class DostavaViewHolder extends RecyclerView.ViewHolder{
+    @Override
+    public int getItemCount() {
+        return racunList.size();
+    }
+
+    public class DostavaViewHolder extends RecyclerView.ViewHolder {
 
         View view;
         public TextView textViewId;
@@ -63,10 +67,11 @@ public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecycler
             textViewPin = itemView.findViewById(R.id.textViewPin);
 
             view.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View view) {
-                Intent intent = new Intent(context, ScannerStart.class);
-                intent.putExtra("Pin",textViewId.getText().toString());
-                context.startActivity(intent);
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ScannerStart.class);
+                    intent.putExtra("Pin", textViewId.getText().toString());
+                    context.startActivity(intent);
                 }
             });
         }

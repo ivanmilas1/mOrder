@@ -21,7 +21,7 @@ public class Racun {
      * The Stol. Table on whom order was made
      */
     public Integer stol_id;
-    public String dostava;
+    public String status;
     public Long kod;
     public Integer sifra;
 
@@ -106,17 +106,17 @@ public class Racun {
         return result;
     }
 
-    public String getDostava() {
-        return dostava;
+    public String getStatus() {
+        return status;
     }
 
-    public void setDostava(String dostava) {
-        this.dostava = dostava;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public Racun(int id, String dostava) {
+    public Racun(int id, String status) {
         this.id = id;
-        this.dostava = dostava;
+        this.status = status;
     }
 
     public Long getKod() {
