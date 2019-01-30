@@ -35,7 +35,12 @@ public class MainActivity extends AppCompatActivity {
      *             @author Danijel Pintarić
      */
     public void enterLoginEmployee(View view) {
-        Intent intent = new Intent(this, IzbornikDjelatnikActivity.class);
+        Intent intent = new Intent(this, PrijavaDjelatnikActivity.class);
+        startActivity(intent);
+    }
+
+    public void homeDelivery(View view) {
+        Intent intent = new Intent(this, DostavaActivity.class);
         startActivity(intent);
     }
 }

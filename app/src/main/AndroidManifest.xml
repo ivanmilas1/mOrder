@@ -3,6 +3,10 @@
     package="hr.foi.morder">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -11,6 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".DostavaActivity"></activity>
+        <activity android:name=".ScannerActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,14 +24,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="PrikazStolovaActivity" />
+        <activity android:name=".PrikazStolovaActivity" />
         <activity android:name=".DetaljiNarudzbeActivity" />
         <activity android:name="PrijavaDjelatnikActivity" />
         <activity android:name="IzbornikDjelatnikActivity" />
+        <activity android:name=".KosaricaActivity" />
         <activity android:name="NarucivanjeActivity"/>
-        <activity android:name=".DodavanjeRadnikaActivity">
-
-        </activity>
+        <activity android:name=".DodavanjeRadnikaActivity"/>
     </application>
-
 </manifest>
