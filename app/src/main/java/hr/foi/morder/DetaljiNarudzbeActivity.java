@@ -28,7 +28,7 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
     ArrayList<Artikl> listaArtikala = new ArrayList<>();
     ArrayList<StavkaNarudzbe> listaStavkiNarudžbi = new ArrayList<>();
     private FirebaseFirestore database;
-    Button btnPlaceOrder;
+    Button btnPlaceOrder, buttonIssueBill;
     private ListView listView;
     int stolID;
     private DjelatnikPregledRacunaListAdapter djelatnikPregledRacunaStolaListAdapter;
@@ -36,7 +36,7 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detalji_narudzbe2);
+        setContentView(R.layout.activity_detalji_narudzbe);
         Intent intent = getIntent();
         stolID = Integer.parseInt(intent.getStringExtra("stolID"));
         database = FirebaseFirestore.getInstance();
@@ -47,6 +47,14 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+
+        buttonIssueBill = findViewById(R.id.btnIzdatiRacun);
+        buttonIssueBill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // database.collection("Narudzba").document(narudzbaDokument).update("iznos_narudzbe", iznosNarudzbe + price);
             }
         });
     }

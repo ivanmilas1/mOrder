@@ -1,6 +1,6 @@
 package hr.foi.morder;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -39,11 +38,12 @@ public class KosaricaActivity extends AppCompatActivity {
     public Double ukupnaCijena = 0.0;
     private FirebaseFirestore database;
     private String idNarudzbe = "";
-    private String stolId;
+    private Integer stolId = 0;
     private Integer racunId;
     private String racunDokument;
     private Integer stol;
     private String narudzbaDokument;
+    private String stolDokument;
     private String stolStanje;
 
     @Override
@@ -54,84 +54,22 @@ public class KosaricaActivity extends AppCompatActivity {
         buildRecyclerView();
         database = FirebaseFirestore.getInstance();
         naruci = findViewById(R.id.buttonNaruci);
-        zadnjiElement();
+        dohvatiNarudzbu();
+
         naruci.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(stolStanje == "slobodan"){
-
-                    Toast.makeText(getApplicationContext(), "Slobodan", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    dovrsiNarudzbu();
-                }
+                stanjeStola();
             }
         });
     }
 
-    //Narudžba koja će sadržavati elemente košarice
-    private void dovrsiNarudzbu() {
-        database.collection("Stol").whereEqualTo("stanje", "slobodan").limit(1)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            List<Stol> listStolova = new ArrayList<>();
-                            for (DocumentSnapshot documentSnapshot : task.getResult()) {
-                                Stol stol = documentSnapshot.toObject(Stol.class);
-                                stolId = documentSnapshot.getId();
-                                stol.getId();
-                                stol.getStanje();
-                                listStolova.add(stol);
-
-                            }
-                            for (Stol s : listStolova) {
-                                stol = s.getId();
-                                stolStanje = s.getStanje();
-                            }
-
-                            database.collection("Stol").document(stolId).update("narudzba_id", brojNarudzbe);
-                            database.collection("Stol").document(stolId).update("stanje", "zauzet");
-
-
-                            database.collection("Racun").orderBy("id", Query.Direction.DESCENDING).limit(1)
-                                    .get()
-                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                            if (task.isSuccessful()) {
-                                                final List<Racun> racunLista = new ArrayList<>();
-                                                for (DocumentSnapshot documentSnapshot : task.getResult()) {
-                                                    Racun racun = documentSnapshot.toObject(Racun.class);
-                                                    racun.getId();
-                                                    racunLista.add(racun);
-                                                }
-
-                                                for (Racun r : racunLista) {
-                                                    racunId = r.getId();
-                                                }
-                                                addRacun(racunId + 1, stol);
-                                                database.collection("Narudzba").document(idNarudzbe).update("racun_id", racunId+1);
-                                            } else {
-                                                Log.d("Error", "Error getting data");
-                                            }
-                                        }
-                                    });
-                        }
-                    }
-                });
-    }
-
-    public void nastaviNarudzbu(){
-        database.collection("Stol").whereEqualTo("id", stolId)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
-                    }
-                });
+    public void stanjeStola() {
+        if (stolId == 0) {
+            dovrsiNarudzbu();
+        } else {
+            nastaviNarudzbu();
+        }
     }
 
     public void addRacun(Integer id, Integer stol) {
@@ -146,8 +84,30 @@ public class KosaricaActivity extends AppCompatActivity {
                 });
     }
 
+    //Dohvat zadnjeg id narudzbe, pod tim id se spremaju artikli koji su u kosarici
+    private void dohvatiNarudzbu() {
+        database.collection("Narudzba").orderBy("id", Query.Direction.DESCENDING).limit(1).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                                idNarudzbe = documentSnapshot.getId();
+                                Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
+                                brojNarudzbe = narudzba.getId();
+                                racunId = narudzba.getRacun_id();
+                                dohvatiStolID();
+                                dohvatiStavkeKosarice();
+                            }
+                        } else {
+                            Log.d("Error", "Error getting data");
+                        }
+                    }
+                });
+    }
+
     //Dohvaćanje svih stavki koje je korisnik odabrao, spremaju se prvo na firestore te se onda dobavljaju i prikazuju, nisu vezani za narudzbu
-    private void loadStavkeKosarice() {
+    private void dohvatiStavkeKosarice() {
         database.collection("Stavka narudzbe").whereEqualTo("narudzba_id", brojNarudzbe).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -173,20 +133,81 @@ public class KosaricaActivity extends AppCompatActivity {
                 });
     }
 
-
-    //Dohvat zadnjeg id narudzbe, pod tim id se spremaju artikli koji su u kosarici
-    private void zadnjiElement() {
-        database.collection("Narudzba").orderBy("id", Query.Direction.DESCENDING).limit(1).get()
+    private void dohvatiStolID() {
+        database.collection("Racun").whereEqualTo("id", racunId).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (DocumentSnapshot documentSnapshot : task.getResult()) {
-                                idNarudzbe = documentSnapshot.getId();
-                                Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
-                                brojNarudzbe = narudzba.getId();
-                                loadStavkeKosarice();
+                                Racun racun = documentSnapshot.toObject(Racun.class);
+                                stolId = racun.getStol();
                             }
+                        } else {
+                            Log.d("Error", "Error getting data");
+                        }
+                    }
+                });
+    }
+
+    //Narudžba koja će sadržavati elemente košarice
+    private void dovrsiNarudzbu() {
+        database.collection("Stol").whereEqualTo("stanje", "slobodan").limit(1)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                                Stol stol = documentSnapshot.toObject(Stol.class);
+                                stolDokument = documentSnapshot.getId();
+                                stolId = stol.getId();
+                                stol.getStanje();
+                            }
+                            database.collection("Stol").document(stolDokument).update("narudzba_id", brojNarudzbe);
+                            database.collection("Stol").document(stolDokument).update("stanje", "zauzet");
+
+                            database.collection("Racun").orderBy("id", Query.Direction.DESCENDING).limit(1)
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                                                    Racun racun = documentSnapshot.toObject(Racun.class);
+                                                    racunId = racun.getId();
+                                                    racunDokument = documentSnapshot.getId();
+                                                }
+                                                addRacun(racunId + 1, stolId);
+                                                database.collection("Narudzba").document(idNarudzbe).update("racun_id", racunId + 1);
+                                                //database.collection("Racun").document(racunDokument).update("stol", racunId + 1);
+                                            } else {
+                                                Log.d("Error", "Error getting data");
+                                            }
+                                            Intent intent = new Intent(getApplicationContext(), NarucivanjeActivity.class);
+                                            intent.putExtra("racunID", racunId + 1);
+                                            startActivity(intent);
+                                        }
+                                    });
+                        }
+                    }
+                });
+    }
+
+    public void nastaviNarudzbu() {
+        database.collection("Racun").orderBy("id", Query.Direction.DESCENDING).limit(1).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                                Racun racun = documentSnapshot.toObject(Racun.class);
+                                racunId = racun.getId();
+                            }
+                            database.collection("Narudzba").document(idNarudzbe).update("racun_id", racunId);
+                            Intent intent = new Intent(getApplicationContext(), NarucivanjeActivity.class);
+                            intent.putExtra("racunID", racunId + 1);
+                            startActivity(intent);
                         } else {
                             Log.d("Error", "Error getting data");
                         }

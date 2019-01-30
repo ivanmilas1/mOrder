@@ -31,6 +31,13 @@ public class Narudzba {
         this.status = status;
     }
 
+    public Narudzba(Integer id, Double iznos, String status, Integer racunID){
+        this.id = id;
+        this.iznos_narudzbe = iznos;
+        this.status = status;
+        this.racun_id = racunID;
+    }
+
     public Narudzba(Integer id, Double iznos_narudzbe, Integer korisnik_id, Integer racun_id, String status) {
         this.id = id;
         this.iznos_narudzbe = iznos_narudzbe;

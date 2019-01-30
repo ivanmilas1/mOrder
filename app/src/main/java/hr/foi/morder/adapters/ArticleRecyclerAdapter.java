@@ -21,7 +21,6 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -106,14 +105,8 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
                 id = Integer.parseInt(String.valueOf(viewHolder.id.getText()));
 
                 viewHolder.setPrice(Artikl.getJedinicna_cijena());
-                try {
-                    zadnjiElement();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
                 final Integer quantity = Integer.parseInt(String.valueOf(viewHolder.quantity.getText()));
                 final Double price = Double.parseDouble(String.valueOf(viewHolder.price.getText()));
-                addOrder(Artikl.getId(), brojNarudzbe, price, quantity);
                 viewHolder.setPrice(Artikl.getJedinicna_cijena());
                 viewHolder.setQuantity(1);
                 Toast.makeText(ctx, "Narudžba je stavljena u košaricu.", Toast.LENGTH_SHORT).show();
@@ -124,23 +117,13 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
-                                    List<Narudzba> narudzbaList = new ArrayList<>();
-
                                     for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                         Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
                                         narudzbaDokument = documentSnapshot.getId();
                                         iznosNarudzbe = narudzba.getIznos_narudzbe();
-                                        narudzba.getId();
-                                        narudzbaList.add(narudzba);
-                                    }
-
-                                    for (Narudzba n : narudzbaList) {
-                                        idNarudzba = n.getId();
+                                        idNarudzba = narudzba.getId();
                                     }
                                     addOrder(id, idNarudzba, price, quantity);
-                                    //database.collection("Narudzba").document(narudzbaDokument).update("iznos_narudzbe", iznosNarudzbe + price);
-
-
                                 } else {
                                     Log.d("Error", "Error getting data");
                                 }
@@ -224,13 +207,10 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-
                             for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                 Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
                                 brojNarudzbe = narudzba.getId();
                                 brojNarudzbe = brojNarudzbe + 1;
-
-
                             }
                         } else {
                             Log.d("Error", "Error getting data");
