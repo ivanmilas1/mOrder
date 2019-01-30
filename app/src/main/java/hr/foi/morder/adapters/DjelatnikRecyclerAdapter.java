@@ -18,17 +18,33 @@ import hr.foi.morder.DodavanjeRadnikaActivity;
 import hr.foi.morder.R;
 import hr.foi.morder.model.Djelatnik;
 
+/**
+ * The type Djelatnik recycler adapter.
+ */
 public class DjelatnikRecyclerAdapter extends RecyclerView.Adapter<DjelatnikRecyclerAdapter.DjelatnikViewHoleder>  {
     private Context context;
     private List<Djelatnik> DjelatnikList;
     private FirebaseFirestore database;
 
+    /**
+     * Instantiates a new Djelatnik recycler adapter.
+     *
+     * @param context       the context , accepts activity context
+     * @param djelatnikList the djelatnik list, List of waiters
+     * @param database      the database, database parameter
+     */
     public DjelatnikRecyclerAdapter(Context context, List<Djelatnik> djelatnikList, FirebaseFirestore database) {
         this.context = context;
         this.DjelatnikList = djelatnikList;
         this.database = database;
     }
 
+    /**
+     *
+     * @param viewGroup
+     * @param i current position inside the view holder
+     * @return returns new view
+     */
     @NonNull
     @Override
     public DjelatnikViewHoleder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -37,6 +53,11 @@ public class DjelatnikRecyclerAdapter extends RecyclerView.Adapter<DjelatnikRecy
         return new DjelatnikViewHoleder(view);
     }
 
+    /**
+     *
+     * @param djelatnikViewHoleder
+     * @param i
+     */
     @Override
     public void onBindViewHolder(@NonNull DjelatnikViewHoleder djelatnikViewHoleder, int i) {
         Integer tipDjelatnik;
@@ -64,16 +85,45 @@ public class DjelatnikRecyclerAdapter extends RecyclerView.Adapter<DjelatnikRecy
         return DjelatnikList.size();
     }
 
+    /**
+     * The type Djelatnik view holeder.
+     */
     public class DjelatnikViewHoleder extends RecyclerView.ViewHolder{
+        /**
+         * The View.
+         */
         View view;
+        /**
+         * The Text view email. Text view for email input
+         */
         public TextView textViewEmail;
+        /**
+         * The Text view ime. Text view for name input
+         */
         public TextView textViewIme;
+        /**
+         * The Text view djelatnik id. Text view for user id input.
+         */
         public TextView textViewDjelatnikId;
 
+        /**
+         * The Text view djelatnik ime. Text view inside view holder to print user name.
+         */
         public TextView textViewDjelatnikIme;
+        /**
+         * The Text view djelatnik email. Text view inside view holder to print user email.
+         */
         public TextView textViewDjelatnikEmail;
+        /**
+         * The Text view djelatnik tip. Text view inside view holder to print user type..
+         */
         public TextView textViewDjelatnikTip;
 
+        /**
+         * Instantiates a new Djelatnik view holeder.
+         *
+         * @param itemView the item view
+         */
         public DjelatnikViewHoleder(@NonNull View itemView) {
 
             super(itemView);

@@ -20,11 +20,46 @@ import java.util.List;
 
 import hr.foi.morder.model.Stol;
 
+/**
+ * The type Prikaz stolova activity table preview, shows table layout and defines table colors.
+ * If table is taken red color, if table is free green color and yellow if order is in process.
+ * @author Marko Fabijan Pavlović
+ */
 public class PrikazStolovaActivity extends AppCompatActivity {
 
     private FirebaseFirestore database;
-    int crvena, zuta, zelena;
-    Button btnStol1, btnStol2, btnStol3, btnStol4, btnStol5, btnStol6, btnStol7;
+    /**
+     * The Crvena If table is taken red color
+     */
+    int crvena, /**
+     * The Zuta if order is in process
+     */
+    zuta, /**
+     * The Zelena if table is free
+     */
+    zelena;
+    /**
+     * The Btn stol 1 opens table content for table 1.
+     */
+    Button btnStol1, /**
+     * The Btn stol 2. opens table content for table 2.
+     */
+    btnStol2, /**
+     * The Btn stol 3. opens table content for table 3.
+     */
+    btnStol3, /**
+     * The Btn stol 4. opens table content for table 4.
+     */
+    btnStol4, /**
+     * The Btn stol 5. opens table content for table 5.
+     */
+    btnStol5, /**
+     * The Btn stol 6.opens table content for table 6.
+     */
+    btnStol6, /**
+     * The Btn stol 7. opens table content for table 7.
+     */
+    btnStol7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +71,12 @@ public class PrikazStolovaActivity extends AppCompatActivity {
         getTables(listOfButtons, listaStolova);
     }
 
+    /**
+     * Connects table with its button
+     * @param listOfButtons Each button represents table
+     * @param listaStolova Table list
+     * @author Marko Fabijan PavloviÄ‡
+     */
     private void getTables(final List<Button> listOfButtons, final List<Stol> listaStolova) {
         database = FirebaseFirestore.getInstance();
         database.collection("Stol")
@@ -57,6 +98,16 @@ public class PrikazStolovaActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Defines table status
+     * Colors table depending on status
+     * Status "slobodan" green color
+     * Status "narudzbaUPrirpemi" yellow color
+     * Status "zauzet" red color
+     * @param listOfButtons Each button represents table
+     * @param listaStolova Table list
+     * @author Marko Fabijan PavloviÄ‡
+     */
     private void setButtonBehaviour(List<Button> listOfButtons, List<Stol> listaStolova) {
         for (Stol item : listaStolova) {
             for (Button itemButton : listOfButtons) {
@@ -73,6 +124,13 @@ public class PrikazStolovaActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Connecting each table button with table from database
+     * On button click opening activity DetaljiNarudzbeActivity
+     * Intent passing data about table id
+     * @param listOfButtons Each button represents table
+     * @author Marko Fabijan PavloviÄ‡
+     */
     private void setOnClickListenerForAllButtons(List<Button> listOfButtons) {
         for (final Button itemButton : listOfButtons) {
             // seting for all buttons onClickListener to start DetaljiNaruzdbeActivity
@@ -87,15 +145,28 @@ public class PrikazStolovaActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Defining table colors
+     * crvena red
+     * zuta yellow
+     * zelena green
+     * @author Marko Fabijan PavloviÄ‡
+     */
     private void initColors() {
-        //ako nema narud�be
+        //ako nema narudžbe
         crvena = Color.rgb(179, 5, 5);
-        //ako je narud�ba u izradi
+        //ako je narudžba u izradi
         zuta = Color.rgb(225, 206, 132);
-        //ako je narud�ba poslu�ena
+        //ako je narudžba poslužena
         zelena = Color.rgb(78, 255, 167);
     }
 
+    /**
+     * Hardcoding table values
+     * Adding each button to list
+     *
+     * @return returning ListOfButton list which consist of button values
+     */
     @NonNull
     private List<Button> getButtonsInList() {
         btnStol1 = findViewById(R.id.btnStol1);
