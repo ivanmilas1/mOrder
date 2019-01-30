@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void enterLoginEmployee(View view) {
-        Intent intent = new Intent(this, IzbornikDjelatnikActivity.class);
+        Intent intent = new Intent(this, PrijavaDjelatnikActivity.class);
         startActivity(intent);
     }
 
