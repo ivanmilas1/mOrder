@@ -23,7 +23,7 @@ import static android.Manifest.permission_group.CAMERA;
 public class ScannerStart extends AppCompatActivity implements ZXingScannerView.ResultHandler {
     private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView scannerView;
-
+    public  String sifra;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +31,19 @@ public class ScannerStart extends AppCompatActivity implements ZXingScannerView.
         setContentView(scannerView);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Intent intent = getIntent();
+        sifra = intent.getStringExtra("Pin");
+        /*
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+        */
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkPermission()) {
@@ -64,6 +77,12 @@ public class ScannerStart extends AppCompatActivity implements ZXingScannerView.
         });
 
         builder.setMessage(scanResult);
+        if(scanResult.equals(String.valueOf(sifra))){
+            builder.setMessage("Narudžba uspješno dostavljenja");
+        }
+        else {
+            builder.setMessage("Kriva adresa");
+        }
 
         AlertDialog alert = builder.create();
         alert.show();

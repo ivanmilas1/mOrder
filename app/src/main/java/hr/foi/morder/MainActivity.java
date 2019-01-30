@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void homeDelivery(View view) {
-        Intent intent = new Intent(this, NarucivanjeDostavaActivity.class);
+        Intent intent = new Intent(this, ProvjeriDostavuActivity.class);
         startActivity(intent);
     }
 }

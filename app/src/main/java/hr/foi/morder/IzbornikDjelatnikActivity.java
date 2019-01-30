@@ -54,14 +54,8 @@ public class IzbornikDjelatnikActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /**
-     * On click start scanner starts modular activity for creating QR code.
-     *
-     * @param view the view
-     * @author Danijel Pintarić
-     */
-    public void OnClickStartQR(View view) {
-        Intent intent = new Intent(this, ScannerStart.class);
+    public void OnClickStartQR(View view){
+        Intent intent=new Intent(this, ProvjeriDostavuActivity.class);
         startActivity(intent);
     }
 }
