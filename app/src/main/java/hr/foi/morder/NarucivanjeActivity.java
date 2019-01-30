@@ -1,6 +1,5 @@
 package hr.foi.morder;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -34,12 +33,17 @@ import hr.foi.morder.adapters.ExpendableListAdapter;
 import hr.foi.morder.model.Artikl;
 import hr.foi.morder.model.Kategorija;
 import hr.foi.morder.model.Narudzba;
-import hr.foi.morder.model.Racun;
-import hr.foi.morder.model.Stol;
 
-public class NarucivanjeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+/**
+ * The type Narucivanje activity.
+ * Set content view activity_prijava layout
+ * @author Nikola Gluhak
+ */
+public class NarucivanjeActivity extends AppCompatActivity {
+
 
     private DrawerLayout drawer;
+
     private ActionBarDrawerToggle toggle;
     private NavigationView navigation;
     private TextView textViewNovoUPonudi;
@@ -53,18 +57,13 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
     private HashMap<String, List<String>> listChildEx;
     private Long childId;
     private Integer idNarudzba;
-    private String stolId;
-    private Integer racunId;
-    private String racunDokument;
-    private Integer stol;
-    private String narudzbaDokument;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.article);
         drawer = findViewById(R.id.drawer);
-
         toggle = new ActionBarDrawerToggle(this, drawer, R.string.open, R.string.close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -72,9 +71,8 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
         expandableListView = findViewById(R.id.navigationmenu);
         navigation = findViewById(R.id.nv);
         setupDrawerContent(navigation);
-        navigation.setNavigationItemSelectedListener(this);
 
-        textViewNovoUPonudi = findViewById(R.id.naslovNovoUPonudi);
+        textViewNovoUPonudi = findViewById(R.id.NaslovNovoUPonudi);
 
         recyclerView = findViewById(R.id.article_recycler);
         database = FirebaseFirestore.getInstance();
@@ -92,6 +90,13 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
         textViewNovoUPonudi.setText("");
     }
 
+    /**
+     * Finding order Id
+     * Firebase connection to "Narudzba" collection
+     * Ordering by id descending to find last order
+     * Adds one on last order number, that represent order in processing
+     *@author Nikola Gluhak
+     */
     private void dohvatiIdNarudzbe() {
         database.collection("Narudzba").orderBy("id", Query.Direction.DESCENDING).limit(1)
                 .get()
@@ -99,10 +104,9 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            final List<Narudzba> narudzbaList = new ArrayList<>();
+                            List<Narudzba> narudzbaList = new ArrayList<>();
                             for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                 Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
-                                narudzbaDokument = documentSnapshot.getId();
                                 narudzba.getId();
                                 narudzbaList.add(narudzba);
                             }
@@ -110,55 +114,7 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                             for (Narudzba n : narudzbaList) {
                                 idNarudzba = n.getId();
                             }
-                            database.collection("Stol").whereEqualTo("stanje", "slobodan").limit(1)
-                                    .get()
-                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                            if (task.isSuccessful()) {
-                                                List<Stol> listStolova = new ArrayList<>();
-                                                for (DocumentSnapshot documentSnapshot : task.getResult()) {
-                                                    Stol stol = documentSnapshot.toObject(Stol.class);
-                                                    stolId = documentSnapshot.getId();
-                                                    stol.getId();
-                                                    listStolova.add(stol);
-
-                                                }
-                                                for (Stol s : listStolova) {
-                                                    stol = s.getId();
-                                                }
-
-                                                database.collection("Stol").document(stolId).update("narudzba_id", idNarudzba + 1);
-                                                database.collection("Stol").document(stolId).update("stanje", "narudzbaUPripremi");
-
-                                                database.collection("Racun").orderBy("id", Query.Direction.DESCENDING).limit(1)
-                                                        .get()
-                                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                            @Override
-                                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                                if (task.isSuccessful()) {
-                                                                    final List<Racun> racunLista = new ArrayList<>();
-                                                                    for (DocumentSnapshot documentSnapshot : task.getResult()) {
-                                                                        Racun racun = documentSnapshot.toObject(Racun.class);
-                                                                        racun.getId();
-                                                                        racunLista.add(racun);
-                                                                    }
-
-                                                                    for (Racun r : racunLista) {
-                                                                        racunId = r.getId();
-                                                                    }
-                                                                    addRacun(racunId + 1, stol);
-                                                                    addIdNarudzba(idNarudzba + 1, 0.00, racunId + 1);
-
-                                                                } else {
-                                                                    Log.d("Error", "Error getting data");
-                                                                }
-                                                            }
-                                                        });
-                                            }
-                                        }
-                                    });
-
+                            addIdNarudzba(idNarudzba + 1, "U pripremi");
                         } else {
                             Log.d("Error", "Error getting data");
                         }
@@ -166,20 +122,16 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                 });
     }
 
-    public void addRacun(Integer id, Integer stol) {
-        Map<String, Object> idRacuna = new Racun(id, stol).toMap();
-        database.collection("Racun")
-                .add(idRacuna)
-                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
-
-                    }
-                });
-    }
-
-    public void addIdNarudzba(Integer id, Double cijena, Integer racun) {
-        Map<String, Object> idNarudzbe = new Narudzba(id, cijena, racun).toMap();
+    /**
+     * Add id narudzba. Adding id value to order.
+     *Firebase connection to "Narudzba" collection
+     * @param id     the id represents order id number
+     * @param status the status defines table status, free, in processing or taken.
+     * @author Nikola Gluhak
+     *
+     */
+    public void addIdNarudzba(Integer id, String status) {
+        Map<String, Object> idNarudzbe = new Narudzba(id, status).toMap();
         database.collection("Narudzba")
                 .add(idNarudzbe)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -190,17 +142,13 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                 });
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case R.id.kosarica:
-                Intent intent = new Intent(this, KosaricaActivity.class);
-                startActivity(intent);
-                break;
-        }
-        return true;
-    }
-
+    /**
+     * Dohvati kategorije. Creating categories from data gathered from Firestore based on their "Kategorija_id".
+     * Creating new adapter for recycler viwe
+     * Setting recycler view layout manager from application context
+     * Setting the adapter into recycler view
+     * @author Nikola Gluhak
+     */
     private void dohvatiKategorije() {
         listChildEx = new HashMap<>();
         database.collection("Kategorija")
@@ -214,7 +162,6 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                                 Kategorija kategorija = documentSnapshot.toObject(Kategorija.class);
                                 kategorijaList.add(kategorija.getNaziv());
                             }
-
                             listChildEx.put("Jelovnik", kategorijaList);
                             listChild = listChildEx;
                             listHeader = new ArrayList<>(listChild.keySet());
@@ -243,7 +190,14 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                     }
                 });
     }
-
+    /**
+     * Load articels List loading articels from Firestore database depending on their "kategorija_id" field.
+     * Creating new adapter for recycler viwe
+     * Setting recycler view layout manager from application context
+     * Setting the adapter into recycler view
+     * @param idKategorije    the idKategorije respresents category id number
+     * @author Nikola Gluhak
+     */
     private void loadArticleList(long idKategorije) {
         database.collection("Artikl")
                 .whereEqualTo("kategorija_id", idKategorije)
@@ -268,9 +222,17 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                     }
                 });
     }
-
+    /**
+     * Load last articles fetching last 7 articles from Firestore collection "Artikl" and orders them by "id" field descending
+     * Adding data to articlesList list
+     * Creating new adapter for recycler viwe
+     * Setting recycler view layout manager from application context
+     * Setting the adapter into recycler view
+     *@author Nikola Gluhak
+     *
+     */
     private void loadLastArticles() {
-        database.collection("Artikl").orderBy("id", Query.Direction.DESCENDING).limit(3)
+        database.collection("Artikl").orderBy("id", Query.Direction.DESCENDING).limit(7)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -293,6 +255,11 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                 });
     }
 
+    /**
+     * Click on navigation item marks it
+     * @param nv navigation view for drawer
+     * @author Nikola Gluhak
+     */
     private void setupDrawerContent(NavigationView nv) {
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -310,7 +277,6 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (toggle.onOptionsItemSelected(item)) {
-
             return true;
         }
         return super.onOptionsItemSelected(item);
