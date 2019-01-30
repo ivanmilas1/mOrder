@@ -71,6 +71,11 @@ public class ScannerStart extends AppCompatActivity implements ZXingScannerView.
                 startActivity(intent);
             }
         });
+
+//        if (scanResult.eq(idRacun)) {
+//            // narudzba je potvrđena
+//        }
+
         builder.setMessage(scanResult);
 
         AlertDialog alert = builder.create();
