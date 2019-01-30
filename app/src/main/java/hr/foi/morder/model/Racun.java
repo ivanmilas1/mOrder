@@ -30,7 +30,6 @@ public class Racun {
     }
 
 
-
     public Racun() {
     }
 
@@ -84,7 +83,7 @@ public class Racun {
         result.put("stol_id", this.stol_id);
         return result;
     }
-    }
+
     public String getDostava() {
         return dostava;
     }
@@ -93,7 +92,8 @@ public class Racun {
         this.dostava = dostava;
     }
 
-    public Racun(int id, String dostava){
+    public Racun(int id, String dostava) {
         this.id = id;
         this.dostava = dostava;
+    }
 }
