@@ -29,10 +29,6 @@ public class IzbornikDjelatnikActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void OnClickStartScanner(View view){
-
-    }
-
     public void OnClickStartQR(View view){
         Intent intent=new Intent(this, ScannerStart.class);
         startActivity(intent);

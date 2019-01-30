@@ -41,6 +41,8 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
     private Integer id;
     private String narudzbaDokument;
     private Double iznosNarudzbe;
+    public Integer brojNarudzbe;
+
 
     public ArticleRecyclerAdapter(List<Artikl> articleList, Context ctx, FirebaseFirestore database) {
         this.articleList = articleList;
@@ -57,6 +59,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int position) {
+
         final int itemPosition = position;
         final Artikl Artikl = articleList.get(itemPosition);
         viewHolder.setId(Artikl.getId());
@@ -107,19 +110,28 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
                 id = Integer.parseInt(String.valueOf(viewHolder.id.getText()));
 
 
-viewHolder.setPrice(Artikl.getJedinicna_cijena());
+                viewHolder.setPrice(Artikl.getJedinicna_cijena());
+                try {
+                    zadnjiElement();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                final Integer quantity = Integer.parseInt(String.valueOf(viewHolder.quantity.getText()));
+                final Double price = Double.parseDouble(String.valueOf(viewHolder.price.getText()));
+                addOrder(Artikl.getId(), brojNarudzbe, price, quantity);
+                viewHolder.setPrice(Artikl.getJedinicna_cijena());
                 viewHolder.setQuantity(1);
-                Toast.makeText(ctx, "Narudžba je zaprimljena" , Toast.LENGTH_LONG).show();
+                Toast.makeText(ctx, "Narudžba je zaprimljena", Toast.LENGTH_SHORT).show();
 
                 database.collection("Narudzba").orderBy("id", Query.Direction.DESCENDING).limit(1)
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     List<Narudzba> narudzbaList = new ArrayList<>();
 
-                                    for(DocumentSnapshot documentSnapshot: task.getResult()){
+                                    for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                         Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
                                         narudzbaDokument = documentSnapshot.getId();
                                         iznosNarudzbe = narudzba.getIznos_narudzbe();
@@ -127,15 +139,14 @@ viewHolder.setPrice(Artikl.getJedinicna_cijena());
                                         narudzbaList.add(narudzba);
                                     }
 
-                                    for (Narudzba n: narudzbaList){
+                                    for (Narudzba n : narudzbaList) {
                                         idNarudzba = n.getId();
                                     }
-                                    addOrder(id,idNarudzba, price, quantity);
-                                    database.collection("Narudzba").document(narudzbaDokument).update("iznos_narudzbe", iznosNarudzbe+price);
+                                    addOrder(id, idNarudzba, price, quantity);
+                                    database.collection("Narudzba").document(narudzbaDokument).update("iznos_narudzbe", iznosNarudzbe + price);
 
 
-                                }
-                                else{
+                                } else {
                                     Log.d("Error", "Error getting data");
                                 }
                             }
@@ -210,5 +221,26 @@ viewHolder.setPrice(Artikl.getJedinicna_cijena());
             TextView articlePriceCurrency = itemView.findViewById(R.id.article_price_currency);
             articlePriceCurrency.setText(quantity);
         }
+    }
+
+    private void zadnjiElement() {
+        database.collection("Narudzba").limit(1).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                                Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
+                                brojNarudzbe = narudzba.getId();
+                                brojNarudzbe = brojNarudzbe + 1;
+
+
+                            }
+                        } else {
+                            Log.d("Error", "Error getting data");
+                        }
+                    }
+                });
     }
 }

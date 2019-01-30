@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Racun {
+
     public int id;
     public Date vrijeme_izdavanja;
     public Integer stol_id;
