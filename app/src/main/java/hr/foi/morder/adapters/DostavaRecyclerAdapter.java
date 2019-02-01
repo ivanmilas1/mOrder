@@ -14,18 +14,25 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.List;
 
 import hr.foi.morder.R;
+import hr.foi.morder.scannerlib.DostavaManager;
+import hr.foi.morder.scannerlib.MetodaValidacijeDostave;
+import hr.foi.morder.scannerlib.ValidiranjePutemQRKoda;
+import hr.foi.morder.scannerlib.ValidiranjePrekoLozinkeActivity;
 import hr.foi.morder.model.Racun;
-import hr.foi.morder.scannerlib.ScannerStart;
+import hr.foi.morder.scannerlib.ValidiranjeActivity;
 
 public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecyclerAdapter.DostavaViewHolder> {
     private Context context;
     private List<Racun> racunList;
-    private FirebaseFirestore database;
+    private String nacinRada = "";
 
-    public DostavaRecyclerAdapter(Context context, List<Racun> racuns, FirebaseFirestore database) {
+    private MetodaValidacijeDostave putemPina = new ValidiranjePrekoLozinkeActivity();
+    private MetodaValidacijeDostave putemQRCoda = new ValidiranjePutemQRKoda();
+
+    public DostavaRecyclerAdapter(Context context, List<Racun> racuna, String nacinRada) {
         this.context = context;
-        this.racunList = racuns;
-        this.database = database;
+        this.racunList = racuna;
+        this.nacinRada = nacinRada;
     }
 
     @NonNull
@@ -38,13 +45,10 @@ public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecycler
 
     @Override
     public void onBindViewHolder(@NonNull DostavaRecyclerAdapter.DostavaViewHolder dostavaViewHolder, int i) {
-
         final Racun racun = racunList.get(i);
-
         dostavaViewHolder.textViewId.setText(String.valueOf(racun.getId()));
-        dostavaViewHolder.textViewQR.setText(String.valueOf(racun.getKod()));
-        dostavaViewHolder.textViewPin.setText(String.valueOf(racun.getStatus()));
-
+        dostavaViewHolder.textViewQR.setText(String.valueOf(racun.getStatus()));
+        dostavaViewHolder.textViewPin.setText(String.valueOf(racun.getKod()));
     }
 
     @Override
@@ -53,7 +57,6 @@ public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecycler
     }
 
     public class DostavaViewHolder extends RecyclerView.ViewHolder {
-
         View view;
         public TextView textViewId;
         public TextView textViewQR;
@@ -69,12 +72,22 @@ public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecycler
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, ScannerStart.class);
-                    intent.putExtra("Pin", textViewId.getText().toString());
+                    Intent intent;
+                    if (nacinRada.equals("validatePassword")){
+                        intent = new Intent(context, ValidiranjeActivity.class);
+                        intent.putExtra("Pin", textViewPin.getText().toString());
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        DostavaManager.getInstance().setMetodaValidacijeDostave(putemPina);
+                    }
+                    else {
+                        intent = new Intent(context, ValidiranjeActivity.class);
+                        intent.putExtra("Pin", textViewId.getText().toString());
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        DostavaManager.getInstance().setMetodaValidacijeDostave(putemQRCoda);
+                    }
                     context.startActivity(intent);
                 }
             });
         }
     }
-
 }

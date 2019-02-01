@@ -30,16 +30,13 @@ public class GeneriraniKodActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.racun_kod);
-        kod = findViewById(R.id.buttonKod);
+        kod = findViewById(R.id.buttonGeneriraniKod);
         database = FirebaseFirestore.getInstance();
         dohvatiIdRacun();
-
-
     }
 
     private void racun(Integer id) {
-        database.collection("Racun").whereEqualTo("id", id)
-                .get()
+        database.collection("Racun").whereEqualTo("id", id).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -47,7 +44,6 @@ public class GeneriraniKodActivity extends AppCompatActivity {
                             for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                 Racun racun = documentSnapshot.toObject(Racun.class);
                                 generirani = racun.getKod().toString();
-
                             }
                             kod.setText(generirani);
                         } else {
@@ -66,7 +62,7 @@ public class GeneriraniKodActivity extends AppCompatActivity {
                             for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                 Racun racun = documentSnapshot.toObject(Racun.class);
                                 racunId = racun.getId();
-                                if(racunId >maxRacunId){
+                                if (racunId > maxRacunId) {
                                     maxRacunId = racunId;
                                 }
                             }
@@ -77,5 +73,4 @@ public class GeneriraniKodActivity extends AppCompatActivity {
                     }
                 });
     }
-
 }

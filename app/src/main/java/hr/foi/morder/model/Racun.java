@@ -42,6 +42,13 @@ public class Racun {
         this.stol_id = stol;
     }
 
+    public Racun(int id, String status, Long kod) {
+        this.id = id;
+        this.status = status;
+        this.kod = kod;
+    }
+
+
     public Integer getStol_id() {
         return stol_id;
     }
@@ -103,6 +110,8 @@ public class Racun {
         HashMap<String, Object> result = new HashMap<>();
         result.put("id", this.id);
         result.put("stol_id", this.stol_id);
+        result.put("status", this.status);
+        result.put("kod", this.kod);
         return result;
     }
 
@@ -111,11 +120,6 @@ public class Racun {
     }
 
     public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Racun(int id, String status) {
-        this.id = id;
         this.status = status;
     }
 

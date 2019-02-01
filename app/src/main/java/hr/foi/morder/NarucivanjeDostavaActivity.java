@@ -1,5 +1,6 @@
 package hr.foi.morder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -174,11 +175,11 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
                                 }
                             });
                             expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-                                @Override
-                                public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                                    return false;
-                                    }
-                                    }
+                                                                           @Override
+                                                                           public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                                                                               return false;
+                                                                           }
+                                                                       }
                             );
                         } else {
                             Log.d("Error", "Error getting data");
@@ -253,7 +254,12 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
     }
 
     private void selectDrawerView(MenuItem item) {
-
+        switch (item.getItemId()) {
+            case R.id.kosarica:
+                Intent intent = new Intent(this, KosaricaDostavaActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 
     @Override

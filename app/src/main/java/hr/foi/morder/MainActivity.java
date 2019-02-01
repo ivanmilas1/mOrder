@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
 
     /**
@@ -35,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
      *             @author Danijel Pintarić
      */
     public void enterLoginEmployee(View view) {
-        Intent intent = new Intent(this, PrijavaDjelatnikActivity.class);
+        //todo - vrni na staro
+        Intent intent = new Intent(this, IzbornikDjelatnikActivity.class);
         startActivity(intent);
     }
 

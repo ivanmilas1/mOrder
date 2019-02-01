@@ -1,5 +1,6 @@
 package hr.foi.morder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,6 +27,7 @@ public class ProvjeriDostavuActivity extends AppCompatActivity {
     private FirebaseFirestore databaseDostava;
     public DostavaRecyclerAdapter dostavaRecyclerAdapter;
     private List<Racun> racunList;
+    String nacinRada = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,6 +37,8 @@ public class ProvjeriDostavuActivity extends AppCompatActivity {
         buildRecyclerView();
         databaseDostava = FirebaseFirestore.getInstance();
         loadRacuni();
+        Intent intent = getIntent();
+        nacinRada = intent.getStringExtra("nacinRada");
     }
 
     private void loadRacuni() {
@@ -50,7 +54,7 @@ public class ProvjeriDostavuActivity extends AppCompatActivity {
                 racun.getStatus();
                 racunList.add(racun);
                 }
-                dostavaRecyclerAdapter = new DostavaRecyclerAdapter(getApplicationContext(), racunList, databaseDostava);
+                dostavaRecyclerAdapter = new DostavaRecyclerAdapter(getApplicationContext(), racunList, nacinRada);
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(dostavaRecyclerAdapter);
