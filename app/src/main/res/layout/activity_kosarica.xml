@@ -53,9 +53,9 @@
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="107dp"
+        android:layout_width="111dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="115dp"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="105dp"
         android:text="Jedinična cijena"

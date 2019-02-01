@@ -52,8 +52,6 @@ public class DostavaActivity extends AppCompatActivity implements CodeGenerateFr
     /**
      * The Lista.
      */
-    ArrayList<String> lista;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
