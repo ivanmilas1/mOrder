@@ -22,16 +22,9 @@
 
         <Button
             android:id="@+id/btnIzdatiRacun"
-            android:layout_width="365dp"
+            android:layout_width="733dp"
             android:layout_height="60dp"
             android:text="@string/izdati_racun" />
-
-        <Button
-            android:id="@+id/btnPlaceOrder"
-            android:layout_width="335dp"
-            android:layout_height="60dp"
-            android:layout_weight="0.5"
-            android:text="Potvrdi" />
 
     </LinearLayout>
 

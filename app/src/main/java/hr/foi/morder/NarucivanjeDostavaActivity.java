@@ -259,6 +259,11 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, KosaricaDostavaActivity.class);
                 startActivity(intent);
                 break;
+
+            case R.id.pocetna:
+                Intent intent1 = new Intent(this, MainActivity.class);
+                startActivity(intent1);
+                break;
         }
     }
 

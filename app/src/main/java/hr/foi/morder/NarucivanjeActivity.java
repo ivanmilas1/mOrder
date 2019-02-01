@@ -182,6 +182,11 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                 Intent intent = new Intent(this, KosaricaActivity.class);
                 startActivity(intent);
                 break;
+
+            case R.id.pocetna:
+                Intent intent1 = new Intent(this, MainActivity.class);
+                startActivity(intent1);
+                break;
         }
         return true;
     }

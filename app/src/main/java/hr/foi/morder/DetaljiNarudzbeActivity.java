@@ -61,7 +61,7 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
      *
      * @param savedInstanceState
      */
-    String stolDocumentID;
+    String stolDocumentID, racunDocumentID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,7 +79,6 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
 
             }
         });
-
         buttonIssueBill = findViewById(R.id.btnIzdatiRacun);
         buttonIssueBill.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +98,27 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
                                 stolDocumentID = documentSnapshot.getId();
                             }
                             database.collection("Stol").document(stolDocumentID).update("stanje", "slobodan");
+                            setBillPayed();
+//                            Intent i = new Intent(getApplicationContext(), PrikazStolovaActivity.class);
+//                            startActivity(i);
+//                            Toast.makeText(getApplicationContext(), "Račun je izdan", LENGTH_LONG).show();
+                        } else {
+                            Log.d("Error", "Error getting data");
+                        }
+                    }
+                });
+    }
+
+    private void setBillPayed(){
+        database.collection("Racun").whereEqualTo("stol_id", stolID).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                                racunDocumentID = documentSnapshot.getId();
+                            }
+                            database.collection("Racun").document(racunDocumentID).update("stol_id", "0");
                             Intent i = new Intent(getApplicationContext(), PrikazStolovaActivity.class);
                             startActivity(i);
                             Toast.makeText(getApplicationContext(), "Račun je izdan", LENGTH_LONG).show();
