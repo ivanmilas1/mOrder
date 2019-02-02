@@ -16,8 +16,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
-
 import hr.foi.morder.model.Racun;
 import hr.foi.morder.scannerlib.CodeGenerateFragment;
 
@@ -57,7 +55,7 @@ public class DostavaActivity extends AppCompatActivity implements CodeGenerateFr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dostava);
         imageView = findViewById(R.id.imageView);
-        button = findViewById(R.id.btnPlaceOrder);
+        button = findViewById(R.id.btnPlaceDeliveryOrder);
         database = FirebaseFirestore.getInstance();
 
         database.collection("Racun").whereEqualTo("status", "dostava").get()

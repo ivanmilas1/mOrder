@@ -72,13 +72,6 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
         database = FirebaseFirestore.getInstance();
         getBill();
 
-        btnPlaceOrder = findViewById(R.id.btnPlaceOrder);
-        btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
         buttonIssueBill = findViewById(R.id.btnIzdatiRacun);
         buttonIssueBill.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,9 +92,6 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
                             }
                             database.collection("Stol").document(stolDocumentID).update("stanje", "slobodan");
                             setBillPayed();
-//                            Intent i = new Intent(getApplicationContext(), PrikazStolovaActivity.class);
-//                            startActivity(i);
-//                            Toast.makeText(getApplicationContext(), "Račun je izdan", LENGTH_LONG).show();
                         } else {
                             Log.d("Error", "Error getting data");
                         }
@@ -118,7 +108,7 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
                             for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                 racunDocumentID = documentSnapshot.getId();
                             }
-                            database.collection("Racun").document(racunDocumentID).update("stol_id", "0");
+                            database.collection("Racun").document(racunDocumentID).update("stol_id", 0);
                             Intent i = new Intent(getApplicationContext(), PrikazStolovaActivity.class);
                             startActivity(i);
                             Toast.makeText(getApplicationContext(), "Račun je izdan", LENGTH_LONG).show();

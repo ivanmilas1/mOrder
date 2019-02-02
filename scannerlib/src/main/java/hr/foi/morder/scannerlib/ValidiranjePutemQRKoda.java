@@ -70,7 +70,6 @@ public class ValidiranjePutemQRKoda extends Fragment implements MetodaValidacije
         super.onViewCreated(view, savedInstanceState);
     }
 
-    @Override
     public void validirajNarudzbuDostave(final String result)
     {
         final AlertDialog.Builder builder = new AlertDialog.Builder(thiscontext);

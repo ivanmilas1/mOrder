@@ -9,25 +9,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.List;
 
 import hr.foi.morder.R;
+import hr.foi.morder.model.Racun;
 import hr.foi.morder.scannerlib.DostavaManager;
 import hr.foi.morder.scannerlib.MetodaValidacijeDostave;
-import hr.foi.morder.scannerlib.ValidiranjePutemQRKoda;
-import hr.foi.morder.scannerlib.ValidiranjePrekoLozinkeActivity;
-import hr.foi.morder.model.Racun;
 import hr.foi.morder.scannerlib.ValidiranjeActivity;
+import hr.foi.morder.scannerlib.ValidiranjePrekoLozinkeActivity;
+import hr.foi.morder.scannerlib.ValidiranjePutemQRKoda;
 
 public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecyclerAdapter.DostavaViewHolder> {
     private Context context;
     private List<Racun> racunList;
     private String nacinRada = "";
 
-    private MetodaValidacijeDostave putemPina = new ValidiranjePrekoLozinkeActivity();
-    private MetodaValidacijeDostave putemQRCoda = new ValidiranjePutemQRKoda();
 
     public DostavaRecyclerAdapter(Context context, List<Racun> racuna, String nacinRada) {
         this.context = context;
@@ -72,19 +68,22 @@ public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecycler
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent;
+                    MetodaValidacijeDostave fragZaValidaciju;
+
+                    Intent intent = new Intent(context, ValidiranjeActivity.class);
+                    intent.putExtra("Pin", textViewId.getText().toString());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     if (nacinRada.equals("validatePassword")){
-                        intent = new Intent(context, ValidiranjeActivity.class);
-                        intent.putExtra("Pin", textViewPin.getText().toString());
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        DostavaManager.getInstance().setMetodaValidacijeDostave(putemPina);
-                    }
-                    else {
-                        intent = new Intent(context, ValidiranjeActivity.class);
+                        fragZaValidaciju = new ValidiranjePrekoLozinkeActivity();
                         intent.putExtra("Pin", textViewId.getText().toString());
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        DostavaManager.getInstance().setMetodaValidacijeDostave(putemQRCoda);
                     }
+                    else {
+                        fragZaValidaciju = new ValidiranjePutemQRKoda();
+                        intent.putExtra("Pin", textViewId.getText().toString());
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    }
+                    DostavaManager.getInstance().setMetodaValidacijeDostave(fragZaValidaciju);
                     context.startActivity(intent);
                 }
             });
