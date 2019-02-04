@@ -1,7 +1,7 @@
 package hr.foi.morder.model;
 
 /**
- * The type Kategorija.
+ * The type Kategorija represents the category of an item. Items in the cart are sorted by their category.
  */
 public class Kategorija {
     private Integer id;

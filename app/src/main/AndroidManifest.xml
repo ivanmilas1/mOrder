@@ -33,5 +33,10 @@
         <activity android:name=".DodavanjeRadnikaActivity"/>
         <activity android:name=".ProvjeriDostavuActivity"/>
         <activity android:name=".DodavanjeArtiklaActivity"/>
+        <activity android:name=".scannerlib.ValidiranjePrekoLozinkeActivity"/>
+        <activity android:name=".OdabirKorisnikaActivity"/>
+        <activity android:name=".NarucivanjeDostavaActivity"/>
+        <activity android:name=".GeneriraniKodActivity"/>
+        <activity android:name=".KosaricaDostavaActivity"/>
     </application>
 </manifest>

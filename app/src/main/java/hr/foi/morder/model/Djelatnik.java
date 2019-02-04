@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The type Djelatnik.
+ * The type Djelatnik represents an employee in the restaurant.
  */
 public class Djelatnik {
     /**
-     * The Ime prezime First and last name of user
+     * The Ime prezime first and last name of user
      */
     public String imePrezime;
     /**

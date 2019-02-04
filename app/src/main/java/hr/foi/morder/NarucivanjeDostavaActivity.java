@@ -1,5 +1,6 @@
 package hr.foi.morder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -34,6 +35,9 @@ import hr.foi.morder.model.Artikl;
 import hr.foi.morder.model.Kategorija;
 import hr.foi.morder.model.Narudzba;
 
+/**
+ * The type Narucivanje dostava activity.
+ */
 public class NarucivanjeDostavaActivity extends AppCompatActivity {
 
     private DrawerLayout drawer;
@@ -50,7 +54,6 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
     private HashMap<String, List<String>> listChildEx;
     private Long childId;
     private Integer idNarudzba;
-    private String stolId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,14 +78,23 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
         dohvatiIdNarudzbe();
     }
 
+    /*
+     * Sets the page title about new articles.
+     */
     private void setHomePageHeaderText() {
         textViewNovoUPonudi.setText(R.string.novo_u_ponudi);
     }
 
+    /*
+     * Removes title about new articles.
+     */
     private void removeHomePageHeaderText() {
         textViewNovoUPonudi.setText("");
     }
 
+    /*
+     * Returns order ID from last order as a query result.
+     */
     private void dohvatiIdNarudzbe() {
         database.collection("Narudzba").orderBy("id", Query.Direction.DESCENDING).limit(1)
                 .get()
@@ -100,7 +112,7 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
                             for (Narudzba n : narudzbaList) {
                                 idNarudzba = n.getId();
                             }
-                            addIdNarudzba(idNarudzba + 1, 0.00, 0);
+                            addIdNarudzba(idNarudzba + 1, 0.00, "dostava");
 
 
                         } else {
@@ -111,8 +123,16 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
     }
 
 
-    public void addIdNarudzba(Integer id, Double cijena, Integer racun) {
-        Map<String, Object> idNarudzbe = new Narudzba(id, cijena, racun).toMap();
+    /**
+     * Add id narudzba.
+     *
+     * @param id     the id
+     * @param cijena the cijena
+     * @param status  the racun
+     */
+
+    public void addIdNarudzba(Integer id, Double cijena, String status) {
+        Map<String, Object> idNarudzbe = new Narudzba(id, cijena, status).toMap();
         database.collection("Narudzba")
                 .add(idNarudzbe)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -122,9 +142,9 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
                     }
                 });
     }
-
-
-
+    /*
+     * Get categories from database.
+     */
     private void dohvatiKategorije() {
         listChildEx = new HashMap<>();
         database.collection("Kategorija")
@@ -154,11 +174,11 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
                                 }
                             });
                             expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-                                @Override
-                                public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                                    return false;
-                                    }
-                                    }
+                                                                           @Override
+                                                                           public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                                                                               return false;
+                                                                           }
+                                                                       }
                             );
                         } else {
                             Log.d("Error", "Error getting data");
@@ -167,6 +187,9 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
                 });
     }
 
+    /*
+     * Loads list of articles grouped by category.
+     */
     private void loadArticleList(long idKategorije) {
         database.collection("Artikl")
                 .whereEqualTo("kategorija_id", idKategorije)
@@ -192,6 +215,9 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
                 });
     }
 
+    /*
+     * Loads the last article as query result.
+     */
     private void loadLastArticles() {
         database.collection("Artikl").orderBy("id", Query.Direction.DESCENDING).limit(3)
                 .get()
@@ -227,7 +253,17 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
     }
 
     private void selectDrawerView(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.kosarica:
+                Intent intent = new Intent(this, KosaricaDostavaActivity.class);
+                startActivity(intent);
+                break;
 
+            case R.id.pocetna:
+                Intent intent1 = new Intent(this, MainActivity.class);
+                startActivity(intent1);
+                break;
+        }
     }
 
     @Override

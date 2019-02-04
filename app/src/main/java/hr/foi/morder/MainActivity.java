@@ -10,7 +10,6 @@ import android.view.View;
  * @author Danijel Pintarić
  */
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void homeDelivery(View view) {
-        Intent intent = new Intent(this, ProvjeriDostavuActivity.class);
+        Intent intent = new Intent(this, OdabirKorisnikaActivity.class);
         startActivity(intent);
     }
 }

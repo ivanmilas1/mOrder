@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,10 +25,13 @@ import hr.foi.morder.model.Narudzba;
 import hr.foi.morder.model.Racun;
 import hr.foi.morder.model.StavkaNarudzbe;
 
+import static android.widget.Toast.LENGTH_LONG;
+
 /**
  * The type Detalji narudzbe activity is used for preview of customers order depending on table.
- *  * Set content view activity_detalji_narudzbe layout
- *  @author Ivan Milas
+ * * Set content view activity_detalji_narudzbe layout
+ *
+ * @author Ivan Milas
  */
 public class DetaljiNarudzbeActivity extends AppCompatActivity {
     /**
@@ -39,6 +43,7 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
      */
     ArrayList<StavkaNarudzbe> listaStavkiNarudžbi = new ArrayList<>();
     private FirebaseFirestore database;
+    Button buttonIssueBill;
     /**
      * The Btn place order for submiting order an send update to Firestore server.
      */
@@ -56,28 +61,69 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
      *
      * @param savedInstanceState
      */
+    String stolDocumentID, racunDocumentID;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detalji_narudzbe2);
+        setContentView(R.layout.activity_detalji_narudzbe);
         Intent intent = getIntent();
         stolID = Integer.parseInt(intent.getStringExtra("stolID"));
         database = FirebaseFirestore.getInstance();
         getBill();
 
-        btnPlaceOrder = findViewById(R.id.btnPlaceOrder);
-        btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
+        buttonIssueBill = findViewById(R.id.btnIzdatiRacun);
+        buttonIssueBill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                setTableStatusFree();
             }
         });
     }
 
+    private void setTableStatusFree() {
+        database.collection("Stol").whereEqualTo("id", stolID).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                                stolDocumentID = documentSnapshot.getId();
+                            }
+                            database.collection("Stol").document(stolDocumentID).update("stanje", "slobodan");
+                            setBillPayed();
+                        } else {
+                            Log.d("Error", "Error getting data");
+                        }
+                    }
+                });
+    }
+
+    private void setBillPayed() {
+        database.collection("Racun").whereEqualTo("stol_id", stolID).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                                racunDocumentID = documentSnapshot.getId();
+                            }
+                            database.collection("Racun").document(racunDocumentID).update("stol_id", 0);
+                            Intent i = new Intent(getApplicationContext(), PrikazStolovaActivity.class);
+                            startActivity(i);
+                            Toast.makeText(getApplicationContext(), "Račun je izdan", LENGTH_LONG).show();
+                        } else {
+                            Log.d("Error", "Error getting data");
+                        }
+                    }
+                });
+    }
+
     /**
      * Gets bill get data from Firestore. Data from "Racun" collection and document which has "stil_id" value that equals stolID.
-     *      *
-     *If error occurs during fetching data, displays error message
+     * *
+     * If error occurs during fetching data, displays error message
+     *
      * @author Ivan Milas
      */
     public void getBill() {
@@ -87,13 +133,12 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            for(DocumentSnapshot documentSnapshot: task.getResult()){
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                 Racun racun = documentSnapshot.toObject(Racun.class);
                                 getOrders(racun.getId());
                             }
-                        }
-                        else{
+                        } else {
                             Log.d("Error", "Error getting data");
                         }
                     }
@@ -102,8 +147,9 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
 
     /**
      * Gets orders get data from Firestore. Data from "Narudzba" collection and and document which has "racun_id" value that equals racunID.
+     * <p>
+     * If error occurs during fetching data, displays error message
      *
-     *If error occurs during fetching data, displays error message
      * @param racunID the racun id current bill
      * @author Ivan Milas
      */
@@ -114,13 +160,12 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            for(DocumentSnapshot documentSnapshot: task.getResult()){
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                 Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
                                 getOrderItem(narudzba.getId());
                             }
-                        }
-                        else{
+                        } else {
                             Log.d("Error", "Error getting data");
                         }
                     }
@@ -129,10 +174,11 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
 
     /**
      * Gets order item get data from Firestore. Data from "Stavka narudzbe" collection and document which has "narudzba_id" value that equals orderID.
+     * <p>
+     * If error occurs during fetching data, displays error message
      *
-     *If error occurs during fetching data, displays error message
      * @param orderID the order id current order
-     *  @author Ivan Milas
+     * @author Ivan Milas
      */
     public void getOrderItem(int orderID) {
         database.collection("Stavka narudzbe")
@@ -141,14 +187,13 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            for(DocumentSnapshot documentSnapshot: task.getResult()){
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                 StavkaNarudzbe stavkaNarudzbe = documentSnapshot.toObject(StavkaNarudzbe.class);
                                 listaStavkiNarudžbi.add(stavkaNarudzbe);
                                 getOrderArticles(stavkaNarudzbe.getArtikl_id());
                             }
-                        }
-                        else{
+                        } else {
                             Log.d("Error", "Error getting data");
                         }
                     }
@@ -157,8 +202,9 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
 
     /**
      * Gets order articles  from Firestore. Data from "Artikl" collection and document which has "id" value that equals articleID.
-     *Adding article to listaArtikala list which consist of articles
+     * Adding article to listaArtikala list which consist of articles
      * If error occurs during fetching data, displays error message
+     *
      * @param articleID the article id selected article from article list
      * @author Ivan Milas
      */
@@ -169,8 +215,8 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            for(DocumentSnapshot documentSnapshot: task.getResult()){
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                 Artikl artikl = documentSnapshot.toObject(Artikl.class);
                                 listaArtikala.add(artikl);
                             }
@@ -178,8 +224,7 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
                             djelatnikPregledRacunaStolaListAdapter = new DjelatnikPregledRacunaListAdapter
                                     (getApplicationContext(), listaArtikala, listaStavkiNarudžbi);
                             listView.setAdapter(djelatnikPregledRacunaStolaListAdapter);
-                        }
-                        else{
+                        } else {
                             Log.d("Error", "Error getting data");
                         }
                     }

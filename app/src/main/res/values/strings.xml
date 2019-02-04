@@ -40,7 +40,9 @@
     <string name="naziv_proizvoda">Naziv proizvoda</string>
     <string name="cijena_proizvoda">Cijena proizvoda</string>
     <string name="ponisti">Ponisti</string>
+    <string name="izdati_racun">Izdati račun</string>
     <string name="pregled_stolova">Pregled stolova</string>
+    <string name="qr_kod">QR kod</string>
     <array name="tip_korisnika">
         <item>Konobar</item>
         <item>Administrator</item>

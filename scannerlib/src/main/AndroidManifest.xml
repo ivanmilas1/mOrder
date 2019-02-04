@@ -9,7 +9,7 @@
 
     <application>
         <activity
-            android:name=".ScannerStart"
+            android:name=".ValidiranjeActivity"
             android:label="@string/title_activity_scanner_start"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/food_wallpaper_backgroud"
+    tools:context="hr.foi.morder.OdabirKorisnikaActivity"
+    tools:layout_editor_absoluteY="89dp">
+
+    <Button
+        android:id="@+id/buttonStartQR"
+        android:layout_width="304dp"
+        android:layout_height="89dp"
+        android:layout_marginEnd="156dp"
+        android:layout_marginBottom="32dp"
+        android:background="@color/colorAccent"
+        android:onClick="dohvatiQrKod"
+        android:text="Qr kod"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonKod"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonNaruci" />
+
+    <Button
+        android:id="@+id/buttonKod"
+        android:layout_width="304dp"
+        android:layout_height="89dp"
+        android:layout_marginBottom="125dp"
+        android:background="@color/colorAccent"
+        android:onClick="dohvatiGeneriraniKod"
+        android:text="Generirani kod"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/buttonStartQR"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/buttonStartQR"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStartQR" />
+
+    <Button
+        android:id="@+id/buttonNaruci"
+        android:layout_width="304dp"
+        android:layout_height="89dp"
+        android:layout_marginTop="190dp"
+        android:layout_marginBottom="29dp"
+        android:background="@color/colorAccent"
+        android:onClick="naruciDostavu"
+        android:text="Naruci dostavu"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonStartQR"
+        app:layout_constraintEnd_toEndOf="@+id/buttonStartQR"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/buttonStartQR"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>
