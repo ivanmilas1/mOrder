@@ -35,7 +35,7 @@ import hr.foi.morder.model.Djelatnik;
  *  * Set content view activity_dodavanje_radnika layout
  *  @author Ivan Milas
  */
-public class DodavanjeRadnikaActivity extends AppCompatActivity {
+public class DodavanjeDjelatnikaActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     /**
