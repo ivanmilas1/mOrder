@@ -42,13 +42,13 @@ public class IzbornikDjelatnikActivity extends AppCompatActivity {
     }
 
     /**
-     * On click view djelatnik starts DodavanjeRadnikaActivity activity
+     * On click view djelatnik starts DodavanjeDjelatnikaActivity activity
      *
      * @param view the view
      * @author Danijel Pintarić
      */
     public void OnClickViewDjelatnik(View view) {
-        Intent intent = new Intent(this, DodavanjeRadnikaActivity.class);
+        Intent intent = new Intent(this, DodavanjeDjelatnikaActivity.class);
         startActivity(intent);
     }
 
@@ -61,6 +61,11 @@ public class IzbornikDjelatnikActivity extends AppCompatActivity {
     public void OnClickValidateGenericPassword(View view) {
         Intent intent = new Intent(this, ProvjeriDostavuActivity.class);
         intent.putExtra("nacinRada", "validatePassword");
+        startActivity(intent);
+    }
+
+    public void OnClickViewArticles(View view) {
+        Intent intent = new Intent(this, DodavanjeArtiklaActivity.class);
         startActivity(intent);
     }
 }

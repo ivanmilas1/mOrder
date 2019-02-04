@@ -30,8 +30,9 @@
         <activity android:name="IzbornikDjelatnikActivity" />
         <activity android:name=".KosaricaActivity" />
         <activity android:name="NarucivanjeActivity"/>
-        <activity android:name=".DodavanjeRadnikaActivity"/>
+        <activity android:name=".DodavanjeDjelatnikaActivity"/>
         <activity android:name=".ProvjeriDostavuActivity"/>
+        <activity android:name=".DodavanjeArtiklaActivity"/>
         <activity android:name=".scannerlib.ValidiranjePrekoLozinkeActivity"/>
         <activity android:name=".OdabirKorisnikaActivity"/>
         <activity android:name=".NarucivanjeDostavaActivity"/>

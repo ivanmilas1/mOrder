@@ -14,7 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
-import hr.foi.morder.DodavanjeRadnikaActivity;
+import hr.foi.morder.DodavanjeDjelatnikaActivity;
 import hr.foi.morder.R;
 import hr.foi.morder.model.Djelatnik;
 
@@ -136,7 +136,7 @@ public class DjelatnikRecyclerAdapter extends RecyclerView.Adapter<DjelatnikRecy
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View view) {
-                    Intent myIntent = new Intent(context, DodavanjeRadnikaActivity.class);
+                    Intent myIntent = new Intent(context, DodavanjeDjelatnikaActivity.class);
                     myIntent.putExtra("Ime", textViewIme.getText().toString());
                     myIntent.putExtra("Azuriranje", "a");
                     myIntent.putExtra("Email", textViewEmail.getText().toString());

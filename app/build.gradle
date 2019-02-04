@@ -47,4 +47,6 @@ dependencies {
     implementation 'com.android.support:design:28.0.0-alpha3'
     implementation project(path: ':scannerlib')
     implementation project(':scannerlib')
+    implementation 'com.google.firebase:firebase-storage:16.0.5'
+
 }
