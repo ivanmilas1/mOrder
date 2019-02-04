@@ -38,6 +38,7 @@ import hr.foi.morder.model.Narudzba;
 /**
  * The type Narucivanje activity.
  * Set content view activity_prijava layout
+ *
  * @author Nikola Gluhak
  */
 public class NarucivanjeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -54,12 +55,7 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
     private HashMap<String, List<String>> listChild;
     private HashMap<String, List<String>> listChildEx;
     private Long childId;
-    private Integer idNarudzba;
-    private String stolId;
-    private Integer racunId = 0;
-    private String racunDokument;
-    private Integer stol;
-    private String narudzbaDokument;
+    private Integer idNarudzba, racunId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +99,8 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
      * Firebase connection to "Narudzba" collection
      * Ordering by id descending to find last order
      * Adds one on last order number, that represent order in processing
-     *@author Nikola Gluhak
+     *
+     * @author Nikola Gluhak
      */
     private void dohvatiIdNarudzbe() {
         database.collection("Narudzba").orderBy("id", Query.Direction.DESCENDING).limit(1)
@@ -115,7 +112,6 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                             final List<Narudzba> narudzbaList = new ArrayList<>();
                             for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                 Narudzba narudzba = documentSnapshot.toObject(Narudzba.class);
-                                narudzbaDokument = documentSnapshot.getId();
                                 narudzba.getId();
                                 narudzbaList.add(narudzba);
                             }
@@ -123,10 +119,9 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                             for (Narudzba n : narudzbaList) {
                                 idNarudzba = n.getId();
                             }
-                            if (racunId == 0){
+                            if (racunId == 0) {
                                 addIdNarudzba(idNarudzba + 1, 0.00, "restoran");
-                            }
-                            else {
+                            } else {
                                 addNarudzba(idNarudzba + 1, 0.00, "restoran", racunId);
                             }
                         } else {
@@ -138,11 +133,11 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
 
     /**
      * Add id narudzba. Adding id value to order.
-     *Firebase connection to "Narudzba" collection
+     * Firebase connection to "Narudzba" collection
+     *
      * @param id     the id represents order id number
      * @param status the status defines table status, free, in processing or taken.
      * @author Nikola Gluhak
-     *
      */
     public void addIdNarudzba(Integer id, Double cijena, String status) {
         Map<String, Object> idNarudzbe = new Narudzba(id, cijena, status).toMap();
@@ -173,6 +168,7 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
      * Creating new adapter for recycler viwe
      * Setting recycler view layout manager from application context
      * Setting the adapter into recycler view
+     *
      * @author Nikola Gluhak
      */
     @Override
@@ -224,7 +220,7 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                                 @Override
                                 public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                                     return false;
-                                    }
+                                }
                             });
                         } else {
                             Log.d("Error", "Error getting data");
@@ -232,12 +228,14 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                     }
                 });
     }
+
     /**
      * Load articels List loading articels from Firestore database depending on their "kategorija_id" field.
      * Creating new adapter for recycler viwe
      * Setting recycler view layout manager from application context
      * Setting the adapter into recycler view
-     * @param idKategorije    the idKategorije respresents category id number
+     *
+     * @param idKategorije the idKategorije respresents category id number
      * @author Nikola Gluhak
      */
     private void loadArticleList(long idKategorije) {
@@ -264,14 +262,15 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
                     }
                 });
     }
+
     /**
      * Load last articles fetching last 7 articles from Firestore collection "Artikl" and orders them by "id" field descending
      * Adding data to articlesList list
      * Creating new adapter for recycler viwe
      * Setting recycler view layout manager from application context
      * Setting the adapter into recycler view
-     *@author Nikola Gluhak
      *
+     * @author Nikola Gluhak
      */
     private void loadLastArticles() {
         database.collection("Artikl").orderBy("id", Query.Direction.DESCENDING).limit(3)
@@ -299,6 +298,7 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
 
     /**
      * Click on navigation item marks it
+     *
      * @param nv navigation view for drawer
      * @author Nikola Gluhak
      */
