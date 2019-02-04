@@ -24,7 +24,6 @@ public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecycler
     private List<Racun> racunList;
     private String nacinRada = "";
 
-
     public DostavaRecyclerAdapter(Context context, List<Racun> racuna, String nacinRada) {
         this.context = context;
         this.racunList = racuna;

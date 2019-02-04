@@ -54,7 +54,6 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
     private HashMap<String, List<String>> listChildEx;
     private Long childId;
     private Integer idNarudzba;
-    private String stolId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

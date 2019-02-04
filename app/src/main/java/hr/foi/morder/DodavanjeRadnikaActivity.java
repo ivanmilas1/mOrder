@@ -164,7 +164,6 @@ public class DodavanjeRadnikaActivity extends AppCompatActivity {
                 });
     }
 
-
         /**
          * Build recycler view for creating new Recycler view and setting the adapter for this recycler view.
          * Find recycler view by id

@@ -37,14 +37,9 @@ public class KosaricaActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private Button naruci;
     private FirebaseFirestore database;
-    private String idNarudzbe = "";
+    private String idNarudzbe = "", racunDokument, stolDokument;
     private Integer stolId = 0;
     private Integer racunId;
-    private String racunDokument;
-    private Integer stol;
-    private String narudzbaDokument;
-    private String stolDokument;
-    private String stolStanje;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -180,7 +175,6 @@ public class KosaricaActivity extends AppCompatActivity {
                                                 }
                                                 addRacun(racunId + 1, stolId);
                                                 database.collection("Narudzba").document(idNarudzbe).update("racun_id", racunId + 1);
-                                                //database.collection("Racun").document(racunDokument).update("stol", racunId + 1);
                                             } else {
                                                 Log.d("Error", "Error getting data");
                                             }

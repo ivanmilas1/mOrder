@@ -7,12 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
 
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import com.google.firebase.firestore.QuerySnapshot;
 
 import hr.foi.morder.model.Racun;
@@ -21,9 +19,7 @@ import hr.foi.morder.model.Racun;
 public class GeneriraniKodActivity extends AppCompatActivity {
 
     private FirebaseFirestore database;
-    private Integer racunId;
-    private Integer maxRacunId = 0;
-    private Integer generiraniKod;
+    private Integer racunId, maxRacunId = 0;
     private Button kod;
     private String generirani;
 

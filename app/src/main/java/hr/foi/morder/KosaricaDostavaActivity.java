@@ -38,13 +38,7 @@ public class KosaricaDostavaActivity extends AppCompatActivity {
     private Button naruci;
     private FirebaseFirestore database;
     private String idNarudzbe = "";
-    private Integer stolId = 0;
     private Integer racunId;
-    private String racunDokument;
-    private Integer stol;
-    private String narudzbaDokument;
-    private String stolDokument;
-    private String stolStanje;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -123,7 +117,6 @@ public class KosaricaDostavaActivity extends AppCompatActivity {
                 });
     }
 
-
     //Narudžba koja ce sadržavati elemente košarice
     private void dovrsiNarudzbu() {
         database.collection("Racun").orderBy("id", Query.Direction.DESCENDING).limit(1)
@@ -135,7 +128,6 @@ public class KosaricaDostavaActivity extends AppCompatActivity {
                             for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                 Racun racun = documentSnapshot.toObject(Racun.class);
                                 racunId = racun.getId();
-                                racunDokument = documentSnapshot.getId();
                             }
                             Long generiraniKod = (long) new Random().nextInt(999999)+100000;
                             addRacun(racunId + 1, "dostava", generiraniKod);

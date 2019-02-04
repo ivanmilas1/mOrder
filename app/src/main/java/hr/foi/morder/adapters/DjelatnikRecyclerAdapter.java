@@ -131,7 +131,6 @@ public class DjelatnikRecyclerAdapter extends RecyclerView.Adapter<DjelatnikRecy
             textViewEmail = itemView.findViewById(R.id.textViewEmail);
             textViewIme = itemView.findViewById(R.id.textViewName);
             textViewDjelatnikId = itemView.findViewById(R.id.textViewTipKor);
-
             textViewDjelatnikIme = itemView.findViewById(R.id.input_name);
             textViewDjelatnikEmail = itemView.findViewById(R.id.input_email);
 

@@ -26,14 +26,12 @@ public class ProvjeriDostavuActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private FirebaseFirestore databaseDostava;
     public DostavaRecyclerAdapter dostavaRecyclerAdapter;
-    private List<Racun> racunList;
     String nacinRada = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_provjera_narudzbe);
-        racunList = new ArrayList<>();
         buildRecyclerView();
         databaseDostava = FirebaseFirestore.getInstance();
         loadRacuni();

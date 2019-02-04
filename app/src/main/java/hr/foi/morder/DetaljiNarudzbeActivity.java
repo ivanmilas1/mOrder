@@ -99,7 +99,7 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
                 });
     }
 
-    private void setBillPayed(){
+    private void setBillPayed() {
         database.collection("Racun").whereEqualTo("stol_id", stolID).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
