@@ -82,8 +82,12 @@ public class DodavanjeArtiklaActivity extends AppCompatActivity {
         btnDodajArtikl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadSliku();
-
+                if (imageView.getDrawable() == null){
+                    Toast.makeText(getApplicationContext(), "Proizvod mora sadržavati sliku!", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    uploadSliku();
+                }
             }
         });
         btnDodajSliku.setOnClickListener(new View.OnClickListener() {
