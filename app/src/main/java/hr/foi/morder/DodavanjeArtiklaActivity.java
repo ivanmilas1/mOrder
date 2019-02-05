@@ -34,15 +34,12 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import hr.foi.morder.model.Artikl;
 
 public class DodavanjeArtiklaActivity extends AppCompatActivity {
 
-    private List<Artikl> artiklList;
     private Button btnDodajSliku, btnDodajArtikl;
     private EditText nazivProizvoda, cijenaProizvoda;
     private Spinner spinner;
@@ -63,7 +60,6 @@ public class DodavanjeArtiklaActivity extends AppCompatActivity {
     protected void onCreate(@android.support.annotation.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dodavanje_artikla);
-        artiklList = new ArrayList<>();
         databaseArtikl = FirebaseFirestore.getInstance();
         nazivProizvoda = findViewById(R.id.input_naziv_proizvoda);
         cijenaProizvoda = findViewById(R.id.input_cijena);

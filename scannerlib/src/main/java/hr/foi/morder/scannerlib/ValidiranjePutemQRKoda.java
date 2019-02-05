@@ -39,8 +39,7 @@ public class ValidiranjePutemQRKoda extends Fragment implements MetodaValidacije
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         return inflater.inflate(R.layout.fragment_scanner_start, container, false);
     }
@@ -53,7 +52,7 @@ public class ValidiranjePutemQRKoda extends Fragment implements MetodaValidacije
         scannerView = new ZXingScannerView(thiscontext);
         getActivity().setContentView(scannerView);
         Intent intent = getActivity().getIntent();
-        sifra = intent.getStringExtra("Pin");
+        sifra = intent.getStringExtra("Ocekivana vrijednost");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         {

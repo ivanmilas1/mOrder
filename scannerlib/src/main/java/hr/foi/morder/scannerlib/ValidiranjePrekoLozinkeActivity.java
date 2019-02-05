@@ -43,7 +43,7 @@ public class ValidiranjePrekoLozinkeActivity extends Fragment implements MetodaV
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Intent intent = getActivity().getIntent();
-        genericpasswordToCheck = intent.getStringExtra("Pin");
+        genericpasswordToCheck = intent.getStringExtra("Ocekivana vrijednost");
     }
 
     public void validirajNarudzbuDostave(String result)

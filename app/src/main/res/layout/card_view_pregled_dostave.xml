@@ -51,14 +51,14 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Button
-                android:id="@+id/btnValidacijaPrekoQRKoda"
+                android:id="@+id/buttonValidacijaPrekoQRKoda"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:text="QR" />
 
             <Button
-                android:id="@+id/btnValidacijaPrekoLozinke"
+                android:id="@+id/buttonValidacijaPrekoLozinke"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
