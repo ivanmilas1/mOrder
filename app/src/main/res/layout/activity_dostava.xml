@@ -30,7 +30,7 @@
             android:id="@+id/btnPlaceDeliveryOrder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Potvrdi" />
+            android:text="Generiraj QR kod" />
     </LinearLayout>
 
     <fragment

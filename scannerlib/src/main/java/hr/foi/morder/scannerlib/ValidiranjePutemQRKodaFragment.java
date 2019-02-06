@@ -28,14 +28,14 @@ import static android.Manifest.permission_group.CAMERA;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class ValidiranjePutemQRKoda extends Fragment implements MetodaValidacijeDostave, ZXingScannerView.ResultHandler {
+public class ValidiranjePutemQRKodaFragment extends Fragment implements ValidacijaDostave, ZXingScannerView.ResultHandler {
 
     private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView scannerView;
     private String sifra;
     Context thiscontext;
 
-    public ValidiranjePutemQRKoda() {
+    public ValidiranjePutemQRKodaFragment() {
     }
 
     @Override
@@ -76,7 +76,7 @@ public class ValidiranjePutemQRKoda extends Fragment implements MetodaValidacije
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                scannerView.resumeCameraPreview(ValidiranjePutemQRKoda.this);
+                scannerView.resumeCameraPreview(ValidiranjePutemQRKodaFragment.this);
             }
         });
         builder.setNeutralButton("Visit", new DialogInterface.OnClickListener() {
