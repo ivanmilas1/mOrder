@@ -13,9 +13,11 @@ public class ValidacijaDostaveManager {
     private AppCompatActivity activity;
     private HashMap<String, ValidacijaDostave> metodeValidacijeDostave;
     ValidacijaDostave selectedModule;
-    public static final String QR_LABEL = "QR";
-    public static final String VIA_PASSWORD_LABEL = "Lozinka";
     Intent intent;
+
+    public HashMap<String, ValidacijaDostave> getMetodeValidacijeDostave() {
+        return metodeValidacijeDostave;
+    }
 
     private ValidacijaDostaveManager() {
         metodeValidacijeDostave = new HashMap<>();

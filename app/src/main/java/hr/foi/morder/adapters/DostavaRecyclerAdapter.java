@@ -7,15 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.List;
 
 import hr.foi.morder.R;
 import hr.foi.morder.model.Racun;
+import hr.foi.morder.scannerlib.ValidacijaDostave;
 import hr.foi.morder.scannerlib.ValidacijaDostaveManager;
-
-import static hr.foi.morder.scannerlib.ValidacijaDostaveManager.VIA_PASSWORD_LABEL;
 
 public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecyclerAdapter.DostavaViewHolder> {
     private Context context;
@@ -51,7 +52,6 @@ public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecycler
     public class DostavaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         View view;
         TextView textViewId, textViewQR, textViewPin;
-        Button buttonValidateViaQR, buttonValidateViaGeneratedPassword;
 
         public DostavaViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -60,13 +60,19 @@ public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecycler
             textViewQR = itemView.findViewById(R.id.textViewQR);
             textViewPin = itemView.findViewById(R.id.textViewPin);
 
-            buttonValidateViaQR = itemView.findViewById(R.id.buttonValidacijaPrekoQRKoda);
-            buttonValidateViaQR.setText(ValidacijaDostaveManager.QR_LABEL);
-            buttonValidateViaGeneratedPassword = itemView.findViewById(R.id.buttonValidacijaPrekoLozinke);
-            buttonValidateViaGeneratedPassword.setText(VIA_PASSWORD_LABEL);
+            // programmatically adding buttons to a layout
+            LinearLayout layout = itemView.findViewById(R.id.cardViewLinearLayout);
 
-            buttonValidateViaGeneratedPassword.setOnClickListener(this);
-            buttonValidateViaQR.setOnClickListener(this);
+            HashMap<String, ValidacijaDostave> hashMapMetodeValidacije = ValidacijaDostaveManager.getInstance().getMetodeValidacijeDostave();
+            for (String key : hashMapMetodeValidacije.keySet()) {
+                Button buttonToAdd = new Button(context);
+                buttonToAdd.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                buttonToAdd.setText(key);
+                buttonToAdd.setId(View.generateViewId());
+
+                buttonToAdd.setOnClickListener(this);
+                layout.addView(buttonToAdd);
+            }
         }
 
         @Override
