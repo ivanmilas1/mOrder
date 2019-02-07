@@ -109,8 +109,7 @@ public class DetaljiNarudzbeActivity extends AppCompatActivity {
                                 racunDocumentID = documentSnapshot.getId();
                             }
                             database.collection("Racun").document(racunDocumentID).update("stol_id", 0);
-                            Intent i = new Intent(getApplicationContext(), PrikazStolovaActivity.class);
-                            startActivity(i);
+                            finish();
                             Toast.makeText(getApplicationContext(), "Račun je izdan", LENGTH_LONG).show();
                         } else {
                             Log.d("Error", "Error getting data");

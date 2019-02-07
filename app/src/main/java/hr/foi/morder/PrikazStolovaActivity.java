@@ -114,6 +114,8 @@ public class PrikazStolovaActivity extends AppCompatActivity {
                 if (String.valueOf(item.id ).equals(itemButton.getText()) ){
                     if (item.stanje.equals("slobodan")) {
                         itemButton.setBackgroundColor(zelena);
+                        // disabling button if table is not taken
+                        itemButton.setEnabled(false);
                     } else if (item.stanje .equals("narudzbaUPripremi") ) {
                         itemButton.setBackgroundColor(zuta);
                     } else {

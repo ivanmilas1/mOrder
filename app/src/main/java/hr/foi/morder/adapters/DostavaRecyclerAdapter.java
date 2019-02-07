@@ -69,7 +69,6 @@ public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecycler
                 buttonToAdd.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                 buttonToAdd.setText(key);
                 buttonToAdd.setId(View.generateViewId());
-
                 buttonToAdd.setOnClickListener(this);
                 layout.addView(buttonToAdd);
             }
