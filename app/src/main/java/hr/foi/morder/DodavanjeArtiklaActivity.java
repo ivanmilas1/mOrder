@@ -21,9 +21,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -34,15 +31,12 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import hr.foi.morder.model.Artikl;
 
 public class DodavanjeArtiklaActivity extends AppCompatActivity {
 
-    private List<Artikl> artiklList;
     private Button btnDodajSliku, btnDodajArtikl;
     private EditText nazivProizvoda, cijenaProizvoda;
     private Spinner spinner;
@@ -50,20 +44,15 @@ public class DodavanjeArtiklaActivity extends AppCompatActivity {
     private FirebaseFirestore databaseArtikl;
     private Uri filePath;
     private final int PICK_IMAGE_REQUEST = 71;
-    private FirebaseAuth auth;
     private ProgressDialog progressDialog;
-    private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
     public StorageReference mStorageRef;
-    private FirebaseStorage firebaseStorage;
-    private StorageReference storageReference;
     public int artiklId = 0, tipArtikla = 0;
 
     @Override
     protected void onCreate(@android.support.annotation.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dodavanje_artikla);
-        artiklList = new ArrayList<>();
+
         databaseArtikl = FirebaseFirestore.getInstance();
         nazivProizvoda = findViewById(R.id.input_naziv_proizvoda);
         cijenaProizvoda = findViewById(R.id.input_cijena);
@@ -73,17 +62,15 @@ public class DodavanjeArtiklaActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageViewDodavanjeProizvoda);
         progressDialog = new ProgressDialog(DodavanjeArtiklaActivity.this);
 
-        auth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
-        firebaseStorage = FirebaseStorage.getInstance();
-        storageReference = firebaseStorage.getReference("Slike artikala");
-
         btnDodajArtikl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadSliku();
-
+                if (filePath == null) {
+                    Toast.makeText(getApplicationContext(), "Proizvod mora sadržavati sliku!", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    uploadSliku();
+                }
             }
         });
         btnDodajSliku.setOnClickListener(new View.OnClickListener() {

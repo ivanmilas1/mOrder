@@ -1,40 +1,38 @@
 package hr.foi.morder.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.List;
 
 import hr.foi.morder.R;
 import hr.foi.morder.model.Racun;
-import hr.foi.morder.scannerlib.DostavaManager;
-import hr.foi.morder.scannerlib.MetodaValidacijeDostave;
-import hr.foi.morder.scannerlib.ValidiranjeActivity;
-import hr.foi.morder.scannerlib.ValidiranjePrekoLozinkeActivity;
-import hr.foi.morder.scannerlib.ValidiranjePutemQRKoda;
+import hr.foi.morder.scannerlib.ValidacijaDostave;
+import hr.foi.morder.scannerlib.ValidacijaDostaveManager;
 
 public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecyclerAdapter.DostavaViewHolder> {
     private Context context;
     private List<Racun> racunList;
-    private String nacinRada = "";
+    View view;
 
-    public DostavaRecyclerAdapter(Context context, List<Racun> racuna, String nacinRada) {
+    public DostavaRecyclerAdapter(Context context, List<Racun> racuna) {
         this.context = context;
         this.racunList = racuna;
-        this.nacinRada = nacinRada;
     }
 
     @NonNull
     @Override
     public DostavaViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.card_view_pregled_dostave, null);
+        view = inflater.inflate(R.layout.card_view_pregled_dostave, null);
         return new DostavaViewHolder(view);
     }
 
@@ -51,11 +49,9 @@ public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecycler
         return racunList.size();
     }
 
-    public class DostavaViewHolder extends RecyclerView.ViewHolder {
+    public class DostavaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         View view;
-        public TextView textViewId;
-        public TextView textViewQR;
-        public TextView textViewPin;
+        TextView textViewId, textViewQR, textViewPin;
 
         public DostavaViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -64,28 +60,25 @@ public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecycler
             textViewQR = itemView.findViewById(R.id.textViewQR);
             textViewPin = itemView.findViewById(R.id.textViewPin);
 
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    MetodaValidacijeDostave fragZaValidaciju;
+            // programmatically adding buttons to a layout
+            LinearLayout layout = itemView.findViewById(R.id.cardViewLinearLayout);
 
-                    Intent intent = new Intent(context, ValidiranjeActivity.class);
-                    intent.putExtra("Pin", textViewId.getText().toString());
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    if (nacinRada.equals("validatePassword")){
-                        fragZaValidaciju = new ValidiranjePrekoLozinkeActivity();
-                        intent.putExtra("Pin", textViewId.getText().toString());
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    }
-                    else {
-                        fragZaValidaciju = new ValidiranjePutemQRKoda();
-                        intent.putExtra("Pin", textViewId.getText().toString());
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    }
-                    DostavaManager.getInstance().setMetodaValidacijeDostave(fragZaValidaciju);
-                    context.startActivity(intent);
-                }
-            });
+            HashMap<String, ValidacijaDostave> hashMapMetodeValidacije = ValidacijaDostaveManager.getInstance().getMetodeValidacijeDostave();
+            for (String key : hashMapMetodeValidacije.keySet()) {
+                Button buttonToAdd = new Button(context);
+                buttonToAdd.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                buttonToAdd.setText(key);
+                buttonToAdd.setId(View.generateViewId());
+
+                buttonToAdd.setOnClickListener(this);
+                layout.addView(buttonToAdd);
+            }
+        }
+
+        @Override
+        public void onClick(View view) {
+            String racunKod = textViewPin.getText().toString();
+            ValidacijaDostaveManager.getInstance().odabirMetodeValidacijeDostave(((Button) view).getText().toString(), racunKod, context);
         }
     }
 }

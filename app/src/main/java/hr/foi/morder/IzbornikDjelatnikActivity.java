@@ -52,20 +52,13 @@ public class IzbornikDjelatnikActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void OnClickStartQR(View view) {
-        Intent intent = new Intent(this, ProvjeriDostavuActivity.class);
-        intent.putExtra("nacinRada", "validateQRCode");
-        startActivity(intent);
-    }
-
-    public void OnClickValidateGenericPassword(View view) {
-        Intent intent = new Intent(this, ProvjeriDostavuActivity.class);
-        intent.putExtra("nacinRada", "validatePassword");
-        startActivity(intent);
-    }
-
     public void OnClickViewArticles(View view) {
         Intent intent = new Intent(this, DodavanjeArtiklaActivity.class);
+        startActivity(intent);
+    }
+
+    public void OnClickValidateDeliveryOrder(View view) {
+        Intent intent = new Intent(this, ProvjeriDostavuActivity.class);
         startActivity(intent);
     }
 }

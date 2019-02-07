@@ -5,26 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/food_wallpaper_backgroud"
-    tools:context=".ValidiranjePrekoLozinkeActivity"
+    tools:context=".ValidiranjePrekoLozinkeFragment"
     tools:layout_editor_absoluteY="89dp">
 
     <Button
         android:id="@+id/buttonValidateDeliveryViaPassword"
         android:layout_width="287dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="151dp"
-        android:layout_marginBottom="312dp"
+        android:layout_marginStart="324dp"
+        android:layout_marginLeft="324dp"
+        android:layout_marginEnd="157dp"
+        android:layout_marginRight="157dp"
+        android:layout_marginBottom="50dp"
         android:background="@color/colorAccent"
         android:text="Validiraj lozinku"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
+        app:layout_constraintVertical_bias="0.235" />
 
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="114dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="468dp"
+        android:layout_marginEnd="240dp"
+        android:layout_marginRight="240dp"
         android:ems="6"
         android:hint="******"
         android:inputType="numberPassword"
@@ -32,7 +42,9 @@
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonValidateDeliveryViaPassword"
-        app:layout_constraintStart_toStartOf="@+id/buttonValidateDeliveryViaPassword" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/buttonValidateDeliveryViaPassword"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

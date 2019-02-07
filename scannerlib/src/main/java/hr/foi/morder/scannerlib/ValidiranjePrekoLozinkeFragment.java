@@ -16,7 +16,7 @@ import android.widget.Toast;
  *
  * @author Danijel Pintarić
  */
-public class ValidiranjePrekoLozinkeActivity extends Fragment implements MetodaValidacijeDostave
+public class ValidiranjePrekoLozinkeFragment extends Fragment implements ValidacijaDostave
 {
     EditText editTextGenericPassword;
     String genericpasswordToCheck, enteredpasswordtoCheck;
@@ -43,7 +43,7 @@ public class ValidiranjePrekoLozinkeActivity extends Fragment implements MetodaV
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Intent intent = getActivity().getIntent();
-        genericpasswordToCheck = intent.getStringExtra("Pin");
+        genericpasswordToCheck = intent.getStringExtra("Ocekivana vrijednost");
     }
 
     public void validirajNarudzbuDostave(String result)
@@ -54,7 +54,7 @@ public class ValidiranjePrekoLozinkeActivity extends Fragment implements MetodaV
         }
         else
         {
-            Toast.makeText(getActivity().getApplicationContext(), "Dostava nije uspješno izvršena", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity().getApplicationContext(), "Pogrešna lozinka", Toast.LENGTH_LONG).show();
         }
     }
 

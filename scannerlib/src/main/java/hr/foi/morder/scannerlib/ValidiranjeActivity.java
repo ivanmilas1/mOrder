@@ -9,13 +9,13 @@ public class ValidiranjeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scanner_start);
+        setContentView(R.layout.content_scanner_start);
         initializeDostavaManager();
     }
 
     public void initializeDostavaManager()
     {
-        DostavaManager dm = DostavaManager.getInstance();
+        ValidacijaDostaveManager dm = ValidacijaDostaveManager.getInstance();
         dm.setDrawerDependencies(this);
         dm.startModule();
     }
