@@ -33,10 +33,8 @@ public class NarucivanjeActivity extends AppCompatActivity implements Navigation
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.kosarica:
-                setContentView(R.layout.kosarica);
-                FragmentManager fm = getSupportFragmentManager();
-                final KosaricaFragment fragment1 = (KosaricaFragment)fm.findFragmentById(R.id.fragmentKosarica);
-                fragment1.buildRecyclerView();
+                Intent intent = new Intent(this, KosaricaActivity.class);
+                startActivity(intent);
                 break;
 
             case R.id.pocetna:

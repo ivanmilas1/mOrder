@@ -2,6 +2,7 @@ package hr.foi.morder;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -21,7 +22,9 @@ public class OdabirKorisnikaActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void dohvatiGeneriraniKod(View view) {
-        Intent intent = new Intent(this, GeneriraniKodActivity.class);
-        startActivity(intent);
+        setContentView(R.layout.generirani_kod);
+        FragmentManager fm = getSupportFragmentManager();
+        GeneriraniKodFragment generiraniKodFragment = (GeneriraniKodFragment)fm.findFragmentById(R.id.fragmentKod);
+        generiraniKodFragment.dohvatiIdRacun();
     }
 }

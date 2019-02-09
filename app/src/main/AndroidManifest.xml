@@ -36,7 +36,7 @@
         <activity android:name=".scannerlib.ValidiranjeActivity"/>
         <activity android:name=".OdabirKorisnikaActivity"/>
         <activity android:name=".NarucivanjeDostavaActivity"/>
-        <activity android:name=".GeneriraniKodActivity"/>
+        <activity android:name=".GeneriraniKodFragment"/>
         <activity android:name=".KosaricaDostavaActivity"/>
         <activity android:name=".NarucivanjeActivity"/>
 

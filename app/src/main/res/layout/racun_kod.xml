@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:background="@drawable/food_wallpaper_backgroud"
-    tools:context="hr.foi.morder.GeneriraniKodActivity"
+    tools:context="hr.foi.morder.GeneriraniKodFragment"
     tools:layout_editor_absoluteY="89dp">
 
     <Button
@@ -16,10 +15,12 @@
         android:layout_marginEnd="168dp"
         android:layout_marginBottom="488dp"
         android:background="@color/colorAccent"
-        android:text="KOD"
+        android:text=""
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+
 
 
 </android.support.constraint.ConstraintLayout>
