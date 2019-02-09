@@ -2,30 +2,35 @@ package hr.foi.morder;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
+
 
 /**
  * The type Main activity for login
  * @author Danijel Pintarić
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
 
     /**
      * Enter login guest starts activity for guest restaurant to login.
      *
-     * @param view the view on Click from view calls new NarucivanjeActivity activity.
+     * @param view the view on Click from view calls new NarucivanjeFragment activity.
      *             @author Danijel Pintarić
      */
-    public void enterLoginGuest(View view) {
-        Intent intent = new Intent(this, NarucivanjeActivity.class);
-        startActivity(intent);
-    }
+   public void enterLoginGuest(View view) {
+       Intent intent = new Intent(this, NarucivanjeActivity.class);
+       startActivity(intent);
+   }
 
     /**
      * Enter login employee starts activity for employee login.
@@ -42,4 +47,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, OdabirKorisnikaActivity.class);
         startActivity(intent);
     }
+
+
 }

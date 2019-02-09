@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
 
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -29,7 +30,6 @@
         <activity android:name="PrijavaDjelatnikActivity" />
         <activity android:name="IzbornikDjelatnikActivity" />
         <activity android:name=".KosaricaActivity" />
-        <activity android:name="NarucivanjeActivity"/>
         <activity android:name=".DodavanjeDjelatnikaActivity"/>
         <activity android:name=".ProvjeriDostavuActivity"/>
         <activity android:name=".DodavanjeArtiklaActivity"/>
@@ -38,5 +38,7 @@
         <activity android:name=".NarucivanjeDostavaActivity"/>
         <activity android:name=".GeneriraniKodActivity"/>
         <activity android:name=".KosaricaDostavaActivity"/>
+        <activity android:name=".NarucivanjeActivity"/>
+
     </application>
 </manifest>
