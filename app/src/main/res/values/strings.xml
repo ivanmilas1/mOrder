@@ -53,4 +53,14 @@
         <item>Jelo</item>
     </array>
 
+    <string-array name="preferences_ValidationDeliveryModules_entries">
+        <item>QR</item>
+        <item>Lozinka</item>
+    </string-array>
+
+    <string-array name="preferences_ValidationDeliveryModules_values">
+        <item>QR</item>
+        <item>Lozinka</item>
+    </string-array>
+
 </resources>

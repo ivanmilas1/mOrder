@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 /**
  * The type Main activity for login
@@ -23,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.mtoolbar);
         setSupportActionBar(toolbar);
+
+        // load default preferences
+      //  PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
     }
 
     @Override
@@ -31,21 +33,12 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-//    @Override
-//    public boolean onPreABoolean(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.settings_menu, menu);
-//        return true;
-//    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.action_settings:
-                Toast.makeText(this, "hehe", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(this, SettingsActivity.class));
+                return true;
             default:
                 return true;
         }

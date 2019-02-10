@@ -21,6 +21,8 @@ public class ValidacijaDostaveManager {
 
     private ValidacijaDostaveManager() {
         metodeValidacijeDostave = new HashMap<>();
+
+
         metodeValidacijeDostave.put("QR", new ValidiranjePutemQRKodaFragment());
         metodeValidacijeDostave.put("Lozinka", new ValidiranjePrekoLozinkeFragment());
     }
