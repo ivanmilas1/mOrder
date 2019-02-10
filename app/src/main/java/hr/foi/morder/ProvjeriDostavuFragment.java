@@ -3,10 +3,13 @@ package hr.foi.morder;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -20,22 +23,28 @@ import java.util.List;
 import hr.foi.morder.adapters.DostavaRecyclerAdapter;
 import hr.foi.morder.model.Racun;
 
-public class ProvjeriDostavuActivity extends AppCompatActivity {
+public class ProvjeriDostavuFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private FirebaseFirestore databaseDostava;
     public DostavaRecyclerAdapter dostavaRecyclerAdapter;
+    private View view;
 
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_provjera_narudzbe);
-        buildRecyclerView();
-        databaseDostava = FirebaseFirestore.getInstance();
-        loadRacuni();
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.activity_provjera_narudzbe, container, false);
+        return view;
     }
 
-    private void loadRacuni() {
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        databaseDostava = FirebaseFirestore.getInstance();
+
+    }
+
+    public void loadRacuni() {
         databaseDostava.collection("Racun").whereEqualTo("status","dostava").get()
             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -48,8 +57,8 @@ public class ProvjeriDostavuActivity extends AppCompatActivity {
                 racun.getStatus();
                 racunList.add(racun);
                 }
-                dostavaRecyclerAdapter = new DostavaRecyclerAdapter(getApplicationContext(), racunList);
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                dostavaRecyclerAdapter = new DostavaRecyclerAdapter(getContext(), racunList);
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(dostavaRecyclerAdapter);
                 }
@@ -61,9 +70,9 @@ public class ProvjeriDostavuActivity extends AppCompatActivity {
     }
 
     public void buildRecyclerView(){
-        recyclerView = findViewById(R.id.recycler_view_dostava);
+        recyclerView = view.findViewById(R.id.recycler_view_dostava);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(dostavaRecyclerAdapter);
     }
 }

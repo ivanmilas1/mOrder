@@ -31,7 +31,7 @@
         <activity android:name="IzbornikDjelatnikActivity" />
         <activity android:name=".KosaricaActivity" />
         <activity android:name=".DodavanjeDjelatnikaActivity"/>
-        <activity android:name=".ProvjeriDostavuActivity"/>
+        <activity android:name=".ProvjeriDostavuFragment"/>
         <activity android:name=".DodavanjeArtiklaActivity"/>
         <activity android:name=".scannerlib.ValidiranjeActivity"/>
         <activity android:name=".OdabirKorisnikaActivity"/>

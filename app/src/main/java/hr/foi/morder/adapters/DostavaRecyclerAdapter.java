@@ -60,6 +60,13 @@ public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecycler
             textViewQR = itemView.findViewById(R.id.textViewQR);
             textViewPin = itemView.findViewById(R.id.textViewPin);
 
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+
             // programmatically adding buttons to a layout
             LinearLayout layout = itemView.findViewById(R.id.cardViewLinearLayout);
 
@@ -70,6 +77,7 @@ public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecycler
                 buttonToAdd.setText(key);
                 buttonToAdd.setId(View.generateViewId());
                 buttonToAdd.setOnClickListener(this);
+
                 layout.addView(buttonToAdd);
             }
         }
