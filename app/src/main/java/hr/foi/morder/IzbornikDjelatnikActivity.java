@@ -2,6 +2,7 @@ package hr.foi.morder;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -58,7 +59,11 @@ public class IzbornikDjelatnikActivity extends AppCompatActivity {
     }
 
     public void OnClickValidateDeliveryOrder(View view) {
-        Intent intent = new Intent(this, ProvjeriDostavuActivity.class);
-        startActivity(intent);
+        setContentView(R.layout.provjeri_dostavu);
+        FragmentManager fm = getSupportFragmentManager();
+        ProvjeriDostavuFragment provjeriDostavuFragment = (ProvjeriDostavuFragment) fm.findFragmentById(R.id.fragmentProvjeriDostavu);
+        provjeriDostavuFragment.buildRecyclerView();
+        provjeriDostavuFragment.loadRacuni();
+
     }
 }

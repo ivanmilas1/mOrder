@@ -3,8 +3,11 @@ package hr.foi.morder;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -16,19 +19,26 @@ import com.google.firebase.firestore.QuerySnapshot;
 import hr.foi.morder.model.Racun;
 
 
-public class GeneriraniKodActivity extends AppCompatActivity {
+public class GeneriraniKodFragment extends Fragment {
 
     private FirebaseFirestore database;
     private Integer racunId, maxRacunId = 0;
     private Button kod;
     private String generirani;
 
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.racun_kod);
-        kod = findViewById(R.id.buttonGeneriraniKod);
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.racun_kod, container, false);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        kod = view.findViewById(R.id.buttonGeneriraniKod);
         database = FirebaseFirestore.getInstance();
-        dohvatiIdRacun();
+
     }
 
     private void racun(Integer id) {
@@ -49,7 +59,7 @@ public class GeneriraniKodActivity extends AppCompatActivity {
                 });
     }
 
-    private void dohvatiIdRacun() {
+    public void dohvatiIdRacun() {
         database.collection("Racun").whereEqualTo("status", "dostava").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

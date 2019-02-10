@@ -47,6 +47,7 @@ public class DodavanjeArtiklaActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     public StorageReference mStorageRef;
     public int artiklId = 0, tipArtikla = 0;
+    private String tip;
 
     @Override
     protected void onCreate(@android.support.annotation.Nullable Bundle savedInstanceState) {
@@ -138,7 +139,7 @@ public class DodavanjeArtiklaActivity extends AppCompatActivity {
     private void dodajArtikl(final String url) {
         final String naziv = nazivProizvoda.getText().toString().trim();
         final Double cijena = Double.parseDouble(cijenaProizvoda.getText().toString());
-        String tip = spinner.getSelectedItem().toString();
+        tip = spinner.getSelectedItem().toString();
         switch (tip) {
             case "Piće":
                 tipArtikla = 1;
