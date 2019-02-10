@@ -44,7 +44,7 @@ public class PrijavaDjelatnikActivity extends AppCompatActivity {
         // Access a Cloud Firestore instance from your Activity
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Korisnik")
-                .whereEqualTo("imePrezime", username)
+                .whereEqualTo("korisnickoIme", username)
                 .whereEqualTo("lozinka", pin)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
