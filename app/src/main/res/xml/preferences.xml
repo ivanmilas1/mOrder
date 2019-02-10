@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <MultiSelectListPreference
+        android:entries="@array/preferences_ValidationDeliveryModules_entries"
+        android:entryValues="@array/preferences_ValidationDeliveryModules_values"
+        android:key="multi_select_list_preference_ValidationDeliveryModules"
+        android:defaultValue="@array/preferences_ValidationDeliveryModules_entries"
+        android:title="Uključeni moduli za validaciju dostave" />
+</PreferenceScreen>

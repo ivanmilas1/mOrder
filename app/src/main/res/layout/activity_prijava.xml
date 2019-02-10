@@ -21,20 +21,6 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/editTextUsername"
-        android:layout_width="164dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
-        android:hint="@string/korisnicko_ime"
-        android:inputType="text"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
-        app:layout_constraintEnd_toEndOf="@+id/textClock"
-        app:layout_constraintStart_toStartOf="@+id/textClock"/>
-
-    <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="114dp"
         android:layout_height="wrap_content"

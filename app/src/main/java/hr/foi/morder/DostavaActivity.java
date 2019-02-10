@@ -27,6 +27,7 @@ import hr.foi.morder.scannerlib.CodeGenerateFragment;
 public class DostavaActivity extends AppCompatActivity implements CodeGenerateFragment.OnFragmentInteractionListener {
     private FirebaseFirestore database;
     private Integer idRacun, maxRacunID = 0;
+    private Long racunKod;
     /**
      * The Image view on which screen is set generated QR code.
      */
@@ -58,6 +59,20 @@ public class DostavaActivity extends AppCompatActivity implements CodeGenerateFr
         button = findViewById(R.id.btnPlaceDeliveryOrder);
         database = FirebaseFirestore.getInstance();
 
+        getMaxIDBill();
+
+        manager = getSupportFragmentManager();
+        fragment = (CodeGenerateFragment)manager.findFragmentById(R.id.fragmentProbni);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getMaxIDBill();
+            }
+        });
+    }
+
+    private void getMaxIDBill() {
         database.collection("Racun").whereEqualTo("status", "dostava").get()
                  .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -70,21 +85,30 @@ public class DostavaActivity extends AppCompatActivity implements CodeGenerateFr
                             maxRacunID = idRacun;
                         }
                     }
+                    getBillGeneratedCode(maxRacunID);
                 } else {
                     Log.d("Error", "Error getting data");
                 }
             }
         });
+    }
 
-        manager = getSupportFragmentManager();
-        fragment = (CodeGenerateFragment)manager.findFragmentById(R.id.fragmentProbni);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fragment.generateCode(imageView, String.valueOf(maxRacunID));
-            }
-        });
+    private void getBillGeneratedCode(Integer racun_id){
+        database.collection("Racun").whereEqualTo("id", racun_id).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                                Racun racun = documentSnapshot.toObject(Racun.class);
+                                racunKod = racun.getKod();
+                            }
+                            fragment.generateCode(imageView, String.valueOf(racunKod));
+                        } else {
+                            Log.d("Error", "Error getting data");
+                        }
+                    }
+                });
     }
 
     /**

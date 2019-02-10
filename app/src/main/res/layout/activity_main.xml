@@ -9,25 +9,39 @@
     tools:layout_editor_absoluteY="89dp">
 
     <Button
+        android:id="@+id/buttonDelivery"
+        android:layout_width="350dp"
+        android:layout_height="85dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="70dp"
+        android:background="@color/colorAccent"
+        android:onClick="homeDelivery"
+        android:text="Dostava"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonEnterLoginGuest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWelcome" />
+
+    <Button
         android:id="@+id/buttonEnterLoginGuest"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="59dp"
+        android:layout_width="350dp"
+        android:layout_height="85dp"
+        android:layout_marginEnd="144dp"
+        android:layout_marginBottom="70dp"
         android:background="@color/colorAccent"
         android:onClick="enterLoginGuest"
         android:text="@string/zapocnite_s_narudzbom"
         android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonEnterLoginEmployee"
-        app:layout_constraintEnd_toEndOf="@+id/buttonEnterLoginEmployee"
-        app:layout_constraintStart_toStartOf="@+id/buttonEnterLoginEmployee"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonDelivery" />
 
     <Button
         android:id="@+id/buttonEnterLoginEmployee"
-        android:layout_width="356dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="112dp"
-        android:layout_marginBottom="133dp"
+        android:layout_width="350dp"
+        android:layout_height="85dp"
+        android:layout_marginEnd="144dp"
+        android:layout_marginBottom="170dp"
         android:background="@color/colorAccent"
         android:onClick="enterLoginEmployee"
         android:text="@string/prijava_kao_djelatnik"
@@ -38,33 +52,29 @@
 
     <TextView
         android:id="@+id/textViewWelcome"
-        android:layout_width="0dp"
-        android:layout_height="90dp"
-        android:layout_marginTop="238dp"
-        android:layout_marginBottom="38dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="24dp"
         android:text="@string/dobrodosli"
         android:textColor="@color/common_google_signin_btn_text_dark_pressed"
         android:textSize="70sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonDelivery"
         app:layout_constraintEnd_toEndOf="@+id/buttonDelivery"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/buttonDelivery"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarSettings" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarSettings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="199dp"
+        android:background="?attr/colorAccent"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/textViewWelcome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/buttonDelivery"
-        android:layout_width="356dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="71dp"
-        android:background="@color/colorAccent"
-        android:onClick="homeDelivery"
-        android:text="Dostava"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonEnterLoginGuest"
-        app:layout_constraintEnd_toEndOf="@+id/buttonEnterLoginGuest"
-        app:layout_constraintTop_toBottomOf="@+id/textViewWelcome" />
-
-
 
 
 </android.support.constraint.ConstraintLayout>

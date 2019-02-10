@@ -15,7 +15,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import hr.foi.morder.model.Djelatnik;
-import hr.foi.morder.model.Korisnik;
 
 /**
  * The type Prijava djelatnik activity.
@@ -38,14 +37,11 @@ public class PrijavaDjelatnikActivity extends AppCompatActivity {
      *@author Danijel Pintarić
      */
     public void onClickSignIn(View view) {
-        EditText editTextUsername = findViewById(R.id.editTextUsername);
         EditText editTextPassword = findViewById(R.id.editTextPassword);
-        String username = editTextUsername.getText().toString();
         String pin = editTextPassword.getText().toString();
         // Access a Cloud Firestore instance from your Activity
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Djelatnik")
-                .whereEqualTo("imePrezime", username)
                 .whereEqualTo("lozinka", pin)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

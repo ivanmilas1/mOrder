@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/food_wallpaper_backgroud"
-    tools:context=".IzbornikDjelatnikActivity">
+    tools:context="hr.foi.morder.IzbornikDjelatnikActivity">
 
     <Button
         android:id="@+id/buttonOrdersView"

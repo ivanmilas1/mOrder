@@ -53,16 +53,22 @@ public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecycler
         View view;
         TextView textViewId, textViewQR, textViewPin;
 
-        public DostavaViewHolder(@NonNull View itemView) {
+        private DostavaViewHolder(@NonNull View itemView) {
             super(itemView);
             view = itemView;
             textViewId = itemView.findViewById(R.id.textViewNarudzbaId);
             textViewQR = itemView.findViewById(R.id.textViewQR);
             textViewPin = itemView.findViewById(R.id.textViewPin);
 
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+
             // programmatically adding buttons to a layout
             LinearLayout layout = itemView.findViewById(R.id.cardViewLinearLayout);
-
             HashMap<String, ValidacijaDostave> hashMapMetodeValidacije = ValidacijaDostaveManager.getInstance().getMetodeValidacijeDostave();
             for (String key : hashMapMetodeValidacije.keySet()) {
                 Button buttonToAdd = new Button(context);
@@ -70,6 +76,7 @@ public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecycler
                 buttonToAdd.setText(key);
                 buttonToAdd.setId(View.generateViewId());
                 buttonToAdd.setOnClickListener(this);
+
                 layout.addView(buttonToAdd);
             }
         }
