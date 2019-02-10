@@ -2,7 +2,6 @@ package hr.foi.morder;
 
 import android.content.Context;
 import android.content.Intent;
-
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,8 +9,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -41,7 +38,6 @@ import hr.foi.morder.adapters.ExpendableListAdapter;
 import hr.foi.morder.model.Artikl;
 import hr.foi.morder.model.Kategorija;
 import hr.foi.morder.model.Narudzba;
-import hr.foi.morder.scannerlib.CodeGenerateFragment;
 
 /**
  * The type NarucivanjeFragment activity.
@@ -86,7 +82,7 @@ public class NarucivanjeFragment extends Fragment implements NavigationView.OnNa
 
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         expandableListView = view.findViewById(R.id.navigationmenu);
         navigation = view.findViewById(R.id.nv);
         setupDrawerContent(navigation);
