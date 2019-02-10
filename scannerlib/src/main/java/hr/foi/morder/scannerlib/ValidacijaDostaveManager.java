@@ -21,8 +21,6 @@ public class ValidacijaDostaveManager {
 
     private ValidacijaDostaveManager() {
         metodeValidacijeDostave = new HashMap<>();
-
-
         metodeValidacijeDostave.put("QR", new ValidiranjePutemQRKodaFragment());
         metodeValidacijeDostave.put("Lozinka", new ValidiranjePrekoLozinkeFragment());
     }
@@ -42,7 +40,7 @@ public class ValidacijaDostaveManager {
         FragmentManager mFragmentManager = activity.getSupportFragmentManager();
         mFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         mFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, selectedModule.getFragment())
+                .replace(R.id.fragment_container2, selectedModule.getFragment())
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit();
     }

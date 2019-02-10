@@ -17,7 +17,10 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".SettingsActivity"/>
         <activity android:name=".DostavaActivity" />
-        <activity android:name=".ScannerActivity" />
+        <activity android:name=".ScannerActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,7 +37,8 @@
         <activity android:name=".DodavanjeDjelatnikaActivity" />
         <activity android:name=".ProvjeriDostavuActivity" />
         <activity android:name=".DodavanjeArtiklaActivity" />
-        <activity android:name=".scannerlib.ValidiranjeActivity" />
+        <activity android:name=".scannerlib.ValidiranjeActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name=".OdabirKorisnikaActivity" />
         <activity android:name=".NarucivanjeDostavaActivity" />
         <activity android:name=".GeneriraniKodActivity" />

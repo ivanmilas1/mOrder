@@ -63,7 +63,7 @@ public class NarucivanjeDostavaActivity extends AppCompatActivity {
         toggle = new ActionBarDrawerToggle(this, drawer, R.string.open, R.string.close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         expandableListView = findViewById(R.id.navigationmenu);
         navigation = findViewById(R.id.nv);
         setupDrawerContent(navigation);

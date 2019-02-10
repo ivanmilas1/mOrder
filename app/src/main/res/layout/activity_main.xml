@@ -61,10 +61,10 @@
         android:textSize="70sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonDelivery"
         app:layout_constraintEnd_toEndOf="@+id/buttonDelivery"
-        app:layout_constraintTop_toBottomOf="@+id/mtoolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarSettings" />
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/mtoolbar"
+        android:id="@+id/toolbarSettings"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="199dp"

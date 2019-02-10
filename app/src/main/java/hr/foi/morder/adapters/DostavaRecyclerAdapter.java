@@ -33,9 +33,6 @@ public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecycler
     public DostavaViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(context);
         view = inflater.inflate(R.layout.card_view_pregled_dostave, null);
-
-
-
         return new DostavaViewHolder(view);
     }
 
@@ -65,10 +62,6 @@ public class DostavaRecyclerAdapter extends RecyclerView.Adapter<DostavaRecycler
 
             // programmatically adding buttons to a layout
             LinearLayout layout = itemView.findViewById(R.id.cardViewLinearLayout);
-
-//            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-//            String imgSett = prefs.getString(keyChannel, "");
-
             HashMap<String, ValidacijaDostave> hashMapMetodeValidacije = ValidacijaDostaveManager.getInstance().getMetodeValidacijeDostave();
             for (String key : hashMapMetodeValidacije.keySet()) {
                 Button buttonToAdd = new Button(context);
