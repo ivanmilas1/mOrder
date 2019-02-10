@@ -14,6 +14,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import hr.foi.morder.model.Djelatnik;
 import hr.foi.morder.model.Korisnik;
 
 /**
@@ -43,20 +44,20 @@ public class PrijavaDjelatnikActivity extends AppCompatActivity {
         String pin = editTextPassword.getText().toString();
         // Access a Cloud Firestore instance from your Activity
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Korisnik")
-                .whereEqualTo("korisnickoIme", username)
+        db.collection("Djelatnik")
+                .whereEqualTo("imePrezime", username)
                 .whereEqualTo("lozinka", pin)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            Korisnik korisnik = null;
+                            Djelatnik djelatnik = null;
                             for (DocumentSnapshot document : task.getResult()) {
-                                korisnik = document.toObject(Korisnik.class);
+                                djelatnik = document.toObject(Djelatnik.class);
                             }
-                            if (korisnik != null){
-                                Toast.makeText(getApplicationContext(), "Dobrodošli " + korisnik.getImePrezime(), Toast.LENGTH_LONG).show();
+                            if (djelatnik != null){
+                                Toast.makeText(getApplicationContext(), "Dobrodošli " + djelatnik.getImePrezime(), Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(getApplicationContext(), IzbornikDjelatnikActivity.class);
                                 startActivity(intent);
                             }
